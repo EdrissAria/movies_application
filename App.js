@@ -1,27 +1,34 @@
+import React from 'react-native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Home } from './screens/Home'
-import { Search } from './screens/Search'
-import { Me } from './screens/Me'
-import { Downloads } from './screens/Downloads'
+import Home from './routes/Home'
+import MovieDetails from './screens/MovieDetails';
+import ActorsDetails from './screens/ActorsDetails';
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
+      <Stack.Navigator>
+        <Stack.Screen name="home" component={Home}
+          options={{
             headerShown: false
           }}
-      >
-        <Tab.Screen name="home" component={Home} />
-        <Tab.Screen name="search" component={Search} />
-        <Tab.Screen name="downloads" component={Downloads} />
-        <Tab.Screen name="me" component={Me} />
-      </Tab.Navigator>
+        />
+        <Stack.Screen name="movieDetails" component={MovieDetails}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen name="actorsDetails" component={ActorsDetails}
+          options={{
+            headerShown: false
+          }}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
- 
+export default App; 

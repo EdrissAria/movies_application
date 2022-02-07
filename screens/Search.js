@@ -1,15 +1,49 @@
-import React from 'react'; 
-import {StyleSheet, View, Text, ScrollView, SafeAreaView} from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, TextInput, FlatList } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons'
+import { populerMovies } from '../globals/Data';
+import { SearchResults } from '../components/SearchResults';
 
-
-export const Search = ({navigation})=> {
-    return(
-        <SafeAreaView>
-            <Text>Search Screen</Text>
+export const Search = ({ navigation }) => {
+    const searchHander = () => {
+        console.log('searching....')
+    }
+    const searchResults = ({item}) =>{
+        return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
+    }
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+            {/* Search Bar */}
+            <View style={{ marginVertical: 10, paddingHorizontal: 20}}>
+                    <TextInput
+                        onChangeText={() => searchHander}
+                        placeholder="search here.."
+                        style={styles.search}
+                        placeholderTextColor="#bbb"
+                        keyboardType="web-search"
+                    />
+            </View>
+            <FlatList
+                data={populerMovies}
+                renderItem={searchResults}
+                style={{ paddingHorizontal: 20, paddingTop: 20, paddingBottom: 80, paddingHorizontal: 20 }}
+            >
+                {/* search results */}
+            </FlatList>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-
+    search: {
+        width: '100%',
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        fontSize: 18,
+        color: 'rgba(255, 255, 255, 0.9)',
+        borderRadius: 18,
+        borderColor: 'rgba(255, 255, 255, 0.4)',
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        borderWidth: 1,
+    }
 })
