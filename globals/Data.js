@@ -36,6 +36,25 @@ export const populerMovies = [
         "image": require('../assets/images/salvation/salvation_cover.jpg'),
         "genre": "scintific"
     },
+    {
+        "key": 4,
+        "name": "Bridgerton", 
+        "image": require('../assets/images/bridgerton/bridgerton_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 5,
+        "name": "barbarians", 
+        "image": require('../assets/images/barbarians/barbarians_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 6,
+        "name": "House of cards", 
+        "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
+        "genre": "scintific"
+    },
+
 ]
 
 export const movieActors = [

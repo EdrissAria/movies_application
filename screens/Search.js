@@ -23,13 +23,13 @@ export const Search = ({ navigation }) => {
                         keyboardType="web-search"
                     />
             </View>
-            <FlatList
-                data={populerMovies}
-                renderItem={searchResults}
-                style={{ paddingHorizontal: 20, paddingTop: 20, paddingBottom: 80, paddingHorizontal: 20 }}
-            >
-                {/* search results */}
-            </FlatList>
+            <View style={{flex: 1, paddingBottom: 60}}>
+                <FlatList
+                    data={populerMovies}
+                    renderItem={searchResults}
+                    style={{paddingHorizontal: 20, paddingTop: 20}}
+                /> 
+            </View>
         </SafeAreaView>
     )
 }
