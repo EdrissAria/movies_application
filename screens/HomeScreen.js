@@ -33,7 +33,7 @@ export const HomeScreen = ({ navigation }) => {
                 />
                 <View>
                     <View style={{ marginVertical: 20, justifyContent: 'center' }}>
-                        <Text style={{ color: '#eee', fontSize: 18 }}>Populer</Text>
+                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1}}>Populer</Text>
                         <TouchableOpacity
                             style={{
                                 alignItems: 'center',
@@ -67,7 +67,7 @@ export const HomeScreen = ({ navigation }) => {
                 </View>
                 <View>
                     <View style={{ marginVertical: 20 }}>
-                        <Text style={{ color: '#eee', fontSize: 18 }}>Feature Movie</Text>
+                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1 }}>Feature Movie</Text>
                         <TouchableOpacity
                             style={{
                                 alignItems: 'center',
@@ -97,7 +97,7 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 </View>
                 <View style={{ marginVertical: 20 }}>
-                    <Text style={{ color: '#eee', fontSize: 18 }}>Top Movies</Text>
+                    <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1}}>Top Movies</Text>
                     <TouchableOpacity
                         style={{
                             alignItems: 'center',

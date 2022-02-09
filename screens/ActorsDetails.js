@@ -9,7 +9,6 @@ export default function ActorsDetails({ navigation, route }) {
     useEffect(() => {
         setSelectedActor(data);
     }, [])
-
     const renderHeaderBar = () => {
         return (
             <View
