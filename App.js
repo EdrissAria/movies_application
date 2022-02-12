@@ -7,6 +7,7 @@ import ActorsDetails from './screens/ActorsDetails';
 import { MovieCatagory } from './screens/MovieCatagory'
 import CustomFonts from './globals/CustomFonts';
 import { MainHeader } from './components/MainHeader';
+import { MovieGenre } from './screens/MovieGenre';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,11 @@ const App = () => {
             }}
           />
           <Stack.Screen name="movieCatagory" component={MovieCatagory}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen name="movieGenre" component={MovieGenre}
             options={{
               headerShown: false
             }}

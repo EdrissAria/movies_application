@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Search } from '../screens/Search'
-import { Me } from '../screens/Me'
-import { Downloads } from '../screens/Downloads'
+import { About } from '../screens/About'
+import { Catagories } from '../screens/Catagories'
 import { TabIcon } from '../components/TabIcon'
 import { MainHeader } from '../components/MainHeader'
 import { HomeScreen } from '../screens/HomeScreen'
@@ -45,10 +45,11 @@ export default function Home() {
                             icon="search"
                         />
                     ),
+                    headerShown: false
                 }}
             />
 
-            <Tab.Screen name="downloads" component={Downloads}
+            <Tab.Screen name="catagories" component={Catagories}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
@@ -56,9 +57,10 @@ export default function Home() {
                             icon="movie"
                         />
                     ),
+                    headerShown: false
                 }}
             />
-            <Tab.Screen name="me" component={Me}
+            <Tab.Screen name="about" component={About}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <TabIcon

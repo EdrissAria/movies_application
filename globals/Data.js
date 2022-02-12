@@ -57,6 +57,49 @@ export const populerMovies = [
 
 ]
 
+export const MovieCatagories = [
+    {
+        "key": 1,
+        "genre": "Action", 
+        "image": require('../assets/images/action.png'), 
+    },
+    {
+        "key": 2,
+        "genre": "Children", 
+        "image": require('../assets/images/children.png'), 
+    },
+    {
+        "key": 3,
+        "genre": "Romanse", 
+        "image": require('../assets/images/romanse.png'), 
+    },
+    {
+        "key": 4,
+        "genre": "Scientific", 
+        "image": require('../assets/images/science.png'), 
+    },
+    {
+        "key": 5,
+        "genre": "Action", 
+        "image": require('../assets/images/action.png'), 
+    },
+    {
+        "key": 6,
+        "genre": "Children", 
+        "image": require('../assets/images/children.png'), 
+    },
+    {
+        "key": 7,
+        "genre": "Romanse", 
+        "image": require('../assets/images/romanse.png'), 
+    },
+    {
+        "key": 8,
+        "genre": "Scientific", 
+        "image": require('../assets/images/science.png'), 
+    },
+]
+
 export const movieActors = [
     {
         "key": 1,

@@ -2,7 +2,7 @@ import React from 'react'
 import {StyleSheet, View , Image, Text, TouchableOpacity} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
  
-export const Catagory = ({data, navigation}) =>{
+export const Genre = ({data, navigation}) =>{
     return(
         <TouchableOpacity onPress={()=> navigation.navigate('movieDetails', {data})}>
             <Image source={data?.image} style={{ width: (windowWidth - 76)/3, height: 140, borderRadius: 14,marginHorizontal: 6 }}/>

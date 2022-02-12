@@ -20,7 +20,7 @@ export const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-            <ScrollView style={{ paddingHorizontal: 20, paddingTop: 10, paddingBottom: 80 }}>
+            <ScrollView contentContainerStyle={{  paddingHorizontal: 20, paddingTop: 10, paddingBottom: 60}}>
                 <Carousel
                     data={sliderData}
                     renderItem={renderBanner}
@@ -120,7 +120,7 @@ export const HomeScreen = ({ navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={{ paddingBottom: 80 }}>
+                <View>
                     <FlatList
                         data={populerMovies}
                         renderItem={renderPopulerMovies}

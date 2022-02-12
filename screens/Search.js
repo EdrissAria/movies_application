@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView, SafeAreaView, TextInput, FlatList }
 import { MaterialIcons } from '@expo/vector-icons'
 import { populerMovies } from '../globals/Data';
 import { SearchResults } from '../components/SearchResults';
+import  Constants  from 'expo-constants';
 
 export const Search = ({ navigation }) => {
     const searchHander = () => {
@@ -12,9 +13,9 @@ export const Search = ({ navigation }) => {
         return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
     }
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#000', marginTop: Constants.statusBarHeight}}>
             {/* Search Bar */}
-            <View style={{ marginVertical: 10, paddingHorizontal: 20}}>
+            <View style={{ marginVertical: 20, paddingHorizontal: 20}}>
                     <TextInput
                         onChangeText={() => searchHander}
                         placeholder="search here.."
@@ -27,7 +28,8 @@ export const Search = ({ navigation }) => {
                 <FlatList
                     data={populerMovies}
                     renderItem={searchResults}
-                    style={{paddingHorizontal: 20, paddingTop: 20}}
+                    style={{paddingHorizontal: 20}}
+                    contentContainerStyle={{ paddingBottom: 20 }}
                 /> 
             </View>
         </SafeAreaView>
