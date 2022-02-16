@@ -11,7 +11,7 @@ export const Catagories = ({ navigation, route }) => {
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: '#000', paddingHorizontal: 20, marginTop: Constants.statusBarHeight}}>
             <View style={{ paddingVertical: 10, marginTop: 10, backgroundColor: 'rgba(0,0,0, 0.5)', justifyContent: 'center'}}>
-                <Text style={{fontSize: 21, fontFamily: 'roboto-regular', color: '#ddd', textAlign: 'center'}}>Movies By Genre</Text>
+                <Text style={{fontSize: 21, fontFamily: 'roboto-regular', color: 'rgb(234, 88, 12)', textAlign: 'center'}}>Movies By Genres</Text>
             </View>
             <FlatList 
                 numColumns={2}

@@ -53,7 +53,7 @@ export const HomeScreen = ({ navigation }) => {
                                 style={{
                                     width: 12,
                                     height: 12,
-                                    tintColor: '#fff',
+                                    tintColor: 'rgb(234, 88, 12)',
                                 }}
                             />
                         </TouchableOpacity>
@@ -85,7 +85,7 @@ export const HomeScreen = ({ navigation }) => {
                                 style={{
                                     width: 12,
                                     height: 12,
-                                    tintColor: '#fff',
+                                    tintColor: 'rgb(234, 88, 12)',
                                 }}
                             />
                         </TouchableOpacity>
@@ -115,7 +115,7 @@ export const HomeScreen = ({ navigation }) => {
                             style={{
                                 width: 12,
                                 height: 12,
-                                tintColor: '#fff',
+                                tintColor: 'rgb(234, 88, 12)',
                             }}
                         />
                     </TouchableOpacity>

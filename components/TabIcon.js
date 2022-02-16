@@ -8,7 +8,7 @@ export const TabIcon = ({focused, icon}) =>{
             <MaterialIcons 
                 name={icon}
                 size={24}
-                color={focused?'coral':'#fff'}
+                color={focused?'rgb(234, 88, 12)':'#fff'}
             />
         </View>
     )

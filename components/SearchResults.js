@@ -5,7 +5,7 @@ export const SearchResults = ({ data, navigation }) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { data })}>
             <View
-                style={{ flexDirection: 'row', width: '100%', height: 120, borderColor: 'rgba(255, 255, 255, 0.4)', borderWidth: 1, borderRadius: 16, padding: 10 }}
+                style={{ flexDirection: 'row', width: '100%', height: 120, borderColor: 'rgb(234, 88, 12)', borderWidth: 1, borderRadius: 16, padding: 10 }}
             >
                 <Image source={data?.image} style={{ width: 100, height: 100, borderRadius: 16 }} />
                 <View

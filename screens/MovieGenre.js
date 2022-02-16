@@ -13,7 +13,7 @@ export const MovieGenre = ({ navigation, route }) => {
             <View style={{ paddingVertical: 10, backgroundColor: 'rgba(0,0,0, 0.5)', justifyContent: 'center'}}>
                 <Text style={{fontSize: 21, fontFamily: 'roboto-regular', color: '#ddd', textAlign: 'center'}}>Action</Text>
                 <TouchableOpacity style={{ position: 'absolute', left: 10, padding: 6, backgroundColor: 'rgba(250,250,250, 0.18)', borderRadius: 20 }} onPress={()=> navigation.goBack()}>
-                    <Image source={require('../assets/images/left-arrow.png')} style={{tintColor: '#ddd', width: 20, height: 20}} />
+                    <Image source={require('../assets/images/left-arrow.png')} style={{tintColor: 'rgb(234, 88, 12)', width: 20, height: 20}} />
                 </TouchableOpacity>
             </View>
             <FlatList 
