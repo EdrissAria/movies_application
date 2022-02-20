@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, FlatList, Image, TouchableOpacity } from 'react-native'
+import React, { useState, useCallback } from 'react';
+import { View, Text, ScrollView, SafeAreaView, FlatList, Image, TouchableOpacity, RefreshControl } from 'react-native'
 import { globalStyle } from '../globals/GlobalStyle';
 import { sliderData } from '../globals/Data';
 import { populerMovies } from '../globals/Data';
@@ -7,8 +7,30 @@ import Carousel from 'react-native-snap-carousel'
 import { windowWidth } from '../globals/Dimension'
 import { BannerSlider } from '../components/BannerSlider';
 import { PopulerMovies } from '../components/PopulerMovies';
- 
+import { ListFooter } from '../components/ListFooter';
+import { Entypo } from '@expo/vector-icons'
+import { useQuery } from 'react-query'
+import * as api from '../components/api/Api';
+
+
+const wait = (timeout) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout)
+    })
+}
+
 export const HomeScreen = ({ navigation }) => {
+
+    const [refrishing, setRefrishing] = useState(false);
+
+    // const getdata = useQuery('data', api.getdata);
+
+    // if(getdata.isSuccess){
+    //     console.log(getdata.data) 
+    // }
+    // if(getdata.isError){
+    //     console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    // }
 
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />
@@ -18,9 +40,24 @@ export const HomeScreen = ({ navigation }) => {
         return <PopulerMovies data={item} navigation={navigation} />
     }
 
+    const onRefrish = useCallback(() => {
+        setRefrishing(true)
+        wait(2000).then(() => setRefrishing(false))
+    }, [])
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-            <ScrollView contentContainerStyle={{  paddingHorizontal: 20, paddingTop: 10, paddingBottom: 60}}>
+            <ScrollView
+                contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 10, paddingBottom: 60 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refrishing}
+                        onRefresh={onRefrish}
+                        colors={['rgb(234, 88, 12)']}
+                        progressBackgroundColor="#333"
+                    />
+                }
+            >
                 <Carousel
                     data={sliderData}
                     renderItem={renderBanner}
@@ -32,8 +69,8 @@ export const HomeScreen = ({ navigation }) => {
                     lockScrollWhileSnapping={true}
                 />
                 <View>
-                    <View style={{ marginVertical: 20, justifyContent: 'center' }}>
-                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1}}>Populer</Text>
+                    <View style={{ marginVertical: 26, justifyContent: 'center' }}>
+                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Popular</Text>
                         <TouchableOpacity
                             style={{
                                 alignItems: 'center',
@@ -43,18 +80,15 @@ export const HomeScreen = ({ navigation }) => {
                                 borderRadius: 20,
                                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                                 position: 'absolute',
-                                right: 10,
+                                right: 0,
                             }}
 
-                            onPress={()=> navigation.navigate('movieCatagory')}
+                            onPress={() => navigation.navigate('movieCatagory')}
                         >
-                            <Image
-                                source={require('../assets/images/right-arrow.png')}
-                                style={{
-                                    width: 12,
-                                    height: 12,
-                                    tintColor: 'rgb(234, 88, 12)',
-                                }}
+                            <Entypo
+                                name="chevron-small-right"
+                                size={28}
+                                color='rgb(234, 88, 12)'
                             />
                         </TouchableOpacity>
                     </View>
@@ -63,11 +97,12 @@ export const HomeScreen = ({ navigation }) => {
                         renderItem={renderPopulerMovies}
                         horizontal={true}
                         initialNumToRender={3}
+                        ListFooterComponent={<ListFooter navigation={navigation}/>}
                     />
                 </View>
                 <View>
-                    <View style={{ marginVertical: 20 }}>
-                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1 }}>Feature Movie</Text>
+                    <View style={{ marginVertical: 26, justifyContent: 'center' }}>
+                        <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Top Rated</Text>
                         <TouchableOpacity
                             style={{
                                 alignItems: 'center',
@@ -77,16 +112,14 @@ export const HomeScreen = ({ navigation }) => {
                                 borderRadius: 20,
                                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                                 position: 'absolute',
-                                right: 10,
+                                right: 0,
                             }}
+                            onPress={() => navigation.navigate('movieCatagory')}
                         >
-                            <Image
-                                source={require('../assets/images/right-arrow.png')}
-                                style={{
-                                    width: 12,
-                                    height: 12,
-                                    tintColor: 'rgb(234, 88, 12)',
-                                }}
+                            <Entypo
+                                name="chevron-small-right"
+                                size={28}
+                                color='rgb(234, 88, 12)'
                             />
                         </TouchableOpacity>
                     </View>
@@ -94,10 +127,11 @@ export const HomeScreen = ({ navigation }) => {
                         data={populerMovies}
                         renderItem={renderPopulerMovies}
                         horizontal={true}
+                        ListFooterComponent={<ListFooter navigation={navigation}/>}
                     />
                 </View>
-                <View style={{ marginVertical: 20 }}>
-                    <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1}}>Top Movies</Text>
+                <View style={{ marginVertical: 26, justifyContent: 'center' }}>
+                    <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Top Movies</Text>
                     <TouchableOpacity
                         style={{
                             alignItems: 'center',
@@ -107,16 +141,14 @@ export const HomeScreen = ({ navigation }) => {
                             borderRadius: 20,
                             backgroundColor: 'rgba(255, 255, 255, 0.2)',
                             position: 'absolute',
-                            right: 10,
+                            right: 0,
                         }}
+                        onPress={() => navigation.navigate('movieCatagory')}
                     >
-                        <Image
-                            source={require('../assets/images/right-arrow.png')}
-                            style={{
-                                width: 12,
-                                height: 12,
-                                tintColor: 'rgb(234, 88, 12)',
-                            }}
+                        <Entypo
+                            name="chevron-small-right"
+                            size={28}
+                            color='rgb(234, 88, 12)'
                         />
                     </TouchableOpacity>
                 </View>
@@ -125,6 +157,7 @@ export const HomeScreen = ({ navigation }) => {
                         data={populerMovies}
                         renderItem={renderPopulerMovies}
                         horizontal={true}
+                        ListFooterComponent={<ListFooter navigation={navigation}/>}
                     />
                 </View>
             </ScrollView>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 
 export const SearchResults = ({ data, navigation }) => {
     return (
@@ -13,7 +14,7 @@ export const SearchResults = ({ data, navigation }) => {
                 >
                     <Text style={{ color: '#eee', fontSize: 18,textTransform: 'capitalize' }}>{data?.name}</Text>
                     <View style={{ flexDirection: 'row', marginLeft: 3, marginTop: 10}}>
-                        <Image source={require('../assets/images/star.png')} style={{ width: 15, height: 15, }} resizeMode="contain" />
+                        <AntDesign name="star" size={16} color="yellow" />
                         <Text style={{ color: '#fff', fontSize: 14, marginLeft: 4, color: 'yellow' }}>
                             75.3
                         </Text>

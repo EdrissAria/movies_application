@@ -1,13 +1,14 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Image, Platform, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, ImageBackground, Platform, } from 'react-native'
 import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Entypo } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons';
 
-export const RenderHeader = ({ navigation, data }) => {
+
+export const RenderCastHeader = ({ actor, data, navigation }) => {
     return (
         <ImageBackground
-            source={data?.image}
+            source={actor?.image}
             resizeMode="cover"
             style={{
                 width: '100%',
@@ -15,7 +16,6 @@ export const RenderHeader = ({ navigation, data }) => {
             }}
         >
             <View style={{ flex: 1 }}>
-                {/* render header bar */}
                 <View
                     style={{
                         flexDirection: 'row',
@@ -43,26 +43,7 @@ export const RenderHeader = ({ navigation, data }) => {
                             color="#fff"
                         />
                     </TouchableOpacity>
-                    {/* download button */}
-                    <TouchableOpacity
-                        style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 50,
-                            height: 50,
-                            borderRadius: 20,
-                            backgroundColor: 'rgba(0,0,0,0.3)'
-                        }}
-                        onPress={() => console.log('download')}
-                    >
-                        <Entypo
-                            name="upload"
-                            size={24}
-                            color="#fff"
-                        />
-                    </TouchableOpacity>
                 </View>
-                {/* render header bar */}
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                     <LinearGradient
                         start={{ x: 0, y: 0 }}
@@ -75,8 +56,9 @@ export const RenderHeader = ({ navigation, data }) => {
                             style={{
                                 marginTop: 10,
                                 color: '#eee',
-                                fontSize: 26,
+                                fontSize: 28,
                                 textTransform: 'capitalize',
+                                fontWeight: 'bold',
                                 letterSpacing: 4
                             }}
                         >

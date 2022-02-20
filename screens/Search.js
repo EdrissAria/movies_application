@@ -20,7 +20,7 @@ export const Search = ({ navigation }) => {
             {/* Search Bar */}
             <View style={styles.search}>
                     <TouchableWithoutFeedback onPress={() => desmiss.current.clear()}>
-                        <AntDesign name="delete" size={22} color="rgb(234, 88, 12)"/>
+                        <AntDesign name="close" size={22} color="rgb(234, 88, 12)"/>
                     </TouchableWithoutFeedback>
                     <TextInput
                         ref={desmiss}
@@ -30,7 +30,7 @@ export const Search = ({ navigation }) => {
                         keyboardType="web-search"
                         style={{ color:'#ddd', marginHorizontal: 3,fontSize: 18, width: 240, padding: 2}}
                     />
-                    <AntDesign name="find" size={24} color="rgb(234, 88, 12)"/>
+                    <AntDesign name="search1" size={24} color="rgb(234, 88, 12)"/>
             </View>
             <View style={{flex: 1, paddingBottom: 60}}>
                 <FlatList

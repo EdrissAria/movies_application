@@ -54,7 +54,7 @@ export default function Home() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="movie"
+                            icon="grid-outline"
                         />
                     ),
                     headerShown: false
@@ -65,7 +65,7 @@ export default function Home() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="circle"
+                            icon="user"
                         />
                     ),
                 }}

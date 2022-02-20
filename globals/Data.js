@@ -61,42 +61,42 @@ export const MovieCatagories = [
     {
         "key": 1,
         "genre": "Action", 
-        "image": require('../assets/images/action.png'), 
+        "image": require('../assets/images/action.jpg'), 
     },
     {
         "key": 2,
-        "genre": "Children", 
-        "image": require('../assets/images/children.png'), 
+        "genre": "Drama", 
+        "image": require('../assets/images/drama.jpg'), 
     },
     {
         "key": 3,
-        "genre": "Romanse", 
-        "image": require('../assets/images/romanse.png'), 
+        "genre": "Horror", 
+        "image": require('../assets/images/horror.jpg'), 
     },
     {
         "key": 4,
         "genre": "Scientific", 
-        "image": require('../assets/images/science.png'), 
+        "image": require('../assets/images/scintific.jpg'), 
     },
     {
         "key": 5,
-        "genre": "Action", 
-        "image": require('../assets/images/action.png'), 
+        "genre": "Comedy", 
+        "image": require('../assets/images/comedy.jpg'), 
     },
     {
         "key": 6,
         "genre": "Children", 
-        "image": require('../assets/images/children.png'), 
+        "image": require('../assets/images/action.jpg'), 
     },
     {
         "key": 7,
         "genre": "Romanse", 
-        "image": require('../assets/images/romanse.png'), 
+        "image": require('../assets/images/barbarians/barbarians.jpg'), 
     },
     {
         "key": 8,
         "genre": "Scientific", 
-        "image": require('../assets/images/science.png'), 
+        "image": require('../assets/images/scintific.jpg'), 
     },
 ]
 

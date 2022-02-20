@@ -1,50 +1,43 @@
 import React from 'react'
-import { StyleSheet, View, Text,TouchableOpacity, Image, Platform, ImageBackground } from 'react-native'
-import { windowHeight } from '../globals/Dimension';
- 
+import { StyleSheet, View, Text } from 'react-native'
+import { Entypo } from '@expo/vector-icons'
+
 export const RenderCatagoryAndRating = () => {
     return (
-        <View
-            style={{
-                flexDirection: 'row',
-                marginTop: 16,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}
-        >
-            {/* Age */}
+        <View style={{ flexDirection: 'column' }}>
             <View
-                style={[
-                    styles.catagoryContainer,
-                    {
-                        marginLeft: 0
-                    }
-                ]}
+                style={{
+                    flexDirection: 'row',
+                    marginTop: 16,
+                    alignItems: 'center',
+                    paddingHorizontal: 20
+                }}
             >
-                <Text style={{ color: '#fff', fontSize: 14 }}>
-                    18+
+                {/* Users Scores */}
+                <View
+                    style={{ borderRightColor: '#999', borderRightWidth: 1, paddingRight: 10 }}
+                >
+                    <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
+                        User Score &nbsp;
+                        <Entypo name="star" size={16} color="yellow" style={{ marginLeft: 10 }} />
+                        <Text style={{ color: '#fff', fontSize: 14 }}>
+                            75.3
+                        </Text>
+                    </Text>
+                </View>
+                {/* Rating */}
+                <Text style={{ textAlign: 'left', marginLeft: 10 }}>
+                    <Entypo name="controller-play" size={20} color="#f00" />
+                    &nbsp;
+                    <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
+                        Play Trailer
+                    </Text>
                 </Text>
             </View>
-            {/* Genre */}
-            <View
-                style={[
-                    styles.catagoryContainer,
-                    {
-                        paddingHorizontal: 8,
-                    }
-                ]}
-            >
-                <Text style={{ color: '#fff', fontSize: 14 }}>
-                    scintific
-                </Text>
-            </View>
-            {/* Rating */}
-            <View
-                style={styles.catagoryContainer}>
-                <Image source={require('../assets/images/star.png')} style={{ width: 15, height: 15, }} resizeMode="contain" />
-                <Text style={{ color: '#fff', fontSize: 14 }}>
-                    75.3
-                </Text>
+            {/* realize day and genre */}
+            <View style={{alignItems: 'center',flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1}}>
+                <Text style={{ fontSize: 16, color: '#ccc' }}>3/1/2022 (US)</Text>
+                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>Action, Crime, Drama</Text>
             </View>
         </View>
     )
