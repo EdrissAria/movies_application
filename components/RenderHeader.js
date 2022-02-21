@@ -7,11 +7,11 @@ import { Entypo } from '@expo/vector-icons'
 export const RenderHeader = ({ navigation, data }) => {
     return (
         <ImageBackground
-            source={data?.image}
-            resizeMode="cover"
+            source={{ uri: "https://image.tmdb.org/t/p/w300"+data?.backdrop_path }}
+            resizeMode="stretch"
             style={{
                 width: '100%',
-                height: windowHeight / 2 * 1.2,
+                height: windowHeight / 2,
             }}
         >
             <View style={{ flex: 1 }}>
@@ -63,7 +63,7 @@ export const RenderHeader = ({ navigation, data }) => {
                     </TouchableOpacity>
                 </View>
                 {/* render header bar */}
-                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                <View style={{ flex: 1, justifyContent: 'flex-end'}}>
                     <LinearGradient
                         start={{ x: 0, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -75,12 +75,14 @@ export const RenderHeader = ({ navigation, data }) => {
                             style={{
                                 marginTop: 10,
                                 color: '#eee',
-                                fontSize: 26,
+                                fontSize: 22,
                                 textTransform: 'capitalize',
-                                letterSpacing: 4
+                                letterSpacing: 4, 
+                                textAlign: 'center',
+                                paddingHorizontal: 10,
                             }}
                         >
-                            {data?.name}
+                            {data?.original_title}
                         </Text>
                     </LinearGradient>
                 </View>

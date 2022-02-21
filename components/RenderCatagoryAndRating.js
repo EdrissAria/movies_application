@@ -1,8 +1,25 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React, {useState, useMemo} from 'react'
+import { StyleSheet, View, Text, Linking, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
+import * as api from './api/Api'
+import { useQuery } from 'react-query'
+ 
 
-export const RenderCatagoryAndRating = () => {
+const openUrl = async (url) => {
+    const isSupported = await Linking.openURL(url);
+    if (isSupported) {
+        await Linking.openUrl(url)
+    } else {
+        Alert.alert(`can't open this ${url}`);
+    }
+}
+
+export const RenderCatagoryAndRating = ({ data }) => {
+    const [trailer, setTrailer] = useState(''); 
+    const getTrailer = useQuery(['gettrailer', data?.id], ()=> api.getTrailer(data?.id));
+    useMemo(()=>{
+        setTrailer(getTrailer?.data?getTrailer?.data?.results[0]?.key:'')
+    }, [getTrailer.data])
     return (
         <View style={{ flexDirection: 'column' }}>
             <View
@@ -21,22 +38,24 @@ export const RenderCatagoryAndRating = () => {
                         User Score &nbsp;
                         <Entypo name="star" size={16} color="yellow" style={{ marginLeft: 10 }} />
                         <Text style={{ color: '#fff', fontSize: 14 }}>
-                            75.3
+                            {data?.vote_count}
                         </Text>
                     </Text>
                 </View>
                 {/* Rating */}
-                <Text style={{ textAlign: 'left', marginLeft: 10 }}>
-                    <Entypo name="controller-play" size={20} color="#f00" />
-                    &nbsp;
-                    <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
-                        Play Trailer
+                <TouchableWithoutFeedback onPress={()=> Linking.openURL(`https://www.youtube.com/watch?v=${trailer}`) }>
+                    <Text style={{ textAlign: 'left', marginLeft: 10 }}>
+                        <Entypo name="controller-play" size={20} color="#f00" />
+                        &nbsp;
+                        <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
+                            Play Trailer
+                        </Text>
                     </Text>
-                </Text>
+                </TouchableWithoutFeedback>
             </View>
-            {/* realize day and genre */}
-            <View style={{alignItems: 'center',flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1}}>
-                <Text style={{ fontSize: 16, color: '#ccc' }}>3/1/2022 (US)</Text>
+            {/* realize date and genre */}
+            <View style={{ alignItems: 'center', flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1 }}>
+                <Text style={{ fontSize: 16, color: '#ccc' }}>{data?.release_date}</Text>
                 <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>Action, Crime, Drama</Text>
             </View>
         </View>

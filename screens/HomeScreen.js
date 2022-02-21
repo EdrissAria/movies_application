@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
-import { View, Text, ScrollView, SafeAreaView, FlatList, Image, TouchableOpacity, RefreshControl } from 'react-native'
-import { globalStyle } from '../globals/GlobalStyle';
+import React, { useState, useCallback, useMemo} from 'react';
+import { View, Text, ScrollView, SafeAreaView, FlatList, Image, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native'
 import { sliderData } from '../globals/Data';
 import { populerMovies } from '../globals/Data';
 import Carousel from 'react-native-snap-carousel'
 import { windowWidth } from '../globals/Dimension'
 import { BannerSlider } from '../components/BannerSlider';
-import { PopulerMovies } from '../components/PopulerMovies';
+import { RenderMovies } from '../components/RenderMovies';
 import { ListFooter } from '../components/ListFooter';
 import { Entypo } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
@@ -22,27 +21,35 @@ const wait = (timeout) => {
 export const HomeScreen = ({ navigation }) => {
 
     const [refrishing, setRefrishing] = useState(false);
+    const [upcomming, setUpcomming] = useState([]); 
+    const [popular, setPopular] = useState([]); 
+    const [toprated, setToprated] = useState([]); 
 
-    // const getdata = useQuery('data', api.getdata);
-
-    // if(getdata.isSuccess){
-    //     console.log(getdata.data) 
-    // }
-    // if(getdata.isError){
-    //     console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    // }
+    const getUpcomming = useQuery('upcomming', api.getUpcomming);
+    const getNow_playing = useQuery('now_playing', api.getNow_playing);
+    const getPopular = useQuery('populer', api.getPopular);
+    const getTop_rated = useQuery('toprated', api.getTop_rated);
+    
+    useMemo(()=>{
+        setPopular(getPopular.data?getPopular.data.results:null); 
+        setToprated(getTop_rated.data?getTop_rated.data.results:null); 
+        setUpcomming(getUpcomming.data?getUpcomming.data.results:null); 
+    },[getPopular.data, getTop_rated.data, getUpcomming.data])
 
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />
     }
-
-    const renderPopulerMovies = ({ item, index }) => {
-        return <PopulerMovies data={item} navigation={navigation} />
+    const renderMovies = ({ item, index }) => {
+        return <RenderMovies data={item} navigation={navigation} />
     }
 
     const onRefrish = useCallback(() => {
         setRefrishing(true)
         wait(2000).then(() => setRefrishing(false))
+        getNow_playing.refetch();
+        getPopular.refetch();
+        getTop_rated.refetch(); 
+        getUpcomming.refetch(); 
     }, [])
 
     return (
@@ -58,8 +65,9 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 }
             >
+                {getNow_playing.isSuccess?
                 <Carousel
-                    data={sliderData}
+                    data={getNow_playing.data.results}
                     renderItem={renderBanner}
                     sliderWidth={windowWidth - 40}
                     itemWidth={300}
@@ -67,7 +75,7 @@ export const HomeScreen = ({ navigation }) => {
                     autoplay={true}
                     enableMomentum={false}
                     lockScrollWhileSnapping={true}
-                />
+                />:(getNow_playing.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 <View>
                     <View style={{ marginVertical: 26, justifyContent: 'center' }}>
                         <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Popular</Text>
@@ -92,13 +100,15 @@ export const HomeScreen = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                     </View>
+                    {getPopular.isSuccess?
                     <FlatList
-                        data={populerMovies}
-                        renderItem={renderPopulerMovies}
+                        data={popular}
+                        renderItem={renderMovies}
                         horizontal={true}
                         initialNumToRender={3}
+                        keyExtractor={(item)=> item.id}
                         ListFooterComponent={<ListFooter navigation={navigation}/>}
-                    />
+                    />:(getPopular.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
                 <View>
                     <View style={{ marginVertical: 26, justifyContent: 'center' }}>
@@ -123,15 +133,18 @@ export const HomeScreen = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                     </View>
+                    {getTop_rated.isSuccess?
                     <FlatList
-                        data={populerMovies}
-                        renderItem={renderPopulerMovies}
+                        data={toprated}
+                        renderItem={renderMovies}
                         horizontal={true}
+                        initialNumToRender={3}
+                        keyExtractor={(item)=> item.id}
                         ListFooterComponent={<ListFooter navigation={navigation}/>}
-                    />
+                    />:(getTop_rated.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
                 <View style={{ marginVertical: 26, justifyContent: 'center' }}>
-                    <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Top Movies</Text>
+                    <Text style={{ color: '#eee', fontSize: 18, fontFamily: 'roboto-regular', letterSpacing: 1, position: 'absolute', left: 0, marginTop: 20 }}>Upcomming</Text>
                     <TouchableOpacity
                         style={{
                             alignItems: 'center',
@@ -153,12 +166,15 @@ export const HomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View>
+                {getUpcomming.isSuccess?
                     <FlatList
-                        data={populerMovies}
-                        renderItem={renderPopulerMovies}
+                        data={upcomming}
+                        renderItem={renderMovies}
                         horizontal={true}
+                        initialNumToRender={3}
+                        keyExtractor={(item)=> item.id}
                         ListFooterComponent={<ListFooter navigation={navigation}/>}
-                    />
+                    />:(getUpcomming.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
             </ScrollView>
         </SafeAreaView>
