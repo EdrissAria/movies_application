@@ -1,6 +1,15 @@
 import React from 'react'; 
-import {StyleSheet, View, Text,ScrollView, Image, SafeAreaView} from 'react-native'
+import { View, Text,Linking, Image, SafeAreaView, TouchableWithoutFeedback} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+
+const openUrl = async (url) => {
+    const isSupported = await Linking.openURL(url);
+    if (isSupported) {
+        await Linking.openUrl(url)
+    } else {
+        Alert.alert(`can't open this ${url}`);
+    }
+}
 
 export const About = ({navigation})=> {
     return(
@@ -18,6 +27,7 @@ export const About = ({navigation})=> {
                         style={{ width: 50, height: 50, borderRadius: 25, alignSelf: 'center', marginTop: 20, backgroundColor: '#222'}}
                     />  
                     <Text style={{ color: '#ccc', fontSize: 16, letterSpacing: 1,marginTop: 10}}>M.Edriss Aria</Text>
+                    <TouchableWithoutFeedback onPress={()=> Linking.openURL(`https://edrissaria.github.io`) }>
                     <View
                         style={{ borderColor: '#666', borderWidth: 1, marginTop: 20, backgroundColor: '#ccc', width: '100%', height: 50, borderRadius: 6, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}
                     >
@@ -33,6 +43,8 @@ export const About = ({navigation})=> {
                             GitHub
                         </Text>
                     </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={()=> Linking.openURL(`mailto:edrissaria8@gmail.com?subject=SendMail&body=hello`) }>
                     <View
                         style={{ borderColor: '#666', borderWidth: 1, marginTop: 20, backgroundColor: 'orange', width: '100%', height: 50, borderRadius: 6, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}
                     >
@@ -48,6 +60,7 @@ export const About = ({navigation})=> {
                             E-MAIL
                         </Text>
                     </View>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         </SafeAreaView>

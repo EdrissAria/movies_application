@@ -1,45 +1,62 @@
-import React, {useRef}from 'react';
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
-import { populerMovies } from '../globals/Data';
+import React, { useMemo, useRef, useState } from 'react';
+import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard } from 'react-native'
 import { SearchResults } from '../components/SearchResults';
-import  Constants  from 'expo-constants';
+import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
+import { useQuery } from 'react-query'
+import * as api from '../components/api/Api';
 
 export const Search = ({ navigation }) => {
-    const searchHander = () => {
-        console.log('searching....')
+    const [search, setSearch] = useState();
+    const [dismiss, setDismiss] = useState(false);
+    const [searchResult, setSearchResult] = useState();
+
+    const searchHander = (query) => {
+        setSearch(query)
+        setDismiss(true)
     }
-    const searchResults = ({item}) =>{
+
+    let searching = useQuery(['searching', search], () => api.search(search));
+
+    useMemo(() => {
+        setSearchResult(searching?.data ? searching?.data?.results : []);
+    }, [searching?.data])
+
+    const searchResults = ({ item }) => {
         return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
     }
-    const desmiss = useRef(null); 
+    const desmiss = useRef(null);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#000', marginTop: Constants.statusBarHeight, paddingHorizontal: 20}}>
-            {/* Search Bar */}
-            <View style={styles.search}>
-                    <TouchableWithoutFeedback onPress={() => desmiss.current.clear()}>
-                        <AntDesign name="close" size={22} color="rgb(234, 88, 12)"/>
-                    </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#000', marginTop: Constants.statusBarHeight, paddingHorizontal: 20 }}>
+                {/* Search Bar */}
+                <View style={styles.search}>
+                    {dismiss ?
+                        <TouchableWithoutFeedback onPress={() => { desmiss.current.clear(); setDismiss(false) }}>
+                            <AntDesign name="close" size={22} color="rgb(234, 88, 12)" />
+                        </TouchableWithoutFeedback> : null
+                    }
                     <TextInput
                         ref={desmiss}
-                        onChangeText={() => searchHander}
+                        onChangeText={searchHander}
                         placeholder="search here.."
                         placeholderTextColor="#bbb"
                         keyboardType="web-search"
-                        style={{ color:'#ddd', marginHorizontal: 3,fontSize: 18, width: 240, padding: 2}}
+                        style={{ color: '#ddd', marginHorizontal: 3, fontSize: 18, width: 240, paddingVertical: 2, paddingHorizontal: 4 }}
                     />
-                    <AntDesign name="search1" size={24} color="rgb(234, 88, 12)"/>
-            </View>
-            <View style={{flex: 1, paddingBottom: 60}}>
-                <FlatList
-                    data={populerMovies}
-                    renderItem={searchResults}
-                    contentContainerStyle={{ paddingBottom: 20,}}
-                /> 
-            </View>
-        </SafeAreaView>
+                    <AntDesign name="search1" size={24} color="rgb(234, 88, 12)" />
+                </View>
+                <View style={{ flex: 1, paddingBottom: 60 }}>
+                    {searching?.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20, alignSelf: 'center' }} /> :
+                        <FlatList
+                            data={searchResult}
+                            renderItem={searchResults}
+                            contentContainerStyle={{ paddingBottom: 20, }}
+                        />}
+                </View>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 

@@ -5,10 +5,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 
 
-export const RenderCastHeader = ({ actor, data, navigation }) => {
+export const RenderCastHeader = ({ actor, navigation }) => {
     return (
         <ImageBackground
-            source={actor?.image}
+            source={{ uri: "https://image.tmdb.org/t/p/original"+actor?.profile_path }}
             resizeMode="cover"
             style={{
                 width: '100%',
@@ -62,7 +62,7 @@ export const RenderCastHeader = ({ actor, data, navigation }) => {
                                 letterSpacing: 4
                             }}
                         >
-                            {data?.name}
+                            {actor?.name}
                         </Text>
                     </LinearGradient>
                 </View>

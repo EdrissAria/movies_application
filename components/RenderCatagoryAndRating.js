@@ -15,11 +15,22 @@ const openUrl = async (url) => {
 }
 
 export const RenderCatagoryAndRating = ({ data }) => {
-    const [trailer, setTrailer] = useState(''); 
+    const [trailer, setTrailer] = useState('');
+    const [genres, setGenres] = useState([]); 
+    
+    const getGenres = useQuery('genres', api.getGenres); 
     const getTrailer = useQuery(['gettrailer', data?.id], ()=> api.getTrailer(data?.id));
     useMemo(()=>{
         setTrailer(getTrailer?.data?getTrailer?.data?.results[0]?.key:'')
-    }, [getTrailer.data])
+        setGenres(getGenres?.data?getGenres?.data?.genres:[])
+    }, [getTrailer.data, getGenres.data]) 
+    
+    const Gen = []; 
+    genres.map(g=>{
+        data?.genre_ids.filter(n => {g.id == n ? Gen.push(g.name) : null})
+    })
+
+
     return (
         <View style={{ flexDirection: 'column' }}>
             <View
@@ -56,7 +67,7 @@ export const RenderCatagoryAndRating = ({ data }) => {
             {/* realize date and genre */}
             <View style={{ alignItems: 'center', flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1 }}>
                 <Text style={{ fontSize: 16, color: '#ccc' }}>{data?.release_date}</Text>
-                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>Action, Crime, Drama</Text>
+                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{Gen.map((g, index) => g+',  ')}</Text>
             </View>
         </View>
     )

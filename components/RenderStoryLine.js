@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo} from 'react'
 import { View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
-import { movieActors } from '../globals/Data';
 import { MovieActors } from '../components/MovieActors';
+import * as api from './api/Api'
+import { useQuery } from 'react-query'
 
 export const RednerStoryLine = ({ navigation, data }) => {
-
+    const [casts, setCasts] = useState([])
     const [more, setMore] = useState(false);
 
-    const renderActors = ({ item, index }) => {
+    const getCasts = useQuery(['casts', data?.id],()=> api.getCasts(data?.id)); 
+
+    useMemo(()=>{
+        setCasts(getCasts?.data?getCasts?.data?.cast:[])
+    }, [getCasts?.data]) 
+ 
+    const renderActors = ({ item }) => {
         return <MovieActors data={item} navigation={navigation} />
     }
     return (
@@ -28,8 +35,9 @@ export const RednerStoryLine = ({ navigation, data }) => {
             <View style={{ marginTop: 10, paddingBottom: 20 }}>
                 <Text style={{ color: '#ddd', fontSize: 16, marginBottom: 10, letterSpacing: 1 }}>Top Billed Cast</Text>
                 <FlatList
-                    data={movieActors}
+                    data={casts}
                     renderItem={renderActors}
+                    keyExtractor={(item) => item.id}
                     horizontal={true}
                 />
             </View>

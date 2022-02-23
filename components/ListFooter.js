@@ -3,9 +3,9 @@ import {StyleSheet, View , Image, Text, TouchableOpacity} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 import { Feather, Ionicons, AntDesign, Entypo } from '@expo/vector-icons'
 
-export const ListFooter = ({navigation}) =>{
+export const ListFooter = ({navigation, catagory}) =>{
     return(
-        <TouchableOpacity onPress={()=> navigation.navigate('movieCatagory')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('catagoryMovies', {catagory})}>
              <View style={{ justifyContent: 'center', alignItems: 'center', width: (windowWidth - 76)/3, height: 140, backgroundColor: '#222', borderRadius: 14, marginHorizontal: 6}}>
                 <Entypo 
                     name="plus"

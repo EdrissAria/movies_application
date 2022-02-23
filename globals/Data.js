@@ -54,6 +54,78 @@ export const populerMovies = [
         "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
         "genre": "scintific"
     },
+    {
+        "key": 7,
+        "name": "salvation", 
+        "image": require('../assets/images/salvation/salvation_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 8,
+        "name": "Bridgerton", 
+        "image": require('../assets/images/bridgerton/bridgerton_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 9,
+        "name": "barbarians", 
+        "image": require('../assets/images/barbarians/barbarians_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 10,
+        "name": "House of cards", 
+        "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 11,
+        "name": "House of cards", 
+        "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 12,
+        "name": "salvation", 
+        "image": require('../assets/images/salvation/salvation_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 13,
+        "name": "Bridgerton", 
+        "image": require('../assets/images/bridgerton/bridgerton_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 14,
+        "name": "barbarians", 
+        "image": require('../assets/images/barbarians/barbarians_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 15,
+        "name": "House of cards", 
+        "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 16,
+        "name": "Bridgerton", 
+        "image": require('../assets/images/bridgerton/bridgerton_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 17,
+        "name": "barbarians", 
+        "image": require('../assets/images/barbarians/barbarians_cover.jpg'),
+        "genre": "scintific"
+    },
+    {
+        "key": 18,
+        "name": "House of cards", 
+        "image": require('../assets/images/house_of_cards/house_of_cards_cover.jpg'),
+        "genre": "scintific"
+    },
 
 ]
 

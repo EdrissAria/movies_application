@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useMemo} from 'react';
 import { View, Text, ScrollView, SafeAreaView, FlatList, Image, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native'
-import { sliderData } from '../globals/Data';
-import { populerMovies } from '../globals/Data';
 import Carousel from 'react-native-snap-carousel'
 import { windowWidth } from '../globals/Dimension'
 import { BannerSlider } from '../components/BannerSlider';
@@ -91,7 +89,7 @@ export const HomeScreen = ({ navigation }) => {
                                 right: 0,
                             }}
 
-                            onPress={() => navigation.navigate('movieCatagory')}
+                            onPress={() => navigation.navigate('catagoryMovies', {catagory: 'popular'})}
                         >
                             <Entypo
                                 name="chevron-small-right"
@@ -107,7 +105,7 @@ export const HomeScreen = ({ navigation }) => {
                         horizontal={true}
                         initialNumToRender={3}
                         keyExtractor={(item)=> item.id}
-                        ListFooterComponent={<ListFooter navigation={navigation}/>}
+                        ListFooterComponent={<ListFooter navigation={navigation} catagory="popular"/>}
                     />:(getPopular.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
                 <View>
@@ -124,7 +122,7 @@ export const HomeScreen = ({ navigation }) => {
                                 position: 'absolute',
                                 right: 0,
                             }}
-                            onPress={() => navigation.navigate('movieCatagory')}
+                            onPress={() => navigation.navigate('catagoryMovies', {catagory: 'top_rated'})}
                         >
                             <Entypo
                                 name="chevron-small-right"
@@ -140,7 +138,7 @@ export const HomeScreen = ({ navigation }) => {
                         horizontal={true}
                         initialNumToRender={3}
                         keyExtractor={(item)=> item.id}
-                        ListFooterComponent={<ListFooter navigation={navigation}/>}
+                        ListFooterComponent={<ListFooter navigation={navigation} catagory="top_rated"/>}
                     />:(getTop_rated.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
                 <View style={{ marginVertical: 26, justifyContent: 'center' }}>
@@ -156,7 +154,7 @@ export const HomeScreen = ({ navigation }) => {
                             position: 'absolute',
                             right: 0,
                         }}
-                        onPress={() => navigation.navigate('movieCatagory')}
+                        onPress={() => navigation.navigate('catagoryMovies', {catagory: 'upcomming'})}
                     >
                         <Entypo
                             name="chevron-small-right"
@@ -173,7 +171,7 @@ export const HomeScreen = ({ navigation }) => {
                         horizontal={true}
                         initialNumToRender={3}
                         keyExtractor={(item)=> item.id}
-                        ListFooterComponent={<ListFooter navigation={navigation}/>}
+                        ListFooterComponent={<ListFooter navigation={navigation} catagory="upcomming"/>}
                     />:(getUpcomming.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
             </ScrollView>
