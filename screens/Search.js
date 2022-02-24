@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard } from 'react-native'
+import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard, Text } from 'react-native'
 import { SearchResults } from '../components/SearchResults';
 import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ export const Search = ({ navigation }) => {
         setDismiss(true)
     }
 
-    let searching = useQuery(['searching', search], () => api.search(search));
+    const searching = useQuery(['searching', search], () => api.search(search));
 
     useMemo(() => {
         setSearchResult(searching?.data ? searching?.data?.results : []);
@@ -25,10 +25,11 @@ export const Search = ({ navigation }) => {
     const searchResults = ({ item }) => {
         return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
     }
+
     const desmiss = useRef(null);
 
     return (
-        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={{ flex: 1, backgroundColor: '#000', marginTop: Constants.statusBarHeight, paddingHorizontal: 20 }}>
                 {/* Search Bar */}
                 <View style={styles.search}>
@@ -49,11 +50,15 @@ export const Search = ({ navigation }) => {
                 </View>
                 <View style={{ flex: 1, paddingBottom: 60 }}>
                     {searching?.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20, alignSelf: 'center' }} /> :
-                        <FlatList
-                            data={searchResult}
-                            renderItem={searchResults}
-                            contentContainerStyle={{ paddingBottom: 20, }}
-                        />}
+                        (
+                            searchResult == null ? <Text style={{ color: 'white' }}>No result!</Text> :
+                                <FlatList
+                                    data={searchResult}
+                                    renderItem={searchResults}
+                                    contentContainerStyle={{ paddingBottom: 20, }}
+                                />
+                    )}
+
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

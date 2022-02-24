@@ -14,22 +14,14 @@ const openUrl = async (url) => {
     }
 }
 
-export const RenderCatagoryAndRating = ({ data }) => {
+export const RenderCatagoryAndRating = ({ movie }) => {
     const [trailer, setTrailer] = useState('');
-    const [genres, setGenres] = useState([]); 
     
-    const getGenres = useQuery('genres', api.getGenres); 
-    const getTrailer = useQuery(['gettrailer', data?.id], ()=> api.getTrailer(data?.id));
+    const getTrailer = useQuery(['gettrailer', movie?.id], ()=> api.getTrailer(movie?.id));
+
     useMemo(()=>{
         setTrailer(getTrailer?.data?getTrailer?.data?.results[0]?.key:'')
-        setGenres(getGenres?.data?getGenres?.data?.genres:[])
-    }, [getTrailer.data, getGenres.data]) 
-    
-    const Gen = []; 
-    genres.map(g=>{
-        data?.genre_ids.filter(n => {g.id == n ? Gen.push(g.name) : null})
-    })
-
+    }, [getTrailer.data]) 
 
     return (
         <View style={{ flexDirection: 'column' }}>
@@ -49,7 +41,7 @@ export const RenderCatagoryAndRating = ({ data }) => {
                         User Score &nbsp;
                         <Entypo name="star" size={16} color="yellow" style={{ marginLeft: 10 }} />
                         <Text style={{ color: '#fff', fontSize: 14 }}>
-                            {data?.vote_count}
+                            {movie?.vote_count}
                         </Text>
                     </Text>
                 </View>
@@ -66,8 +58,8 @@ export const RenderCatagoryAndRating = ({ data }) => {
             </View>
             {/* realize date and genre */}
             <View style={{ alignItems: 'center', flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1 }}>
-                <Text style={{ fontSize: 16, color: '#ccc' }}>{data?.release_date}</Text>
-                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{Gen.map((g, index) => g+',  ')}</Text>
+                <Text style={{ fontSize: 16, color: '#ccc' }}>{movie?.release_date}</Text>
+                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{movie?.genres?.map(g=> g.name+' ,')}</Text>
             </View>
         </View>
     )

@@ -17,9 +17,9 @@ export const SearchResults = ({ data, navigation }) => {
     genres.map(g=>{
         data?.genre_ids.filter(n => {g.id == n ? Gen.push(g.name) : null})
     }) 
-
+     
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { data })}>
+        <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { id: data?.id })}>
             <View
                 style={{ flexDirection: 'row',width: '100%', height: 120, borderColor: 'rgb(234, 88, 12)', borderWidth: 1, borderRadius: 16, padding: 10}}
             >

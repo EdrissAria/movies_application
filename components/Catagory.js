@@ -4,7 +4,7 @@ import { windowWidth } from '../globals/Dimension'
 
 export const Catagory = ({ data, navigation }) => {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { data })}>
+        <TouchableOpacity onPress={() => navigation.navigate('movieDetails', {id: data?.id })}>
             <Image source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} style={{ width: (windowWidth - 76) / 3, height: 140, borderRadius: 14, marginHorizontal: 6 }} />
             <View style={{ flexDirection: 'column', paddingHorizontal: 8, marginTop: 6, alignItems: 'center', }}>
                 <Text style={styles.title}>{data?.title?.length > 11 ? data?.title?.slice(0, 11) + '..' : data?.title}</Text>

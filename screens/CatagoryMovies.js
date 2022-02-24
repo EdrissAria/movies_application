@@ -40,10 +40,10 @@ export const CatagoryMovies = ({ navigation, route }) => {
                 renderItem={renderCatagory}
                 initialNumToRender={4}
                 contentContainerStyle={{ paddingBottom: 20 }}
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={10}
                 onEndReached={() => {
                     setPage(p => p+1); 
-                    allMovies.push(...movies); 
+                    movies != null && allMovies.push(...movies); 
                 }}
                 ListFooterComponent={()=> movies != null?<ActivityIndicator size="large" color="red" style={{marginTop: 20}}/>:null}
             />}

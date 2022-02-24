@@ -1,15 +1,16 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Image, Platform, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, Platform, ImageBackground } from 'react-native'
 import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons'
 
-export const RenderHeader = ({ navigation, data }) => {
+export const RenderHeader = ({ navigation, movie }) => {
     return (
         <ImageBackground
-            source={{ uri: "https://image.tmdb.org/t/p/w300"+data?.backdrop_path }}
+            source={{ uri: "https://image.tmdb.org/t/p/w300"+movie?.backdrop_path }}
             resizeMode="stretch"
             style={{
+                flex: 1,
                 width: '100%',
                 height: windowHeight / 2,
             }}
@@ -82,7 +83,7 @@ export const RenderHeader = ({ navigation, data }) => {
                                 paddingHorizontal: 10,
                             }}
                         >
-                            {data?.original_title}
+                            {movie?.original_title}
                         </Text>
                     </LinearGradient>
                 </View>
