@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, View , Image, Text, TouchableOpacity} from 'react-native'
+import {StyleSheet, View , TouchableOpacity} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
-import { Feather, Ionicons, AntDesign, Entypo } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 
 export const ListFooter = ({navigation, catagory}) =>{
     return(

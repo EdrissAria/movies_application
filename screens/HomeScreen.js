@@ -34,10 +34,10 @@ export const HomeScreen = ({ navigation }) => {
         setUpcomming(getUpcomming.data?getUpcomming.data.results:null); 
     },[getPopular.data, getTop_rated.data, getUpcomming.data])
 
-    const renderBanner = ({ item, index }) => {
+    const renderBanner = ({ item }) => {
         return <BannerSlider data={item} />
     }
-    const renderMovies = ({ item, index }) => {
+    const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
 
@@ -154,7 +154,7 @@ export const HomeScreen = ({ navigation }) => {
                             position: 'absolute',
                             right: 0,
                         }}
-                        onPress={() => navigation.navigate('catagoryMovies', {catagory: 'upcomming'})}
+                        onPress={() => navigation.navigate('catagoryMovies', {catagory: 'upcoming'})}
                     >
                         <Entypo
                             name="chevron-small-right"
@@ -171,7 +171,7 @@ export const HomeScreen = ({ navigation }) => {
                         horizontal={true}
                         initialNumToRender={3}
                         keyExtractor={(item)=> item.id}
-                        ListFooterComponent={<ListFooter navigation={navigation} catagory="upcomming"/>}
+                        ListFooterComponent={<ListFooter navigation={navigation} catagory="upcoming"/>}
                     />:(getUpcomming.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" />:null)}
                 </View>
             </ScrollView>

@@ -49,15 +49,15 @@ export const Search = ({ navigation }) => {
                     <AntDesign name="search1" size={24} color="rgb(234, 88, 12)" />
                 </View>
                 <View style={{ flex: 1, paddingBottom: 60 }}>
-                    {searching?.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20, alignSelf: 'center' }} /> :
-                        (
-                            searchResult == null ? <Text style={{ color: 'white' }}>No result!</Text> :
-                                <FlatList
-                                    data={searchResult}
-                                    renderItem={searchResults}
-                                    contentContainerStyle={{ paddingBottom: 20, }}
-                                />
-                    )}
+                    {
+                        search == undefined ? null : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
+                            <FlatList
+                                data={searchResult}
+                                renderItem={searchResults}
+                                contentContainerStyle={{ paddingBottom: 20, }}
+                            />
+                        )
+                    }
 
                 </View>
             </SafeAreaView>

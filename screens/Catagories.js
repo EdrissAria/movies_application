@@ -1,7 +1,6 @@
 import React, {useState, useMemo} from 'react'
 import {View, SafeAreaView, Text,FlatList} from 'react-native'
 import Constants  from 'expo-constants';
-import { MovieCatagories } from '../globals/Data';
 import { RenderCatagories } from '../components/RenderCatagories';
 import * as api from '../components/api/Api'
 import { useQuery } from 'react-query'

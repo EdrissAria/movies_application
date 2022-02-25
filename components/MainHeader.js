@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
-import { globalStyle } from '../globals/GlobalStyle'
+import { View, Text, Image } from 'react-native'
 import Constants from 'expo-constants'
 
 export const MainHeader = () => {

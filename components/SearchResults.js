@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../components/api/Api'
