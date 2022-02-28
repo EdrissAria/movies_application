@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Text, Linking, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import * as api from './api/Api'
@@ -19,8 +19,8 @@ export const RenderCatagoryAndRating = ({ movie }) => {
     
     const getTrailer = useQuery(['gettrailer', movie?.id], ()=> api.getTrailer(movie?.id));
 
-    useMemo(()=>{
-        setTrailer(getTrailer?.data?getTrailer?.data?.results[0]?.key:'')
+    useEffect(() => {
+        setTrailer(getTrailer?.data?.rusults?getTrailer?.data?.results[0]?.key:'')
     }, [getTrailer?.data]) 
 
     return (

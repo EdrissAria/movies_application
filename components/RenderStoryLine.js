@@ -1,4 +1,4 @@
-import React, { useState, useMemo} from 'react'
+import React, { useState, useEffect} from 'react'
 import { View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
 import { MovieActors } from '../components/MovieActors';
 import * as api from './api/Api'
@@ -11,9 +11,10 @@ export const RednerStoryLine = ({ navigation, movie }) => {
 
     const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id)); 
 
-    useMemo(()=>{
+    useEffect(() => {
         setCasts(getCasts?.data?getCasts?.data?.cast:[])
-    }, [getCasts?.data]) 
+    }, [getCasts?.data])
+    
  
     const renderActors = ({ item }) => {
         return <MovieActors data={item} navigation={navigation} />
