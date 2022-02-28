@@ -21,7 +21,7 @@ export const RenderCatagoryAndRating = ({ movie }) => {
 
     useMemo(()=>{
         setTrailer(getTrailer?.data?getTrailer?.data?.results[0]?.key:'')
-    }, [getTrailer.data]) 
+    }, [getTrailer?.data]) 
 
     return (
         <View style={{ flexDirection: 'column' }}>
@@ -59,7 +59,7 @@ export const RenderCatagoryAndRating = ({ movie }) => {
             {/* realize date and genre */}
             <View style={{ alignItems: 'center', flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1 }}>
                 <Text style={{ fontSize: 16, color: '#ccc' }}>{movie?.release_date}</Text>
-                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{movie?.genres?.map(g=> g.name+' ,')}</Text>
+                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{movie?.genres?.map(g=> g?.name+' ,')}</Text>
             </View>
         </View>
     )
