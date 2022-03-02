@@ -21,7 +21,7 @@ export default function MovieDetails({ navigation, route }) {
             {/* Header */}
             <RenderHeader navigation={navigation} movie={selectedMovie}/>
             {/* Catagory & rating */}
-            <RenderCatagoryAndRating movie={selectedMovie}/>
+            <RenderCatagoryAndRating movieId={selectedMovie.id}/>
             {/* Story line */}
             <RednerStoryLine navigation={navigation} movie={selectedMovie}/>
         </ScrollView>

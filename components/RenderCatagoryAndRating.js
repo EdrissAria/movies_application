@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import { StyleSheet, View, Text, Linking, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import * as api from './api/Api'
@@ -14,14 +14,19 @@ const openUrl = async (url) => {
     }
 }
 
-export const RenderCatagoryAndRating = ({ movie }) => {
+export const RenderCatagoryAndRating = ({ movieId }) => {
     const [trailer, setTrailer] = useState('');
-    
-    const getTrailer = useQuery(['gettrailer', movie?.id], ()=> api.getTrailer(movie?.id));
+    const [movie, setMovie] = useState([]); 
+    const getTrailer = useQuery(['gettrailer', movieId], ()=> api.getTrailer(movieId));
+    const getMovie = useQuery(['movie',  movieId],() => api.getMovie(movieId));
 
-    useEffect(() => {
-        setTrailer(getTrailer?.data?.rusults?getTrailer?.data?.results[0]?.key:'')
-    }, [getTrailer?.data]) 
+    useMemo(() => {
+        if(getTrailer.isSuccess){
+            console.log(getTrailer?.data?.rusults?getTrailer?.data?.results[0]?.key:'no video')
+            setTrailer(getTrailer?.data?.rusults?getTrailer?.data?.results[0]?.key:'')
+            setMovie(getMovie?.data?getMovie?.data:[])
+        }
+    }, [getTrailer?.data, getMovie?.data]) 
 
     return (
         <View style={{ flexDirection: 'column' }}>

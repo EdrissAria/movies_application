@@ -12,7 +12,9 @@ export const RednerStoryLine = ({ navigation, movie }) => {
     const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id)); 
 
     useEffect(() => {
-        setCasts(getCasts?.data?getCasts?.data?.cast:[])
+        if(getCasts.isSuccess){
+            setCasts(getCasts?.data?getCasts?.data?.cast:[])
+        }
     }, [getCasts?.data])
     
  
