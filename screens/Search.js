@@ -16,7 +16,7 @@ export const Search = ({ navigation }) => {
         setDismiss(true)
     }
 
-    const searching = useQuery(['searching', search], () => api.search(search));
+    const searching = useQuery(['searching', search], () => api.search(search),{enabled: !!search});
 
     useMemo(() => {
         setSearchResult(searching?.data ? searching?.data?.results : []);

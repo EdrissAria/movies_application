@@ -9,15 +9,12 @@ export const RednerStoryLine = ({ navigation, movie }) => {
     const [casts, setCasts] = useState([])
     const [more, setMore] = useState(false);
 
-    const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id)); 
+    const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id), {enabled: !!movie.id}); 
 
     useEffect(() => {
-        if(getCasts.isSuccess){
-            setCasts(getCasts?.data?getCasts?.data?.cast:[])
-        }
+        setCasts(getCasts?.data?getCasts?.data?.cast:[])
     }, [getCasts?.data])
     
- 
     const renderActors = ({ item }) => {
         return <MovieActors data={item} navigation={navigation} />
     }
