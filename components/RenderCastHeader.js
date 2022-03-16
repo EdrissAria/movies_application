@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, ImageBackground, Platform, } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
@@ -8,33 +8,17 @@ import { Entypo } from '@expo/vector-icons';
 export const RenderCastHeader = ({ actor, navigation }) => {
     return (
         <ImageBackground
-            source={{ uri: "https://image.tmdb.org/t/p/original"+actor?.profile_path }}
+            source={{ uri: "https://image.tmdb.org/t/p/original" + actor?.profile_path }}
             resizeMode="cover"
-            style={{
-                width: '100%',
-                height: windowHeight / 2 * 1.2,
-            }}
+            style={styles.background}
         >
             <View style={{ flex: 1 }}>
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginTop: Platform.OS ? 40 : 20,
-                        paddingHorizontal: 20
-                    }}
+                    style={styles.header}
                 >
                     {/* back button */}
                     <TouchableOpacity
-                        style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 50,
-                            height: 50,
-                            borderRadius: 20,
-                            backgroundColor: 'rgba(0,0,0,0.3)'
-                        }}
+                        style={styles.back}
                         onPress={() => navigation.goBack()}
                     >
                         <Entypo
@@ -44,23 +28,16 @@ export const RenderCastHeader = ({ actor, navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                <View style={styles.details}>
                     <LinearGradient
                         start={{ x: 0, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={['transparent', '#000']}
-                        style={{ width: '100%', height: 150, alignItems: 'center', justifyContent: 'flex-end' }}
+                        style={styles.gradient}
                     >
                         {/* Name */}
                         <Text
-                            style={{
-                                marginTop: 10,
-                                color: '#eee',
-                                fontSize: 28,
-                                textTransform: 'capitalize',
-                                fontWeight: 'bold',
-                                letterSpacing: 4
-                            }}
+                            style={styles.actor}
                         >
                             {actor?.name}
                         </Text>
@@ -70,3 +47,43 @@ export const RenderCastHeader = ({ actor, navigation }) => {
         </ImageBackground>
     )
 }
+
+const styles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: Platform.OS ? 40 : 20,
+        paddingHorizontal: 20
+    },
+    background: {
+        width: '100%',
+        height: windowHeight / 2 * 1.2,
+    }, 
+    back: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 20,
+        backgroundColor: 'rgba(0,0,0,0.3)'
+    }, 
+    details: {
+        flex: 1, 
+        justifyContent: 'flex-end'
+    }, 
+    gradient: {
+        width: '100%', 
+        height: 150, 
+        alignItems: 'center', 
+        justifyContent: 'flex-end'
+    },
+    actor: {
+        marginTop: 10,
+        color: '#eee',
+        fontSize: 28,
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
+        letterSpacing: 4
+    }
+})

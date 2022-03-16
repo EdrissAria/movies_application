@@ -5,7 +5,7 @@ export const MovieActors = ({data, navigation}) =>{
     const photo = data?.profile_path == null ? require('../assets/images/user.png'):{uri: "https://image.tmdb.org/t/p/original"+data?.profile_path};
     return(
         <TouchableOpacity onPress={()=> navigation.navigate('actorsDetails', {data})}>
-            <Image source={photo} resizeMode="cover" style={{ width: 60, height: 80, borderRadius: 10, marginHorizontal: 6 }}/>
+            <Image source={photo} resizeMode="cover" style={styles.cast}/>
         </TouchableOpacity>
     )
 }
@@ -18,5 +18,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 12, 
         opacity: 0.6
+    },
+    cast: {
+        width: 60, 
+        height: 80, 
+        borderRadius: 10, 
+        marginHorizontal: 6 
     }
 })

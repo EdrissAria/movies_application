@@ -30,7 +30,7 @@ export const Search = ({ navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <SafeAreaView style={{ flex: 1, backgroundColor: '#000', marginTop: Constants.statusBarHeight, paddingHorizontal: 20 }}>
+            <SafeAreaView style={styles.container}>
                 {/* Search Bar */}
                 <View style={styles.search}>
                     {dismiss ?
@@ -44,11 +44,11 @@ export const Search = ({ navigation }) => {
                         placeholder="search here.."
                         placeholderTextColor="#bbb"
                         keyboardType="web-search"
-                        style={{ color: '#ddd', marginHorizontal: 3, fontSize: 18, width: 240, paddingVertical: 2, paddingHorizontal: 4 }}
+                        style={styles.searchInput}
                     />
                     <AntDesign name="search1" size={24} color="rgb(234, 88, 12)" />
                 </View>
-                <View style={{ flex: 1, paddingBottom: 60 }}>
+                <View style={styles.view}>
                     {
                         search == undefined ? null : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
                             <FlatList
@@ -80,5 +80,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         borderWidth: 1,
         marginVertical: 20,
+    }, 
+    container: {
+        flex: 1, 
+        backgroundColor: '#000', 
+        marginTop: Constants.statusBarHeight, 
+        paddingHorizontal: 20 
+    }, 
+    searchInput: {
+        color: '#ddd', 
+        marginHorizontal: 3, 
+        fontSize: 18, 
+        width: 240, 
+        paddingVertical: 2, 
+        paddingHorizontal: 4 
+    }, 
+    view: {
+        flex: 1, 
+        paddingBottom: 60 
     }
 })

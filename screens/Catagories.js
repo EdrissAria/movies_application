@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react'
-import {View, SafeAreaView, Text,FlatList} from 'react-native'
+import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
 import Constants  from 'expo-constants';
 import { RenderCatagories } from '../components/RenderCatagories';
 import * as api from '../components/api/Api'
@@ -18,9 +18,9 @@ export const Catagories = ({ navigation }) => {
         return <View style={{ marginTop: 20 }}><RenderCatagories data={item} navigation={navigation}/></View>
     }
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#000', paddingHorizontal: 20, marginTop: Constants.statusBarHeight}}>
-            <View style={{ paddingVertical: 10, marginTop: 10, backgroundColor: 'rgba(0,0,0, 0.5)', justifyContent: 'center'}}>
-                <Text style={{fontSize: 21, fontFamily: 'roboto-regular', color: 'rgb(234, 88, 12)', textAlign: 'center'}}>Movies Genre</Text>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.title}>
+                <Text style={styles.genre}>Movies Genre</Text>
             </View>
             <FlatList 
                 numColumns={2}
@@ -32,3 +32,24 @@ export const Catagories = ({ navigation }) => {
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        backgroundColor: '#000', 
+        paddingHorizontal: 20, 
+        marginTop: Constants.statusBarHeight
+    }, 
+    title: {
+        paddingVertical: 10, 
+        marginTop: 10, 
+        backgroundColor: 'rgba(0,0,0, 0.5)', 
+        justifyContent: 'center'
+    }, 
+    genre: {
+        fontSize: 21, 
+        fontFamily: 'roboto-regular', 
+        color: 'rgb(234, 88, 12)', 
+        textAlign: 'center'
+    }
+})
