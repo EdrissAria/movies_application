@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
-import { windowHight } from '../globals/Dimension'
 
 export const BannerSlider = ({ data }) => {
     return (
@@ -15,7 +14,9 @@ const styles = StyleSheet.create({
     banner: {
         width: windowWidth - 50,
         height: windowHeight / 2.5,
-        marginHorizontal: 5
+        marginHorizontal: 5,  
+        borderRadius: 40, 
+        overflow: 'hidden'
     },
     image: {
         width: '100%',

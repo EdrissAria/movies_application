@@ -1,10 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { StyleSheet,View } from 'react-native'
 import { Feather, Ionicons, AntDesign } from '@expo/vector-icons'
 
 export const TabIcon = ({ focused, icon }) => {
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.container}>
             {
                 icon == 'grid-outline' ? (<Ionicons
                     name={icon}
@@ -26,3 +26,10 @@ export const TabIcon = ({ focused, icon }) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center', 
+        alignItems: 'center'
+    }
+})

@@ -1,23 +1,19 @@
-import React, { useState, useCallback, useMemo, useRef, useEffect} from 'react';
-import { StyleSheet,View, Text, ScrollView, SafeAreaView, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator, Animated } from 'react-native'
-import { BannerSlider } from '../components/BannerSlider';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator, Animated } from 'react-native'
 import { RenderMovies } from '../components/RenderMovies';
 import { ListFooter } from '../components/ListFooter';
 import { Entypo } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../components/api/Api';
-import { windowWidth } from '../globals/Dimension';
-
-
+import Carousel from '../components/Carousel';
+ 
 const wait = (timeout) => {
     return new Promise(resolve => {
         setTimeout(resolve, timeout)
     })
 }
 
-
 export const HomeScreen = ({ navigation }) => {
-    const carousel = useRef(null);
 
     const [refrishing, setRefrishing] = useState(false);
     const [upcomming, setUpcomming] = useState([]);
@@ -30,34 +26,13 @@ export const HomeScreen = ({ navigation }) => {
     const getPopular = useQuery('populer', api.getPopular);
     const getTop_rated = useQuery('toprated', api.getTop_rated);
 
-    const infiniteScroll = (datalist) => {
-        const numberOfdata = datalist?.length;
-        let scrollValue = 0, scrolled = 0, slideWidth = (windowWidth - 40);
-        setInterval(function () {
-            scrolled++;
-            if (scrolled < numberOfdata) {
-                scrollValue += slideWidth;
-            } else {
-                scrollValue = 0;
-                scrolled = 0;
-            } 
-            carousel.current.scrollToOffset({animated: true, offset: scrollValue})
-        }, 3000)
-    }
-    
     useMemo(() => {
         setPopular(getPopular.data ? getPopular.data.results : null);
         setToprated(getTop_rated.data ? getTop_rated.data.results : null);
         setUpcomming(getUpcomming.data ? getUpcomming.data.results : null);
         setNowPlaying(getNow_playing.data ? getNow_playing.data.results : null);
-    }, [getPopular.data, getTop_rated.data, getUpcomming.data])
+    }, [getPopular.data, getTop_rated.data, getUpcomming.data, getNow_playing.data])
 
-    infiniteScroll(nowPlaying)
-
-    
-    const renderBanner = ({ item }) => {
-        return <BannerSlider data={item} />
-    }
     const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
@@ -85,19 +60,8 @@ export const HomeScreen = ({ navigation }) => {
                 }
             >
                 {getNow_playing.isSuccess ?
-                    <FlatList
-                        ref={carousel}
-                        data={getNow_playing.data.results}
-                        renderItem={renderBanner}
-                        horizontal
-                        pagingEnabled
-                        scrollEnabled
-                        snapToAlignment="center"
-                        scrollEventThrottle={16}
-                        decelerationRate={"fast"}
-                        showsHorizontalScrollIndicator={false}
-
-                    /> : (getNow_playing.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" /> : null)}
+                    <Carousel banners={nowPlaying}/>
+                    : (getNow_playing.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" /> : null)}
                 <View>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Popular</Text>
@@ -176,32 +140,32 @@ export const HomeScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 10, 
-    paddingBottom: 60 
-  }, 
-  title: {
-    color: '#eee', 
-    fontSize: 18, 
-    fontFamily: 'roboto-regular', 
-    letterSpacing: 1, 
-    position: 'absolute', 
-    left: 0, 
-    marginTop: 20 
-  }, 
-  arrow: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 30,
-    height: 30,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    position: 'absolute',
-    right: 0,
-  }, 
-  titleContainer: {
-    marginVertical: 26, 
-    justifyContent: 'center'
-  }  
+    container: {
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingBottom: 60
+    },
+    title: {
+        color: '#eee',
+        fontSize: 18,
+        fontFamily: 'roboto-regular',
+        letterSpacing: 1,
+        position: 'absolute',
+        left: 0,
+        marginTop: 20
+    },
+    arrow: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        position: 'absolute',
+        right: 0,
+    },
+    titleContainer: {
+        marginVertical: 26,
+        justifyContent: 'center'
+    }
 })
