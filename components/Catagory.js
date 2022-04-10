@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 
-export const Catagory = ({ data, navigation }) => {
+const Catagory = ({ data, navigation }) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('movieDetails', {id: data?.id })}>
             <Image source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} style={{ width: (windowWidth - 76) / 3, height: 140, borderRadius: 14, marginHorizontal: 6 }} />
@@ -32,3 +32,5 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
     }
 })
+
+export default React.memo(Catagory);

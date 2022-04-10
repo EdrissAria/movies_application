@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import { windowWidth } from '../globals/Dimension'
-import { BlurView } from "@react-native-community/blur";
 import Images from './Images'
 
 export const RenderCatagories = ({ data, navigation }) => {

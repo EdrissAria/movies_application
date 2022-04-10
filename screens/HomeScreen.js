@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo} from 'react';
 import { StyleSheet, View, Text, ScrollView, SafeAreaView, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator, Animated } from 'react-native'
 import { RenderMovies } from '../components/RenderMovies';
 import { ListFooter } from '../components/ListFooter';
@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../components/api/Api';
 import Carousel from '../components/Carousel';
+import { windowHeight } from '../globals/Dimension';
  
 const wait = (timeout) => {
     return new Promise(resolve => {
@@ -61,7 +62,7 @@ export const HomeScreen = ({ navigation }) => {
             >
                 {getNow_playing.isSuccess ?
                     <Carousel banners={nowPlaying}/>
-                    : (getNow_playing.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" /> : null)}
+                : (getNow_playing.isLoading ? <View style={{ width: windowHeight - 40, height: windowHeight / 2.5, backgroundColor: '#ccc' }} /> : null)}
                 <View>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Popular</Text>

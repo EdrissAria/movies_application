@@ -1,7 +1,7 @@
-import React, { useState, useMemo} from 'react'
+import React, { useState, useMemo, useEffect} from 'react'
 import { View, SafeAreaView, Text,TouchableOpacity,ActivityIndicator, FlatList} from 'react-native'
 import { Entypo } from '@expo/vector-icons'
-import { Catagory } from '../components/Catagory';
+import Catagory  from '../components/Catagory';
 import Constants  from 'expo-constants';
 import * as api from '../components/api/Api'
 import { useQuery } from 'react-query'
@@ -12,15 +12,13 @@ export const CatagoryMovies = ({ navigation, route }) => {
     const [allMovies, setAllMovies] = useState([]); 
     const [movies, setMovies] = useState([]); 
     
-
     const getAllMovies = useQuery(['allmovies', catagory],() => api.getAllMovies(catagory));
     const getMovies = useQuery(['movies', page, catagory],() => api.getMovies(page, catagory));
-     
+      
     useMemo(()=>{
         setAllMovies(getAllMovies?.data?getAllMovies?.data?.results:null); 
         setMovies(getMovies?.data?getMovies?.data?.results:null); 
     },[getMovies.data, getAllMovies.data])
-
 
     const renderCatagory = ({ item }) => {
         return <View style={{ marginTop: 20 }}><Catagory data={item} navigation={navigation}/></View>
@@ -37,13 +35,14 @@ export const CatagoryMovies = ({ navigation, route }) => {
             <FlatList 
                 numColumns={3}
                 data={allMovies}
+                extraData={allMovies}
                 renderItem={renderCatagory}
                 initialNumToRender={4}
                 contentContainerStyle={{ paddingBottom: 20 }}
-                onEndReachedThreshold={10}
+                onEndReachedThreshold={0}
                 onEndReached={() => {
                     setPage(p => p+1); 
-                    movies != null && allMovies.push(...movies); 
+                    movies != null && allMovies.push(...movies);
                 }}
                 ListFooterComponent={()=> movies != null?<ActivityIndicator size="large" color="red" style={{marginTop: 20}}/>:null}
             />}

@@ -55,7 +55,7 @@ export default function Carousel({ banners }) {
                 showsHorizontalScrollIndicator={false}
                 initialScrollIndex={3}
                 onScroll={Animated.event([
-                    { nativeEvent: { contentOffset: { x: scrollX } } },
+                    { nativeEvent: { contentOffset: { x: scrollX } } }
                 ])}
             />
         </SafeAreaView>
