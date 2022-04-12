@@ -4,7 +4,7 @@ import { RenderHeader } from '../components/RenderHeader';
 import { RenderCatagoryAndRating } from '../components/RenderCatagoryAndRating';
 import { RednerStoryLine } from '../components/RenderStoryLine';
 import { useQuery } from 'react-query'
-import * as api from '../components/api/Api';
+import * as api from '../api/Api';
 
 export default function MovieDetails({ navigation, route }) {
     const { id } = route.params;

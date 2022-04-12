@@ -4,7 +4,6 @@ import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 
-
 export const RenderCastHeader = ({ actor, navigation }) => {
     return (
         <ImageBackground

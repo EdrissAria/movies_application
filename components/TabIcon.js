@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet,View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Feather, Ionicons, AntDesign } from '@expo/vector-icons'
 
 export const TabIcon = ({ focused, icon }) => {
@@ -29,7 +29,7 @@ export const TabIcon = ({ focused, icon }) => {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center'
     }
 })

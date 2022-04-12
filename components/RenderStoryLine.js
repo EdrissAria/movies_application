@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
-import { MovieActors } from '../components/MovieActors';
-import * as api from './api/Api'
+import  MovieActors  from '../components/MovieActors';
+import * as api from '../api/Api'
 import { useQuery } from 'react-query'
 
 export const RednerStoryLine = ({ navigation, movie }) => {

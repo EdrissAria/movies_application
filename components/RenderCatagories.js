@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 import Images from './Images'
 
-export const RenderCatagories = ({ data, navigation }) => {
+const RenderCatagories = ({ data, navigation }) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('movieGenre', { id: data?.id, genre: data?.name })}>
             <View style={styles.catagory}>
@@ -40,3 +40,5 @@ const styles = StyleSheet.create({
         overflow: 'hidden' 
     }
 })
+
+export default React.memo(RenderCatagories)

@@ -1,10 +1,10 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard, Text } from 'react-native'
-import { SearchResults } from '../components/SearchResults';
+import SearchResults from '../components/SearchResults';
 import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
 import { useQuery } from 'react-query'
-import * as api from '../components/api/Api';
+import * as api from '../api/Api';
 
 export const Search = ({ navigation }) => {
     const [search, setSearch] = useState();
@@ -18,9 +18,12 @@ export const Search = ({ navigation }) => {
 
     const searching = useQuery(['searching', search], () => api.search(search),{enabled: !!search});
 
-    useMemo(() => {
-        setSearchResult(searching?.data ? searching?.data?.results : []);
-    }, [searching?.data])
+    useEffect(() => {
+        setSearchResult(searching?.data?[...searching?.data?.results]:[]);
+        return () => {
+            setSearchResult([])
+        }
+    }, [searching.data])
 
     const searchResults = ({ item }) => {
         return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
@@ -53,6 +56,7 @@ export const Search = ({ navigation }) => {
                         search == undefined ? null : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
                             <FlatList
                                 data={searchResult}
+                                extraData={searchResult}
                                 renderItem={searchResults}
                                 contentContainerStyle={{ paddingBottom: 20, }}
                             />

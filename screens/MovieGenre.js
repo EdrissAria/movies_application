@@ -1,9 +1,9 @@
 import React, {useMemo, useState} from 'react'
 import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
-import { Genre } from '../components/Genre';
+import Genre  from '../components/Genre';
 import Constants  from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
-import * as api from '../components/api/Api'
+import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
 export const MovieGenre = ({ navigation, route }) => {

@@ -1,7 +1,7 @@
-import React, {useState, useMemo, useEffect} from 'react'
+import React from 'react'
 import { StyleSheet, View, Text, Linking, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
-import * as api from './api/Api'
+import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
 

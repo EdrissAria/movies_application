@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
 
-export const BannerSlider = ({ data }) => {
+const BannerSlider = ({ data }) => {
     return (
         <View style={styles.banner}>
             <Image source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={styles.image} />
@@ -24,3 +24,5 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     }
 })
+
+export default React.memo(BannerSlider)

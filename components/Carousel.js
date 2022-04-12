@@ -2,13 +2,12 @@ import { StyleSheet, SafeAreaView, FlatList, Animated } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import { BannerSlider } from './BannerSlider';
 import { windowHeight, windowWidth } from '../globals/Dimension'
-
  
 export default function Carousel({ banners }) {
-    const [data, setData] = useState([...banners])
+    const [data, setData] = useState(banners)
     const scrollX = new Animated.Value(0);
     const flatlist = useRef(null);
-
+    console.log('dataaaaaaaaaaaaaaaaa:', banners)
     let position = Animated.divide(scrollX, windowWidth - 40)
 
     const infiniteScroll = (datalist) => {
@@ -29,9 +28,7 @@ export default function Carousel({ banners }) {
     useEffect(() => {
         setData([...banners])
         infiniteScroll(data)
-        return () => {
-            setData([])
-        }
+        
     }, [])
 
     const renderBanner = ({ item }) => {
@@ -43,7 +40,7 @@ export default function Carousel({ banners }) {
             <FlatList
                 ref={flatlist}
                 data={data}
-                extraData={banners}
+                extraData={data}
                 renderItem={renderBanner}
                 keyExtractor={(item) => item.id}
                 horizontal={true}

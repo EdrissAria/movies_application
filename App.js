@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Home from './routes/Home'
 import MovieDetails from './screens/MovieDetails';
 import ActorsDetails from './screens/ActorsDetails';
-import { CatagoryMovies } from './screens/CatagoryMovies'
+import CatagoryMovies from './screens/CatagoryMovies'
 import CustomFonts from './globals/CustomFonts';
 import { MovieGenre } from './screens/MovieGenre';
 import { QueryClient, QueryClientProvider } from 'react-query'

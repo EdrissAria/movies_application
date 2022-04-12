@@ -2,9 +2,9 @@ import React, { useState, useMemo } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
-import * as api from '../components/api/Api'
+import * as api from '../api/Api'
 
-export const SearchResults = ({ data, navigation }) => {
+const SearchResults = ({ data, navigation }) => {
     const [genres, setGenres] = useState([]);
 
     const getGenres = useQuery('genres', api.getGenres);
@@ -79,3 +79,5 @@ const styles = StyleSheet.create({
         width: 190
     }
 })
+
+export default React.memo(SearchResults)

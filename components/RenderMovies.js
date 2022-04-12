@@ -2,7 +2,7 @@ import React from 'react'
 import {StyleSheet, View , Image, Text, TouchableOpacity} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
  
-export const RenderMovies = ({data, navigation}) =>{
+const RenderMovies = ({data, navigation}) =>{
     return(
         <TouchableOpacity onPress={()=> navigation.navigate('movieDetails', {id: data?.id})}>
             <View style={styles.movie}>
@@ -38,3 +38,5 @@ const styles = StyleSheet.create({
         marginTop: 6
     }
 })
+
+export default React.memo(RenderMovies)

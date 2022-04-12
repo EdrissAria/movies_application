@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, Image,TouchableOpacity} from 'react-native'
  
-export const MovieActors = ({data, navigation}) =>{
+const MovieActors = ({data, navigation}) =>{
     const photo = data?.profile_path == null ? require('../assets/images/user.png'):{uri: "https://image.tmdb.org/t/p/original"+data?.profile_path};
     return(
         <TouchableOpacity onPress={()=> navigation.navigate('actorsDetails', {data})}>
@@ -26,3 +26,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 6 
     }
 })
+
+export default React.memo(MovieActors)
