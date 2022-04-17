@@ -7,6 +7,7 @@ import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
 export const Search = ({ navigation }) => {
+    console.log('Search.js renderssssssssssssss')
     const [search, setSearch] = useState();
     const [dismiss, setDismiss] = useState(false);
     const [searchResult, setSearchResult] = useState();
@@ -20,13 +21,10 @@ export const Search = ({ navigation }) => {
 
     useEffect(() => {
         setSearchResult(searching?.data?[...searching?.data?.results]:[]);
-        return () => {
-            setSearchResult([])
-        }
     }, [searching.data])
 
     const searchResults = ({ item }) => {
-        return <View style={{ marginVertical: 10 }}><SearchResults navigation={navigation} data={item} /></View>
+        return <SearchResults navigation={navigation} data={item} />
     }
 
     const desmiss = useRef(null);

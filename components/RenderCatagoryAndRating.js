@@ -15,7 +15,7 @@ const openUrl = async (url) => {
 }
  
 
-export const RenderCatagoryAndRating = ({ movie }) => {
+const RenderCatagoryAndRating = ({ movie }) => {
     
     const getTrailer = useQuery(['gettrailer', movie?.id], ()=> api.getTrailer(movie?.id), {
        enabled: !!movie.id
@@ -75,3 +75,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#777'
     }
 })
+
+export default React.memo(RenderCatagoryAndRating)

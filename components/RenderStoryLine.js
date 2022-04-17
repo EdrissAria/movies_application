@@ -4,7 +4,7 @@ import  MovieActors  from '../components/MovieActors';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
 
-export const RednerStoryLine = ({ navigation, movie }) => {
+const RednerStoryLine = ({ navigation, movie }) => {
 
     const [casts, setCasts] = useState([])
     const [more, setMore] = useState(false);
@@ -80,3 +80,5 @@ const styles = StyleSheet.create({
         letterSpacing: 1 
     }
 })
+
+export default React.memo(RednerStoryLine)

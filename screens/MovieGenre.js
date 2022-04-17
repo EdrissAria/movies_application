@@ -1,24 +1,25 @@
-import React, {useMemo, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
-import Genre  from '../components/Genre';
+import RenderMovies from '../components/RenderMovies';
 import Constants  from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
-export const MovieGenre = ({ navigation, route }) => {
+const MovieGenre = ({ navigation, route }) => {
+    console.log('MovieGenre.js renderssssssssssssss')
     const {id, genre} = route.params;
     
     const [genreMovie, setGenreMovie] = useState([]);
 
     const getMoviesByGenre = useQuery(['bygenre', id],()=> api.getByGenre(id));  
     
-    useMemo(()=>{
-        setGenreMovie(getMoviesByGenre?.data?getMoviesByGenre?.data?.data?.results:[]);
+    useEffect(()=>{
+        setGenreMovie(getMoviesByGenre?.data?[...getMoviesByGenre?.data?.data?.results]:[]);
     }, [getMoviesByGenre.data])
    
     const renderGenre = ({ item, index }) => {
-        return <View style={{ marginTop: 20 }}><Genre data={item} navigation={navigation}/></View>
+        return <View style={{ marginTop: 20 }}><RenderMovies data={item} navigation={navigation}/></View>
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -32,6 +33,7 @@ export const MovieGenre = ({ navigation, route }) => {
             <FlatList 
                 numColumns={3}
                 data={genreMovie}
+                extraData={genreMovie}
                 renderItem={renderGenre}
                 initialNumToRender={6}
                 contentContainerStyle={{ paddingBottom: 20 }}
@@ -68,3 +70,5 @@ const styles = StyleSheet.create({
         borderRadius: 20 
     }
 })
+
+export default React.memo(MovieGenre)

@@ -4,7 +4,7 @@ import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 
-export const RenderCastHeader = ({ actor, navigation }) => {
+const RenderCastHeader = ({ actor, navigation }) => {
     return (
         <ImageBackground
             source={{ uri: "https://image.tmdb.org/t/p/original" + actor?.profile_path }}
@@ -86,3 +86,5 @@ const styles = StyleSheet.create({
         letterSpacing: 4
     }
 })
+
+export default React.memo(RenderCastHeader)

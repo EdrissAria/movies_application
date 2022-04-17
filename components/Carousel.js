@@ -7,7 +7,7 @@ export default function Carousel({ banners }) {
     const [data, setData] = useState(banners)
     const scrollX = new Animated.Value(0);
     const flatlist = useRef(null);
-    console.log('dataaaaaaaaaaaaaaaaa:', banners)
+    
     let position = Animated.divide(scrollX, windowWidth - 40)
 
     const infiniteScroll = (datalist) => {

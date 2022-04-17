@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
+import ExpoFastImage from 'expo-fast-image'
 
 const BannerSlider = ({ data }) => {
     return (
         <View style={styles.banner}>
-            <Image source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={styles.image} />
+            <ExpoFastImage source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={styles.image} />
         </View>
     )
 }

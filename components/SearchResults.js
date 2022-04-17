@@ -1,15 +1,16 @@
-import React, { useState, useMemo } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
+import ExpoFastImage from 'expo-fast-image'
 
 const SearchResults = ({ data, navigation }) => {
     const [genres, setGenres] = useState([]);
 
     const getGenres = useQuery('genres', api.getGenres);
 
-    useMemo(() => {
+    useEffect(() => {
         setGenres(getGenres?.data ? getGenres?.data?.genres : [])
     }, [getGenres.data])
 
@@ -23,7 +24,7 @@ const SearchResults = ({ data, navigation }) => {
             <View
                 style={styles.results}
             >
-                <Image source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={{ width: 100, height: 100, borderRadius: 16 }} />
+                <ExpoFastImage source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={{ width: 100, height: 100, borderRadius: 16 }} />
                 <View
                     style={styles.search}
                 >
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
         borderColor: 'rgb(234, 88, 12)',
         borderWidth: 1,
         borderRadius: 16,
-        padding: 10
+        padding: 10, 
+        marginVertical: 10
     }, 
     search: {
         marginLeft: 10, 

@@ -6,7 +6,7 @@ import MovieDetails from './screens/MovieDetails';
 import ActorsDetails from './screens/ActorsDetails';
 import CatagoryMovies from './screens/CatagoryMovies'
 import CustomFonts from './globals/CustomFonts';
-import { MovieGenre } from './screens/MovieGenre';
+import MovieGenre from './screens/MovieGenre';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { I18nManager } from 'react-native';
 
@@ -16,36 +16,31 @@ const queryClient = new QueryClient();
 
 const Stack = createNativeStackNavigator();
 
+const header_shown = {
+  headerShown: false
+}
+
 const App = () => {
+  console.log('app.js rendersssssssssssss')
   return (
     <QueryClientProvider client={queryClient}>
       <CustomFonts>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="home" component={Home}
-              options={{
-                headerShown: false
-              }}
+              options={header_shown}
             />
             <Stack.Screen name="movieDetails" component={MovieDetails}
-              options={{
-                headerShown: false
-              }}
+              options={header_shown}
             />
             <Stack.Screen name="actorsDetails" component={ActorsDetails}
-              options={{
-                headerShown: false
-              }}
+              options={header_shown}
             />
             <Stack.Screen name="catagoryMovies" component={CatagoryMovies}
-              options={{
-                headerShown: false
-              }}
+              options={header_shown}
             />
             <Stack.Screen name="movieGenre" component={MovieGenre}
-              options={{
-                headerShown: false
-              }}
+              options={header_shown}
             />
           </Stack.Navigator>
         </NavigationContainer>

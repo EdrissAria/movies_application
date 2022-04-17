@@ -1,20 +1,21 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useEffect} from 'react'
 import { ScrollView } from 'react-native';
-import { RenderHeader } from '../components/RenderHeader';
-import { RenderCatagoryAndRating } from '../components/RenderCatagoryAndRating';
-import { RednerStoryLine } from '../components/RenderStoryLine';
+import RenderHeader from '../components/RenderHeader';
+import RenderCatagoryAndRating from '../components/RenderCatagoryAndRating';
+import RednerStoryLine from '../components/RenderStoryLine';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
-export default function MovieDetails({ navigation, route }) {
+function MovieDetails({ navigation, route }) {
+    console.log('MovieDetails.js renderssssssssssssss')
     const { id } = route.params;
     const [selectedMovie, setSelectedMovie] = useState({}); 
 
     const getMovie = useQuery(['movie',  id],() => api.getMovie(id));
     
-    useMemo(()=>{
+    useEffect(()=>{
         setSelectedMovie(getMovie?.data?getMovie?.data:{}); 
-    },[getMovie?.data])
+    },[getMovie.data])
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
@@ -27,3 +28,5 @@ export default function MovieDetails({ navigation, route }) {
         </ScrollView>
     )
 }
+
+export default React.memo(MovieDetails)

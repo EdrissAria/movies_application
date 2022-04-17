@@ -1,20 +1,20 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useEffect} from 'react'
 import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
 import Constants  from 'expo-constants';
 import RenderCatagories from '../components/RenderCatagories';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
-export const Catagories = ({ navigation }) => { 
+const Catagories = ({ navigation }) => { 
+    console.log('Catagories.js renderssssssssssssss')
     const [moviesGenre, setMoviesGenre] = useState([]); 
-    
     const getMoviesGenre = useQuery('moviesgenre', api.getGenres);
  
-    useMemo(()=>{
-        setMoviesGenre(getMoviesGenre?.data?getMoviesGenre?.data?.genres:null); 
+    useEffect(()=>{
+        setMoviesGenre(getMoviesGenre?.data?[...getMoviesGenre?.data?.genres]:null); 
     },[getMoviesGenre.data])
 
-    const renderCatagories = ({ item, index }) => {
+    const renderCatagories = ({ item }) => {
         return <View style={{ marginTop: 20 }}><RenderCatagories data={item} navigation={navigation}/></View>
     }
     return (
@@ -25,6 +25,7 @@ export const Catagories = ({ navigation }) => {
             <FlatList 
                 numColumns={2}
                 data={moviesGenre}
+                extraData={moviesGenre}
                 renderItem={renderCatagories}
                 initialNumToRender={4}
                 contentContainerStyle={{ paddingBottom: 64}}
@@ -53,3 +54,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
+
+export default React.memo(Catagories); 

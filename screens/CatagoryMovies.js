@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, SafeAreaView, Text,TouchableOpacity,ActivityIndicator, FlatList} from 'react-native'
 import { Entypo } from '@expo/vector-icons'
-import Catagory  from '../components/Catagory';
+import RenderMovies  from '../components/RenderMovies';
 import Constants  from 'expo-constants';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
 const CatagoryMovies = ({ navigation, route }) => {
-    
+    console.log('CatagoryMovies.js renderssssssssssssss')
     const {catagory} = route.params;
     const [page, setPage] = useState(1); 
     const [allMovies, setAllMovies] = useState([]); 
@@ -15,13 +15,13 @@ const CatagoryMovies = ({ navigation, route }) => {
     const getAllMovies = useQuery(['allmovies', catagory],() => api.getAllMovies(catagory));
     const getMovies = useQuery(['movies', page, catagory],() => api.getMovies(page, catagory));
       
-    useMemo(()=>{
+    useEffect(()=>{
         setAllMovies(getAllMovies?.data?getAllMovies?.data?.results:null); 
         setMovies(getMovies?.data?getMovies?.data?.results:null); 
     },[getMovies.data, getAllMovies.data])
 
     const renderCatagory = ({ item }) => {
-        return <View style={{ marginTop: 20 }}><Catagory data={item} navigation={navigation}/></View>
+        return <View style={{ marginTop: 20 }}><RenderMovies data={item} navigation={navigation}/></View>
     }
     
     return (

@@ -1,15 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 import Images from './Images'
+import ExpoFastImage from 'expo-fast-image'
 
 const RenderCatagories = ({ data, navigation }) => {
     return (
         <TouchableOpacity onPress={() => navigation.navigate('movieGenre', { id: data?.id, genre: data?.name })}>
             <View style={styles.catagory}>
-                <ImageBackground source={Images[`${data?.name == 'Science Fiction'?'Science_Fiction':(data?.name == 'TV Movie'?'TV_Movie':data?.name)}`]} resizeMode="cover" style={{ width: '100%', height: '100%', justifyContent: 'center', borderColor: 'rgb(234, 88, 24)', borderWidth: 1 }}>
+                <ExpoFastImage source={Images[`${data?.name == 'Science Fiction'?'Science_Fiction':(data?.name == 'TV Movie'?'TV_Movie':data?.name)}`]} resizeMode="cover" style={{ width: '100%', height: '100%', justifyContent: 'center', borderColor: 'rgb(234, 88, 24)', borderWidth: 1 }}>
                     <Text style={styles.gen}>{data?.name}</Text>
-                </ImageBackground>
+                </ExpoFastImage>
             </View>
         </TouchableOpacity>
     )

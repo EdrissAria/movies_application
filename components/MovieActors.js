@@ -1,11 +1,12 @@
 import React from 'react'
-import {StyleSheet, Image,TouchableOpacity} from 'react-native'
- 
+import {StyleSheet, TouchableOpacity} from 'react-native'
+import ExpoFastImage from 'expo-fast-image' 
+
 const MovieActors = ({data, navigation}) =>{
     const photo = data?.profile_path == null ? require('../assets/images/user.png'):{uri: "https://image.tmdb.org/t/p/original"+data?.profile_path};
     return(
         <TouchableOpacity onPress={()=> navigation.navigate('actorsDetails', {data})}>
-            <Image source={photo} resizeMode="cover" style={styles.cast}/>
+            <ExpoFastImage source={photo} resizeMode="cover" style={styles.cast}/>
         </TouchableOpacity>
     )
 }

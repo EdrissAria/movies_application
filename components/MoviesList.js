@@ -4,7 +4,7 @@ import RenderMovies from '../components/RenderMovies';
 import { ListFooter } from '../components/ListFooter';
 import { Entypo } from '@expo/vector-icons';
 
-export const MoviesList = ({ movies, cat, title, navigation}) => {
+const MoviesList = ({ movies, cat, title, navigation}) => {
     const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
@@ -61,3 +61,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 })
+
+export default React.memo(MoviesList)

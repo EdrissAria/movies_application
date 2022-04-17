@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
-import { MoviesList } from '../components/MoviesList';
+import MoviesList from '../components/MoviesList';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 import BannerSlider from '../components/BannerSlider';
@@ -14,7 +14,7 @@ const wait = (timeout) => {
 }
 
 export const HomeScreen = ({ navigation }) => {
-
+    console.log('HomeScreen.js renderssssssssssssss')
     const [refrishing, setRefrishing] = useState(false);
     const [upcoming, setUpcoming] = useState([]);
     const [popular, setPopular] = useState([]);
@@ -59,6 +59,7 @@ export const HomeScreen = ({ navigation }) => {
                     />
                 }
             >
+                {getNow_playing.isSuccess?
                 <Carousel
                     data={nowPlaying}
                     renderItem={renderBanner}
@@ -66,7 +67,9 @@ export const HomeScreen = ({ navigation }) => {
                     itemWidth={windowWidth - 40 }
                     loop={true}
                     autoplay={true}
-                />
+                />:
+                <View style={{ width: windowWidth - 40, height: windowHeight / 2.5, backgroundColor: '#777', borderRadius: 40 }}/>
+                }
 
                 <View>
                     <MoviesList movies={popular} cat="popular" title="Popular" navigation={navigation} />
