@@ -1,69 +1,58 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import React, { useState, memo } from 'react'
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
 
-export const RenderCastsAbout = ({ actor }) => {
+export default memo(({ actor }) => {
+    const [more, setMore] = useState(false); 
+
     return (
         <View style={styles.container}>
-            {/* Social Media */}
-            <View style={styles.media}>
-                <FontAwesome
-                    name="twitter"
-                    size={24}
-                    color="#ccc"
-                    style={styles.icon}
-                />
-                <FontAwesome
-                    name="instagram"
-                    size={24}
-                    color="#ccc"
-                    style={styles.icon}
-                />
-                <Ionicons
-                    name="link"
-                    size={24}
-                    color="#ccc"
-                    style={styles.icon}
-                />
-            </View>
             {/* Personal Info */}
             <View style={styles.info}>
                 <Text style={styles.title}>Personal Info</Text>
                 <View style={styles.content}>
                     <View>
                         <Text style={styles.subtitle}>Known For</Text>
-                        <Text style={styles.text}>Acting</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.subtitle}>Known Credits</Text>
-                        <Text style={styles.text}>233</Text>
+                        <Text style={styles.text}>{actor?.known_for_department}</Text>
                     </View>
                     <View>
                         <Text style={styles.subtitle}>Gender</Text>
-                        <Text style={styles.text}>Male</Text>
+                        <Text style={styles.text}>{actor?.gender == 1 ? 'Female' : 'Male'}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.subtitle}>Popularity</Text>
+                        <Text style={styles.text}>{actor?.popularity} <AntDesign color="red" name="heart"/></Text>
                     </View>
                 </View>
                 <View style={{ marginTop: 20 }}>
                     <View>
                         <Text style={styles.subtitle}>Birthday</Text>
-                        <Text style={styles.text}>1977/2/3 (44 years old)</Text>
+                        <Text style={styles.text}>{actor?.birthday}</Text>
                     </View>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <Text style={styles.subtitle}>Place Of Birth</Text>
-                    <Text style={styles.text}>West Newbury, Massachusetts, USA</Text>
+                    <Text style={styles.text}>{actor?.place_of_birth}</Text>
                 </View>
             </View>
             {/* Biography */}
             <View style={styles.biography}>
                 <Text style={styles.bio}>Biography</Text>
                 <Text style={styles.about}>
-                    {actor?.about}
+                    {
+                        more ? actor?.biography : (
+                            actor?.biography?.length > 300 ? <Text>
+                                {actor?.biography?.slice(0, 200)} <TouchableWithoutFeedback onPress={() => setMore(true)}>
+                                    <Text style={styles.more}>more...</Text>
+                                </TouchableWithoutFeedback></Text> :
+                                actor?.biography
+                        )
+                    }
                 </Text>
             </View>
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     container: {
@@ -110,6 +99,7 @@ const styles = StyleSheet.create({
     biography: {
         marginTop: 12,
         paddingTop: 10,
+        paddingBottom: 20,
         borderTopColor: '#333',
         borderTopWidth: 1
     },
@@ -120,10 +110,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     about: {
-        color: '#ddd',
-        fontSize: 16,
-        letterSpacing: 2,
-        lineHeight: 24,
-        marginTop: 6
+        color: '#eee',
+        fontSize: 14,
+        letterSpacing: 1,
+        marginTop: 6, 
+        marginLeft: 4, 
+        fontFamily: 'roboto'
+    }, 
+    more: {
+        fontSize: 16, 
+        color: 'red'
     }
 })

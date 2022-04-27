@@ -1,11 +1,16 @@
 import React from 'react'
 import {StyleSheet, View , TouchableOpacity} from 'react-native'
-import { windowWidth } from '../globals/Dimension'
 import { Entypo } from '@expo/vector-icons'
 
-export const ListFooter = ({navigation, catagory}) =>{
+export const MoreActors = ({setMoreActor, setShowListFooter}) =>{
+
+    const action = ()=> {
+        setMoreActor(true);
+        setShowListFooter(false);
+    }
+
     return(
-        <TouchableOpacity onPress={()=> navigation.navigate('catagoryMovies', {catagory})}>
+        <TouchableOpacity onPress={action}>
              <View style={styles.plus}>
                 <Entypo 
                     name="plus"
@@ -21,8 +26,8 @@ const styles = StyleSheet.create({
     plus: {
         justifyContent: 'center',
         alignItems: 'center', 
-        width: (windowWidth - 76)/3, 
-        height: 140, 
+        width: 60,
+        height: 80,
         backgroundColor: '#222', 
         borderRadius: 14, 
         marginHorizontal: 6

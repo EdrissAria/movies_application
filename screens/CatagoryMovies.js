@@ -21,7 +21,7 @@ const CatagoryMovies = ({ navigation, route }) => {
     },[getMovies.data, getAllMovies.data])
 
     const renderCatagory = ({ item }) => {
-        return <View style={{ marginTop: 20 }}><RenderMovies data={item} navigation={navigation}/></View>
+        return <RenderMovies data={item} navigation={navigation}/>
     }
     
     return (
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(CatagoryMovies)
+export default CatagoryMovies; 

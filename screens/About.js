@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, Linking, SafeAreaView, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, Linking, SafeAreaView, Image,TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
-import ExpoFastImage from 'expo-fast-image'
 
 const openUrl = async (url) => {
     const isSupported = await Linking.openURL(url);
@@ -12,12 +11,12 @@ const openUrl = async (url) => {
     }
 }
 
-export const About = () => {
+const About = () => {
     console.log('about.js renderssssssssssssss')
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <ExpoFastImage source={require('../assets/images/movies.png')} resizeMode="contain" style={styles.logo} />
+                <Image source={require('../assets/images/movies.png')} resizeMode="contain" style={styles.logo} />
                 <Text style={styles.about}>
                     Movies is an application for showing movie details as well as cast details
                     here you can search movies, see movies by genre lot more ...
@@ -25,7 +24,7 @@ export const About = () => {
                 <View style={styles.developer}>
                     {/* about developer */}
                     <Text style={styles.text}>About Developer</Text>
-                    <ExpoFastImage source={require('../assets/images/bishak.png')} resizeMode="cover"
+                    <Image source={require('../assets/images/bishak.png')} resizeMode="cover"
                         style={styles.photo}
                     />
                     <Text style={styles.name}>M.Edriss Aria</Text>
@@ -143,3 +142,5 @@ const styles = StyleSheet.create({
         color: '#222' 
     }
 })
+
+export default About; 

@@ -1,18 +1,21 @@
-import React, { useState, useEffect} from 'react'
-import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
+import React, { useState, useEffect, memo} from 'react'
+import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback} from 'react-native'
 import  MovieActors  from '../components/MovieActors';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
+import { MoreActors } from '../components/MoreActors'
 
-const RednerStoryLine = ({ navigation, movie }) => {
+export default memo(({ navigation, movie }) => {
 
     const [casts, setCasts] = useState([])
     const [more, setMore] = useState(false);
+    const [moreActor, setMoreActor] = useState(false)
+    const [showListFooter, setShowListFooter] = useState(true)
 
     const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id), {enabled: !!movie.id}); 
 
     useEffect(() => {
-        setCasts(getCasts?.data?getCasts?.data?.cast:[])
+        setCasts(getCasts?.data?[...getCasts?.data?.cast]:[])
     }, [getCasts?.data])
     
     const renderActors = ({ item }) => {
@@ -37,15 +40,23 @@ const RednerStoryLine = ({ navigation, movie }) => {
             <View style={styles.casts}>
                 <Text style={styles.castTitle}>Top Billed Cast</Text>
                 <FlatList
-                    data={casts}
+                    data={
+                        moreActor ? casts : (
+                            casts?.length > 6 ? casts?.slice(0, 6):
+                            casts
+                        )
+                    }
+                    extraData={casts}
                     renderItem={renderActors}
+                    initialNumToRender={6}
                     keyExtractor={(item) => item.id}
                     horizontal={true}
+                    ListFooterComponent={showListFooter ? <MoreActors setMoreActor={setMoreActor} setShowListFooter={setShowListFooter}/>: null}
                 />
             </View>
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     container: {
@@ -81,4 +92,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(RednerStoryLine)
+ 

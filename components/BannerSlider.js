@@ -1,15 +1,16 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, {memo} from 'react'
+import { StyleSheet, View} from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
 import ExpoFastImage from 'expo-fast-image'
 
-const BannerSlider = ({ data }) => {
+export default memo(({ data }) => {
+    console.log(windowWidth+'X'+windowHeight)
     return (
         <View style={styles.banner}>
-            <ExpoFastImage source={{ uri: "https://image.tmdb.org/t/p/w300" + data.poster_path }} resizeMode="stretch" style={styles.image} />
+            <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data.poster_path}`} cacheKey={data.id}  resizeMethod="scale" resizeMode="contain" style={styles.image} />
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     banner: {
@@ -25,5 +26,3 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     }
 })
-
-export default React.memo(BannerSlider)

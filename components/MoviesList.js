@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import { ListFooter } from '../components/ListFooter';
 import { Entypo } from '@expo/vector-icons';
 
-const MoviesList = ({ movies, cat, title, navigation}) => {
+export default memo(({ movies, cat, title, navigation}) => {
     const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
@@ -34,7 +34,7 @@ const MoviesList = ({ movies, cat, title, navigation}) => {
             />
         </SafeAreaView>
     )
-}
+})
 
 const styles = StyleSheet.create({
     title: {
@@ -61,5 +61,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 })
-
-export default React.memo(MoviesList)

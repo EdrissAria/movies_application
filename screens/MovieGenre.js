@@ -19,7 +19,7 @@ const MovieGenre = ({ navigation, route }) => {
     }, [getMoviesByGenre.data])
    
     const renderGenre = ({ item, index }) => {
-        return <View style={{ marginTop: 20 }}><RenderMovies data={item} navigation={navigation}/></View>
+        return <RenderMovies data={item} navigation={navigation} />
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(MovieGenre)
+export default MovieGenre; 

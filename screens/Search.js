@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
-export const Search = ({ navigation }) => {
+const Search = ({ navigation }) => {
     console.log('Search.js renderssssssssssssss')
     const [search, setSearch] = useState();
     const [dismiss, setDismiss] = useState(false);
@@ -18,6 +18,12 @@ export const Search = ({ navigation }) => {
     }
 
     const searching = useQuery(['searching', search], () => api.search(search),{enabled: !!search});
+
+    const clearSearch = () => { 
+        desmiss.current.clear(); 
+        setDismiss(false)
+        setSearchResult([]) 
+    }
 
     useEffect(() => {
         setSearchResult(searching?.data?[...searching?.data?.results]:[]);
@@ -35,7 +41,7 @@ export const Search = ({ navigation }) => {
                 {/* Search Bar */}
                 <View style={styles.search}>
                     {dismiss ?
-                        <TouchableWithoutFeedback onPress={() => { desmiss.current.clear(); setDismiss(false) }}>
+                        <TouchableWithoutFeedback onPress={clearSearch}>
                             <AntDesign name="close" size={22} color="rgb(234, 88, 12)" />
                         </TouchableWithoutFeedback> : null
                     }
@@ -51,7 +57,7 @@ export const Search = ({ navigation }) => {
                 </View>
                 <View style={styles.view}>
                     {
-                        search == undefined ? null : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
+                        search == undefined ? [] : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
                             <FlatList
                                 data={searchResult}
                                 extraData={searchResult}
@@ -102,3 +108,5 @@ const styles = StyleSheet.create({
         paddingBottom: 60 
     }
 })
+
+export default Search; 

@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Search } from '../screens/Search'
-import { About } from '../screens/About'
-import Catagories from '../screens/Catagories'
+import Search  from '../screens/Search'
+import About from '../screens/About'
+import MovieGenres from '../screens/MovieGenres'
 import { TabIcon } from '../components/TabIcon'
 import { MainHeader } from '../components/MainHeader'
-import { HomeScreen } from '../screens/HomeScreen'
+import HomeScreen from '../screens/HomeScreen'
 
 const Tab = createBottomTabNavigator();
 console.log('Route.js renderssssssssssssss')
@@ -51,7 +51,7 @@ export default function Home() {
                 }}
             />
 
-            <Tab.Screen name="catagories" component={Catagories}
+            <Tab.Screen name="movieGenres" component={MovieGenres}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <TabIcon

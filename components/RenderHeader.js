@@ -4,10 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons'
 import {windowHeight} from '../globals/Dimension'
 
-const RenderHeader = ({ navigation, movie }) => {
+export const RenderHeader = ({ navigation, movie }) => {
     return (
         <ImageBackground
-            source={{ uri: "https://image.tmdb.org/t/p/w300" + movie?.backdrop_path }}
+            source={{ uri: "https://image.tmdb.org/t/p/original" + movie?.backdrop_path }}
             resizeMode="stretch"
             style={styles.backgroundImage}
         >
@@ -90,5 +90,3 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     }
 })
-
-export default React.memo(RenderHeader)

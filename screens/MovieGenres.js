@@ -5,7 +5,7 @@ import RenderCatagories from '../components/RenderCatagories';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
-const Catagories = ({ navigation }) => { 
+const MovieGenres = ({ navigation }) => { 
     console.log('Catagories.js renderssssssssssssss')
     const [moviesGenre, setMoviesGenre] = useState([]); 
     const getMoviesGenre = useQuery('moviesgenre', api.getGenres);
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(Catagories); 
+export default MovieGenres; 

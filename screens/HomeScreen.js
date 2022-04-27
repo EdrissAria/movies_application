@@ -13,7 +13,7 @@ const wait = (timeout) => {
     })
 }
 
-export const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
     console.log('HomeScreen.js renderssssssssssssss')
     const [refrishing, setRefrishing] = useState(false);
     const [upcoming, setUpcoming] = useState([]);
@@ -64,13 +64,12 @@ export const HomeScreen = ({ navigation }) => {
                     data={nowPlaying}
                     renderItem={renderBanner}
                     sliderWidth={windowWidth - 40}
-                    itemWidth={windowWidth - 40 }
+                    itemWidth={windowWidth - 140 }
                     loop={true}
                     autoplay={true}
                 />:
                 <View style={{ width: windowWidth - 40, height: windowHeight / 2.5, backgroundColor: '#777', borderRadius: 40 }}/>
                 }
-
                 <View>
                     <MoviesList movies={popular} cat="popular" title="Popular" navigation={navigation} />
                 </View>
@@ -98,3 +97,5 @@ const styles = StyleSheet.create({
         borderRadius: 40
     }
 })
+
+export default HomeScreen; 

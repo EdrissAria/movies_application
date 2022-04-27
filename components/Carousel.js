@@ -28,7 +28,6 @@ export default function Carousel({ banners }) {
     useEffect(() => {
         setData([...banners])
         infiniteScroll(data)
-        
     }, [])
 
     const renderBanner = ({ item }) => {

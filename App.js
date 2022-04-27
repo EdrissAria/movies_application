@@ -2,7 +2,7 @@ import React from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Home from './routes/Home'
-import MovieDetails from './screens/MovieDetails';
+import MovieDetails from './screens/MovieDetails'
 import ActorsDetails from './screens/ActorsDetails';
 import CatagoryMovies from './screens/CatagoryMovies'
 import CustomFonts from './globals/CustomFonts';

@@ -1,13 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text , Image} from 'react-native'
 import Constants from 'expo-constants'
-import ExpoFastImage from 'expo-fast-image'
 
 export const MainHeader = () => {
     return (
         <View style={styles.header}>
             <Text style={styles.movies}>Movies</Text>
-            <ExpoFastImage source={require('../assets/images/movies.png')} style={styles.logo} resizeMode="contain" />
+            <Image source={require('../assets/images/movies.png')}  style={styles.logo} resizeMode="contain" />
         </View>
     )
 }

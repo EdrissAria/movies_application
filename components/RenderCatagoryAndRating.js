@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { StyleSheet, View, Text, Linking, Alert, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
-
 const openUrl = async (url) => {
     const isSupported = await Linking.openURL(url);
     if (isSupported) {
@@ -14,8 +13,7 @@ const openUrl = async (url) => {
     }
 }
  
-
-const RenderCatagoryAndRating = ({ movie }) => {
+export default memo(({ movie }) => {
     
     const getTrailer = useQuery(['gettrailer', movie?.id], ()=> api.getTrailer(movie?.id), {
        enabled: !!movie.id
@@ -24,44 +22,39 @@ const RenderCatagoryAndRating = ({ movie }) => {
     return (
         <View style={{ flexDirection: 'column' }}>
             <View
-                style={{
-                    flexDirection: 'row',
-                    marginTop: 16,
-                    alignItems: 'center',
-                    paddingHorizontal: 20
-                }}
+                style={styles.content}
             >
                 {/* Users Scores */}
                 <View
-                    style={{ borderRightColor: '#999', borderRightWidth: 1, paddingRight: 10 }}
+                    style={styles.rating}
                 >
-                    <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
+                    <Text style={styles.score}>
                         User Score &nbsp;
                         <Entypo name="star" size={16} color="yellow" style={{ marginLeft: 10 }} />
-                        <Text style={{ color: '#fff', fontSize: 14 }}>
+                        <Text style={styles.vote}>
                             {movie?.vote_count}
                         </Text>
                     </Text>
                 </View>
-                {/* Rating */}
+                {/* Trailer */}
                 <TouchableWithoutFeedback onPress={()=> Linking.openURL(`https://www.youtube.com/watch?v=${getTrailer?.data?getTrailer?.data?.results[0]?.key:null}`) }>
-                    <Text style={{ textAlign: 'left', marginLeft: 10 }}>
+                    <Text style={styles.trailer}>
                         <Entypo name="controller-play" size={20} color="#f00" />
                         &nbsp;
-                        <Text style={{ color: '#fff', fontSize: 16, letterSpacing: 2 }}>
+                        <Text style={styles.play}>
                             Play Trailer
                         </Text>
                     </Text>
                 </TouchableWithoutFeedback>
             </View>
             {/* realize date and genre */}
-            <View style={{ alignItems: 'center', flexDirection: 'column', marginTop: 10, paddingHorizontal: 20, paddingVertical: 4, borderTopColor: '#222', borderTopWidth: 1 }}>
-                <Text style={{ fontSize: 16, color: '#ccc' }}>{movie?.release_date}</Text>
-                <Text style={{ fontSize: 16, color: 'rgba(255,255,255, 0.6)' }}>{movie?.genres?.map(g=> g.name+' ,')}</Text>
+            <View style={styles.details}>
+                <Text style={styles.info}>{movie?.release_date}</Text>
+                <Text style={styles.info}>{movie?.genres?.map(g=> g.name+' ,')}</Text>
             </View>
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     catagoryContainer: {
@@ -73,7 +66,47 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         borderRadius: 10,
         backgroundColor: '#777'
+    },
+    content: {
+        flexDirection: 'row',
+        marginTop: 16,
+        alignItems: 'center',
+        paddingHorizontal: 20
+    }, 
+    rating: { 
+        borderRightColor: '#999',
+        borderRightWidth: 1,
+        paddingRight: 10 
+    }, 
+    score: { 
+        color: '#fff',
+        fontSize: 16,
+        letterSpacing: 2 
+    }, 
+    trailer: {
+        textAlign: 'left',
+        marginLeft: 10
+    },
+    play: { 
+        color: '#fff',
+        fontSize: 16,
+        letterSpacing: 2 
+    }, 
+    vote: { 
+        color: '#fff', 
+        fontSize: 14 
+    },
+    details: { 
+        alignItems: 'center',
+        flexDirection: 'column', 
+        marginTop: 10, 
+        paddingHorizontal: 20, 
+        paddingVertical: 4, 
+        borderTopColor: '#222', 
+        borderTopWidth: 1 
+    }, 
+    info: { 
+        fontSize: 16, 
+        color: '#ccc'
     }
 })
-
-export default React.memo(RenderCatagoryAndRating)

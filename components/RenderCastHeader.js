@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import { windowHeight } from '../globals/Dimension';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 
-const RenderCastHeader = ({ actor, navigation }) => {
+export default memo(({ actor, navigation }) => {
     return (
         <ImageBackground
             source={{ uri: "https://image.tmdb.org/t/p/original" + actor?.profile_path }}
@@ -45,7 +45,7 @@ const RenderCastHeader = ({ actor, navigation }) => {
             </View>
         </ImageBackground>
     )
-}
+})
 
 const styles = StyleSheet.create({
     header: {
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(RenderCastHeader)
+ 

@@ -13,6 +13,7 @@ export const getGenres = () => api.get(`genre/movie/list?api_key=${API_KEY}&lang
 export const getMovie = (id) => api.get(`movie/${id}?api_key=${API_KEY}&language=en-US`).then(res => res.data)
 export const getTrailer = (id) => api.get(`movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then(res => res.data)
 export const getCasts = (id) => api.get(`movie/${id}/credits?api_key=${API_KEY}&language=en-US`).then(res => res.data)
+export const getActor = (id) => api.get(`person/${id}?api_key=${API_KEY}&language=en-US`).then(res => res.data)
 export const getSingleCast = (id) => api.get(`credit/${id}?api_key=${API_KEY}`).then(res => res.data)
 export const getByGenre = (id) => api.get(`discover/movie?api_key=${API_KEY}&with_genres=${id}`); 
 export const getAllMovies = (catagory) => api.get(`movie/${catagory}?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.data)
