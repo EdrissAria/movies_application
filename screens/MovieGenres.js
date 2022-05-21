@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
 import Constants  from 'expo-constants';
-import RenderCatagories from '../components/RenderCatagories';
+import RenderGenres from '../components/RenderGenres';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
@@ -17,7 +17,7 @@ const MovieGenres = ({ navigation }) => {
     },[getMoviesGenre.data])
 
     const renderCatagories = ({ item }) => {
-        return <View style={{ marginTop: 20 }}><RenderCatagories data={item} navigation={navigation}/></View>
+        return <RenderGenres data={item} navigation={navigation}/>
     }
     
     return (

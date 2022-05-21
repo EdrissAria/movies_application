@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard } from 'react-native'
 import SearchResults from '../components/SearchResults';
 import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
@@ -38,6 +38,7 @@ const Search = ({ navigation }) => {
     }
 
     return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <SafeAreaView style={styles.container}>
             {/* Search Bar */}
             <View style={styles.search}>
@@ -72,6 +73,7 @@ const Search = ({ navigation }) => {
                 }
             </View>
         </SafeAreaView>
+    </TouchableWithoutFeedback>
     )
 }
 

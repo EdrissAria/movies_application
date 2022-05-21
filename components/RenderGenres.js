@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         borderRadius: 26, 
         marginHorizontal: 6, 
         zIndex: 1000, 
-        overflow: 'hidden' 
+        overflow: 'hidden', 
+        marginTop: 20
     }, 
     bgimage: { 
         position: 'relative',
