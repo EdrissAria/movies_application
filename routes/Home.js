@@ -2,8 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Search  from '../screens/Search'
 import About from '../screens/About'
 import MovieGenres from '../screens/MovieGenres'
-import { TabIcon } from '../components/TabIcon'
-import { MainHeader } from '../components/MainHeader'
+import { MainHeader, TabIcon } from '../components/Layout'
 import HomeScreen from '../screens/HomeScreen'
 
 const Tab = createBottomTabNavigator();

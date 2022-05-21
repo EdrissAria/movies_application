@@ -1,13 +1,13 @@
 import React, {memo} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
-import Images from './Images'
 
 export default memo(({ data, navigation }) => {
+    const navigateTo = () => navigation.navigate('movieGenre', { id: data?.id, genre: data?.name })
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('movieGenre', { id: data?.id, genre: data?.name })}>
+        <TouchableOpacity onPress={navigateTo}>
             <View style={styles.catagory}>
-                <Image source={Images[`${data?.name == 'Science Fiction'?'Science_Fiction':(data?.name == 'TV Movie'?'TV_Movie':data?.name)}`]} resizeMethod="resize" style={styles.bgimage}/>
+                <Image source={require('../assets/images/genre.webp')} resizeMethod="resize" style={styles.bgimage}/>
                 <Text style={styles.gen}>{data?.name}</Text>
             </View>
         </TouchableOpacity>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#eee',
         fontSize: 12,
-        fontFamily: 'roboto-regular',
+        fontFamily: 'roboto',
         textTransform: 'capitalize'
     },
     genre: {

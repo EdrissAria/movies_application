@@ -1,8 +1,11 @@
-import React, { useState, memo } from 'react'
+import {useState, memo} from 'react'
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+ 
+// render cast information such biography, popularity ....
+export const RenderCastAbout = memo(({ actor }) => {
 
-export default memo(({ actor }) => {
+    const readMore = () => setMore(true)
     const [more, setMore] = useState(false); 
 
     return (
@@ -42,8 +45,8 @@ export default memo(({ actor }) => {
                     {
                         more ? actor?.biography : (
                             actor?.biography?.length > 300 ? <Text>
-                                {actor?.biography?.slice(0, 200)} <TouchableWithoutFeedback onPress={() => setMore(true)}>
-                                    <Text style={styles.more}>more...</Text>
+                                {actor?.biography?.slice(0, 200)} <TouchableWithoutFeedback onPress={readMore}>
+                                    <Text style={styles.more}>Read More...</Text>
                                 </TouchableWithoutFeedback></Text> :
                                 actor?.biography
                         )
@@ -59,13 +62,6 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10,
         paddingHorizontal: 20
-    },
-    media: {
-        justifyContent: 'center',
-        flexDirection: 'row'
-    },
-    icon: {
-        marginHorizontal: 8
     },
     info: {
         marginTop: 10,
@@ -122,3 +118,5 @@ const styles = StyleSheet.create({
         color: 'red'
     }
 })
+
+ 

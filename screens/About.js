@@ -2,16 +2,17 @@ import React from 'react';
 import { StyleSheet, View, Text, Linking, SafeAreaView, Image,TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 
-const openUrl = async (url) => {
-    const isSupported = await Linking.openURL(url);
-    if (isSupported) {
-        await Linking.openUrl(url)
-    } else {
-        Alert.alert(`can't open this ${url}`);
-    }
-}
-
 const About = () => {
+    
+    const openUrl = async (url) => {
+        const isSupported = await Linking.openURL(url);
+        if (isSupported) {
+            await Linking.openUrl(url)
+        } else {
+            Alert.alert(`can't open this ${url}`);
+        }
+    }
+    
     console.log('about.js renderssssssssssssss')
     return (
         <SafeAreaView style={styles.container}>
@@ -24,7 +25,7 @@ const About = () => {
                 <View style={styles.developer}>
                     {/* about developer */}
                     <Text style={styles.text}>About Developer</Text>
-                    <Image source={require('../assets/images/bishak.png')} resizeMode="cover"
+                    <Image source={require('../assets/images/bishak.png')} resizeMethod="resize"
                         style={styles.photo}
                     />
                     <Text style={styles.name}>M.Edriss Aria</Text>

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { ScrollView, Text } from 'react-native';
-import { RenderHeader } from '../components/RenderHeader';
-import RenderCatagoryAndRating from '../components/RenderCatagoryAndRating';
-import RednerStoryLine from '../components/RenderStoryLine';
+import { useState, useEffect } from 'react'
+import { ScrollView } from 'react-native';
+import { RenderHeader, RenderCatagoryAndRating, RenderStoryLine } from '../components/MovieSections'; 
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
@@ -13,16 +11,22 @@ export default function MovieDetails({ navigation, route }) {
     const getMovie = useQuery(['movie', id], () => api.getMovie(id));
 
     useEffect(() => {
-        setSelectedMovie(getMovie?.data ? getMovie?.data : {});
+        let isUnmounted = false; 
+
+        !isUnmounted && setSelectedMovie(getMovie?.data ? getMovie?.data : {});
+    
+        return () => {isUnmounted = true}
+        
     }, [getMovie.data])
+    
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
             {/* Header */}
-            <RenderHeader navigation={navigation} movie={selectedMovie} />
+            <RenderHeader navigation={navigation} data={selectedMovie} type="movie" />
             {/* Catagory & rating */}
             <RenderCatagoryAndRating movie={selectedMovie} />
             {/* Story line */}
-            <RednerStoryLine navigation={navigation} movie={selectedMovie} />
+            <RenderStoryLine navigation={navigation} movie={selectedMovie} />
         </ScrollView>
     )
 }

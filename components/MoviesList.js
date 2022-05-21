@@ -1,20 +1,22 @@
 import React, {memo} from 'react'
 import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { ListFooter } from '../components/ListFooter';
+import { ListFooter } from '../components/Layout';
 import { Entypo } from '@expo/vector-icons';
 
 export default memo(({ movies, cat, title, navigation}) => {
     const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
+    const navigateTo = () => navigation.navigate('catagoryMovies', { catagory: cat, data: movies })
+
     return (
         <SafeAreaView>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>{title}</Text>
                 <TouchableOpacity
                     style={styles.arrow}
-                    onPress={() => navigation.navigate('catagoryMovies', { catagory: cat })}
+                    onPress={navigateTo}
                 >
                     <Entypo
                         name="chevron-small-right"
@@ -26,9 +28,10 @@ export default memo(({ movies, cat, title, navigation}) => {
             <FlatList
                 data={movies}
                 extraData={movies}
+                decelerationRate="fast"
+                scrollEnabled
                 renderItem={renderMovies}
                 horizontal={true}
-                initialNumToRender={3}
                 keyExtractor={(item) => item.id}
                 ListFooterComponent={<ListFooter navigation={navigation} catagory={cat} />}
             />
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
     title: {
         color: '#eee',
         fontSize: 18,
-        fontFamily: 'roboto-regular',
+        fontFamily: 'roboto',
         letterSpacing: 1,
         position: 'absolute',
         left: 0,

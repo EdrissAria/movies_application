@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import Constants  from 'expo-constants';
@@ -15,17 +15,26 @@ const MovieGenre = ({ navigation, route }) => {
     const getMoviesByGenre = useQuery(['bygenre', id],()=> api.getByGenre(id));  
     
     useEffect(()=>{
-        setGenreMovie(getMoviesByGenre?.data?[...getMoviesByGenre?.data?.data?.results]:[]);
+
+        let isUnmounted = false; 
+
+        !isUnmounted && setGenreMovie(getMoviesByGenre?.data?[...getMoviesByGenre?.data?.data?.results]:[]);
+        
+        return () => {isUnmounted = true}
+        
     }, [getMoviesByGenre.data])
    
-    const renderGenre = ({ item, index }) => {
+    const renderGenre = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
+    
+    const navigateTo = ()=> navigation.goBack()
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>{genre}</Text>
-                <TouchableOpacity style={styles.back} onPress={()=> navigation.goBack()}>
+                <TouchableOpacity style={styles.back} onPress={navigateTo}>
                     <AntDesign name="left" size={20} color='rgb(234, 88, 12)' />
                 </TouchableOpacity>
             </View>
@@ -35,7 +44,6 @@ const MovieGenre = ({ navigation, route }) => {
                 data={genreMovie}
                 extraData={genreMovie}
                 renderItem={renderGenre}
-                initialNumToRender={6}
                 contentContainerStyle={{ paddingBottom: 20 }}
             />}
         </SafeAreaView>
@@ -57,7 +65,7 @@ const styles = StyleSheet.create({
     }, 
     title: {
         fontSize: 21, 
-        fontFamily: 'roboto-regular', 
+        fontFamily: 'roboto', 
         color: 'rgb(234, 88, 12)', 
         textAlign: 'center', 
         textTransform: 'capitalize'

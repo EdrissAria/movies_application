@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
 import Constants  from 'expo-constants';
 import RenderCatagories from '../components/RenderCatagories';
@@ -11,12 +11,15 @@ const MovieGenres = ({ navigation }) => {
     const getMoviesGenre = useQuery('moviesgenre', api.getGenres);
  
     useEffect(()=>{
-        setMoviesGenre(getMoviesGenre?.data?[...getMoviesGenre?.data?.genres]:null); 
+        let isUnmounted = false; 
+        !isUnmounted && setMoviesGenre(getMoviesGenre?.data?[...getMoviesGenre?.data?.genres]:null); 
+        return ()=>{isUnmounted = true}
     },[getMoviesGenre.data])
 
     const renderCatagories = ({ item }) => {
         return <View style={{ marginTop: 20 }}><RenderCatagories data={item} navigation={navigation}/></View>
     }
+    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.title}>
@@ -27,7 +30,6 @@ const MovieGenres = ({ navigation }) => {
                 data={moviesGenre}
                 extraData={moviesGenre}
                 renderItem={renderCatagories}
-                initialNumToRender={4}
                 contentContainerStyle={{ paddingBottom: 64}}
             />
         </SafeAreaView>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     }, 
     genre: {
         fontSize: 21, 
-        fontFamily: 'roboto-regular', 
+        fontFamily: 'roboto', 
         color: 'rgb(234, 88, 12)', 
         textAlign: 'center'
     }

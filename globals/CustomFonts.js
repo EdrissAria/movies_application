@@ -4,10 +4,8 @@ import AppLoading from 'expo-app-loading'
 
 export default function CustomFonts({ children }) {
     let [fontsLoaded, error] = useFonts({
-        'roboto': require('../assets/fonts/Roboto-Light.ttf'), 
-        'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
-        'roboto-regular': require('../assets/fonts/Roboto-Regular.ttf'),
-        'roboto-black': require('../assets/fonts/Roboto-Black.ttf')
+        'roboto': require('../assets/fonts/Roboto-Regular.ttf'), 
+        'gothic': require('../assets/fonts/BankGothicRegular.ttf')
     }); 
     if (!fontsLoaded) {
         return <AppLoading />

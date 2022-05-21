@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
@@ -8,9 +8,13 @@ import ExpoFastImage from 'expo-fast-image'
 export default memo(({ data, navigation }) => {
     const [genres, setGenres] = useState([]);
     const getGenres = useQuery('genres', api.getGenres);
+    
+    const navigateTo = () => navigation.navigate('movieDetails', { id: data?.id })
 
     useEffect(() => {
-        setGenres(getGenres?.data ? getGenres?.data?.genres : [])
+        let isUnmounted = false; 
+        !isUnmounted && setGenres(getGenres?.data ? getGenres?.data?.genres : [])
+        return ()=>{isUnmounted = true}
     }, [getGenres.data])
 
     const Gen = [];
@@ -20,11 +24,12 @@ export default memo(({ data, navigation }) => {
 
     return (
         <SafeAreaView>
-            <TouchableOpacity onPress={() => navigation.navigate('movieDetails', { id: data?.id })}>
+            <TouchableOpacity onPress={navigateTo}>
                 <View
                     style={styles.results}
                 >
-                    <ExpoFastImage uri={`https://image.tmdb.org/t/p/w300${data.poster_path}`} cacheKey={data.id} resizeMode="stretch" style={{ width: 100, height: 100, borderRadius: 16 }} />
+                    {/* <Image source={{uri:`https://image.tmdb.org/t/p/w92${data.poster_path}`}} resizeMethod="scale" style={styles.image} /> */}
+                    <ExpoFastImage uri={`https://image.tmdb.org/t/p/w92${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} />
                     <View
                         style={styles.search}
                     >
