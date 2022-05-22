@@ -15,8 +15,8 @@ export const MainHeader = () => {
 }
 
 // for flatlist to see more movie
-export const ListFooter = ({navigation, catagory}) =>{
-    const navigateTo = () => navigation.navigate('catagoryMovies', {catagory}) 
+export const ListFooter = ({navigateTo}) =>{
+    // const navigateTo = () => navigation.navigate('catagoryMovies', {catagory}) 
     return(
         <TouchableOpacity onPress={navigateTo}>
              <View style={styles.plus}>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     }, 
     logo: {
-        width: 28, 
+        width: 26, 
         height: 26, 
         position: 'absolute', 
         right: 20, 

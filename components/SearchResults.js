@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
@@ -7,6 +7,7 @@ import ExpoFastImage from 'expo-fast-image'
 
 export default memo(({ data, navigation }) => {
     const [genres, setGenres] = useState([]);
+    
     const getGenres = useQuery('genres', api.getGenres);
     
     const navigateTo = () => navigation.navigate('movieDetails', { id: data?.id })
@@ -28,7 +29,6 @@ export default memo(({ data, navigation }) => {
                 <View
                     style={styles.results}
                 >
-                    {/* <Image source={{uri:`https://image.tmdb.org/t/p/w92${data.poster_path}`}} resizeMethod="scale" style={styles.image} /> */}
                     <ExpoFastImage uri={`https://image.tmdb.org/t/p/w92${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} />
                     <View
                         style={styles.search}

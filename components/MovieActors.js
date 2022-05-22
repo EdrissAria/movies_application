@@ -9,8 +9,7 @@ export default memo(({ data, navigation }) => {
             {
             data?.profile_path == null ?
             <Image source={require('../assets/images/user.png')} resizeMethod="resize" style={styles.cast}/>:
-            // <Image source={{uri:`https://image.tmdb.org/t/p/w45${data?.profile_path}`}} resizeMethod="scale" style={styles.cast}/>
-            <ExpoFastImage uri={`https://image.tmdb.org/t/p/w185${data?.profile_path}`} resizeMode="cover" cacheKey={data.credit_id} style={styles.cast}/>
+            <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data?.profile_path}`} resizeMode="cover" cacheKey={data.credit_id} style={styles.cast}/>
             }
         </TouchableOpacity>
     )

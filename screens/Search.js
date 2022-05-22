@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, ActivityIndicator, Keyboard } from 'react-native'
+import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList} from 'react-native'
 import SearchResults from '../components/SearchResults';
 import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
@@ -7,18 +7,20 @@ import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
 const Search = ({ navigation }) => {
-    console.log('Search.js renderssssssssssssss')
+    console.log('out of the search')
     const [search, setSearch] = useState();
     const [dismiss, setDismiss] = useState(false);
     const [searchResult, setSearchResult] = useState();
     
     const desmiss = useRef(null);
-
+    
     const searchHander = (query) => {
-        setSearch(query)
+        setTimeout(()=>{
+            setSearch(query)
+        }, 500)
         setDismiss(true)
     }
-
+     
     const searching = useQuery(['searching', search], () => api.search(search), { enabled: !!search });
 
     const clearSearch = () => {
@@ -30,7 +32,7 @@ const Search = ({ navigation }) => {
     useEffect(() => {
         let isUnmounted = false;
         !isUnmounted && setSearchResult(searching?.data ? [...searching?.data?.results] : []);
-        return () => { isUnmounted = true }
+        return () => { isUnmounted = true }       
     }, [searching.data])
 
     const searchResults = ({ item }) => {
@@ -38,7 +40,6 @@ const Search = ({ navigation }) => {
     }
 
     return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <SafeAreaView style={styles.container}>
             {/* Search Bar */}
             <View style={styles.search}>
@@ -58,8 +59,6 @@ const Search = ({ navigation }) => {
                 <AntDesign name="search1" size={24} color="rgb(234, 88, 12)" />
             </View>
             <View style={styles.view}>
-                {
-                    search == undefined ? [] : (searching.isLoading ? <ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{ marginTop: 20 }} /> :
                         <FlatList
                             data={searchResult}
                             extraData={searchResult}
@@ -69,11 +68,8 @@ const Search = ({ navigation }) => {
                             decelerationRate="fast"
                             contentContainerStyle={{ paddingBottom: 20, }}
                         />
-                    )
-                }
             </View>
         </SafeAreaView>
-    </TouchableWithoutFeedback>
     )
 }
 

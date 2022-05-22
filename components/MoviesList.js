@@ -9,7 +9,6 @@ export default memo(({ movies, cat, title, navigation}) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
     const navigateTo = () => navigation.navigate('catagoryMovies', { catagory: cat, data: movies })
-
     return (
         <SafeAreaView>
             <View style={styles.titleContainer}>
@@ -33,7 +32,7 @@ export default memo(({ movies, cat, title, navigation}) => {
                 renderItem={renderMovies}
                 horizontal={true}
                 keyExtractor={(item) => item.id}
-                ListFooterComponent={<ListFooter navigation={navigation} catagory={cat} />}
+                ListFooterComponent={<ListFooter navigateTo={navigateTo} />}
             />
         </SafeAreaView>
     )
