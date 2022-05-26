@@ -1,14 +1,15 @@
 import React, {memo} from 'react'
-import { StyleSheet, View} from 'react-native'
+import { StyleSheet, View, Image} from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
-import ExpoFastImage from 'expo-fast-image'
+// import ExpoFastImage from 'expo-fast-image'
 
 //width * height = 360X686
 
 export default memo(({ data }) => {
     return (
         <View style={styles.banner}>
-            <ExpoFastImage uri={`https://image.tmdb.org/t/p/w780${data.poster_path}`} cacheKey={data.id} resizeMode="cover" style={styles.image} />
+            <Image source={{ uri: `https://image.tmdb.org/t/p/original${data.poster_path}` }} resizeMode="cover" resizeMethod="scale" style={styles.image} />
+            {/* <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data.poster_path}`} cacheKey={data.id} resizeMode="cover" resizeMethod="resize" style={styles.image} /> */}
         </View>
     )
 })

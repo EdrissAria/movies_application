@@ -1,7 +1,7 @@
 import { StyleSheet, View , TouchableOpacity, Text , Image } from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 import Constants from 'expo-constants'
-import { Entypo, Feather, Ionicons, AntDesign } from '@expo/vector-icons'
+import { Entypo, Feather, Ionicons} from '@expo/vector-icons'
 
 // the main header of app 
 
@@ -62,7 +62,7 @@ export const TabIcon = ({ focused, icon }) => {
                     size={24}
                     color={focused ? 'rgb(234, 88, 12)' : '#fff'}
                 />) : (
-                    icon == 'home' ? (<AntDesign
+                    icon == 'home' ? (<Entypo
                         name={icon}
                         size={24}
                         color={focused ? 'rgb(234, 88, 12)' : '#fff'}

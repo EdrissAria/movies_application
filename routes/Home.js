@@ -11,11 +11,12 @@ const options = {
     tabBarShowLabel: false,
     tabBarStyle: {
         position: 'absolute',
-        bottom: 0,
+        bottom: 10,
         left: 0,
         right: 0,
         elevation: 0,
-        backgroundColor: '#222',
+        backgroundColor: '#111',
+        borderRadius: 30,
         height: 60,
         borderTopColor: 'transparent'
     },

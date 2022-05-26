@@ -23,7 +23,7 @@ const MovieGenres = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.title}>
-                <Text style={styles.genre}>Movies Genre</Text>
+                <Text style={styles.genre}>Genres</Text>
             </View>
             <FlatList 
                 numColumns={2}

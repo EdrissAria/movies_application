@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
  
 // render cast information such biography, popularity ....
+
 export const RenderCastAbout = memo(({ actor }) => {
 
     const readMore = () => setMore(true)

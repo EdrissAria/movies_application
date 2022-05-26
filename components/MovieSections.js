@@ -24,7 +24,7 @@ export const RenderHeader = memo(({ navigation, data, type }) => {
     return (
         <ImageBackground
             source={{ uri: type == 'movie' ?"https://image.tmdb.org/t/p/w780" + data?.backdrop_path:
-            "https://image.tmdb.org/t/p/w185" + data?.profile_path}}
+            "https://image.tmdb.org/t/p/original" + data?.profile_path}}
             resizeMethod="resize"
             style={styles.backgroundImage}
         >

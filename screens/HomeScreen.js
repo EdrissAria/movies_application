@@ -35,15 +35,15 @@ const HomeScreen = ({ navigation }) => {
                 }
             >
                 {getNow_playing.isSuccess ?
-                    <Carousel
-                        data={nowPlaying}
-                        renderItem={renderBanner}
-                        sliderWidth={windowWidth - 40}
-                        itemWidth={windowWidth - 140}
-                        loop={true}
-                        autoplay={true}
-                    /> :
-                    <View style={{ width: windowWidth - 40, height: windowHeight / 2.5, backgroundColor: '#777', borderRadius: 40 }} />
+                     <Carousel
+                     data={nowPlaying}
+                     renderItem={renderBanner}
+                     sliderWidth={windowWidth - 40}
+                     itemWidth={windowWidth - 140}
+                     loop={true}
+                     autoplay={true}
+                    />  :
+                    <View style={{ width: windowWidth - 40, height: windowHeight / 2.5, backgroundColor: '#111', borderRadius: 40 }} />
                 }
                 <View>
                     <MoviesList movies={popular} cat="popular" title="Popular" navigation={navigation} />
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         paddingTop: 10,
-        paddingBottom: 60
+        paddingBottom: 80
     },
     loading: {
         width: windowHeight - 40,

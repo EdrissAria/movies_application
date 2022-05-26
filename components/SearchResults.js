@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
-import ExpoFastImage from 'expo-fast-image'
+// import ExpoFastImage from 'expo-fast-image'
 
 export default memo(({ data, navigation }) => {
     const [genres, setGenres] = useState([]);
@@ -29,7 +29,8 @@ export default memo(({ data, navigation }) => {
                 <View
                     style={styles.results}
                 >
-                    <ExpoFastImage uri={`https://image.tmdb.org/t/p/w92${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} />
+                    <Image source={{ uri:`https://image.tmdb.org/t/p/w154${data.poster_path}` }} resizeMethod="scale" style={styles.image}/>
+                    {/* <ExpoFastImage uri={`https://image.tmdb.org/t/p/w154${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} /> */}
                     <View
                         style={styles.search}
                     >
