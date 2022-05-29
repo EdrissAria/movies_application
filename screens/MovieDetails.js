@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ScrollView } from 'react-native';
-import { RenderHeader, RenderCatagoryAndRating, RenderStoryLine } from '../components/MovieSections'; 
+import { MovieHeader, CatagoryAndRating, StoryLine } from '../components/movieSections'; 
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
@@ -21,12 +21,18 @@ export default function MovieDetails({ navigation, route }) {
     
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
-            {/* Header */}
-            <RenderHeader navigation={navigation} data={selectedMovie} type="movie" />
-            {/* Catagory & rating */}
-            <RenderCatagoryAndRating movie={selectedMovie} />
-            {/* Story line */}
-            <RenderStoryLine navigation={navigation} movie={selectedMovie} />
+            {selectedMovie && (
+                <>
+                {/* Header */}
+                <MovieHeader navigation={navigation} data={selectedMovie} type="movie" />
+                
+                {/* Catagory & rating */}
+                <CatagoryAndRating movie={selectedMovie} />
+
+                {/* Story line */}
+                <StoryLine navigation={navigation} movie={selectedMovie} />
+                </>
+            )}
         </ScrollView>
     )
 }
