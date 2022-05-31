@@ -1,25 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, Keyboard } from 'react-native'
 import SearchResults from '../components/SearchResults';
-import Constants from 'expo-constants';
 import { AntDesign } from '@expo/vector-icons';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
+import { globalStyle } from '../globals/GlobalStyle';
 
 const Search = ({ navigation }) => {
     console.log('out of the search')
     const [search, setSearch] = useState();
     const [dismiss, setDismiss] = useState(false);
-    const [searchResult, setSearchResult] = useState();
-
     const desmiss = useRef(null);
 
-    const searchHander = (query) => {
-        setTimeout(() => {
-            setSearch(query)
-        }, 500)
-        setDismiss(true)
+    function debounce (fn, timeout = 300){
+        let timer; 
+        return (...args) =>{
+            if(timer) clearTimeout(timer)
+            timer = setTimeout(()=> fn(args), timeout); 
+        }
     }
+    const searchHander = debounce((query)=>{
+        setSearch(query)
+        setDismiss(true)
+    })
 
     const searching = useQuery(['searching', search], () => api.search(search), { enabled: !!search });
 
@@ -29,11 +32,11 @@ const Search = ({ navigation }) => {
         setSearchResult([])
     }
 
-    useEffect(() => {
-        let isUnmounted = false;
-        !isUnmounted && setSearchResult(searching?.data ? [...searching?.data?.results] : []);
-        return () => { isUnmounted = true }
-    }, [searching.data])
+    // useEffect(() => {
+    //     let isUnmounted = false;
+    //     !isUnmounted && setSearchResult(searching?.data ? [...searching?.data?.results] : []);
+    //     return () => { isUnmounted = true }
+    // }, [searching.data])
 
     const searchResults = ({ item }) => {
         return <SearchResults navigation={navigation} data={item} />
@@ -41,7 +44,7 @@ const Search = ({ navigation }) => {
 
     return (
             <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
-                <SafeAreaView style={styles.container}>
+                <SafeAreaView style={globalStyle.container}>
                     {/* Search Bar */}
                     <View style={styles.search}>
                         {dismiss ?
@@ -61,8 +64,8 @@ const Search = ({ navigation }) => {
                     </View>
                     <View style={styles.view}>
                         <FlatList
-                            data={searchResult}
-                            extraData={searchResult}
+                            data={searching?.data?.results}
+                            extraData={searching?.data?.results}
                             renderItem={searchResults}
                             scrollEnabled
                             scrollEventThrottle={16}
@@ -90,12 +93,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         borderWidth: 1,
         marginVertical: 20,
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#000',
-        marginTop: Constants.statusBarHeight,
-        paddingHorizontal: 20
     },
     searchInput: {
         color: '#ddd',

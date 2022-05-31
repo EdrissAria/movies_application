@@ -4,6 +4,7 @@ import BannerSlider from '../components/BannerSlider';
 import Carousel from 'react-native-snap-carousel';
 import { windowHeight, windowWidth } from '../globals/Dimension';
 import { useHomeScreenCalls } from '../hooks/useHomeScreenCalls';
+import { NetAlert } from '../components/NetAlert';
 
 const wait = (timeout) => {
     return new Promise(resolve => {
@@ -14,9 +15,7 @@ const wait = (timeout) => {
 const HomeScreen = ({ navigation }) => {
 
     console.log('HomeScreen.js renderssssssssssssss')
-
     const [refrishing, upcoming, popular, toprated, nowPlaying, onRefrish, getNow_playing] = useHomeScreenCalls(); 
-
     const renderBanner = ({ item }) => {
         return <BannerSlider data={item} />
     }
@@ -43,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
                      loop={true}
                      autoplay={true}
                     />  :
-                    <View style={{ width: windowWidth - 40, height: windowHeight / 2.5, backgroundColor: '#111', borderRadius: 40 }} />
+                    <View style={styles.bannerLoader} />
                 }
                 <View>
                     <MoviesList movies={popular} cat="popular" title="Popular" navigation={navigation} />
@@ -55,6 +54,7 @@ const HomeScreen = ({ navigation }) => {
                     <MoviesList movies={upcoming} cat="upcoming" title="Upcoming" navigation={navigation} />
                 </View>
             </ScrollView>
+           <NetAlert />
         </SafeAreaView>
     )
 }
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 80
     },
-    loading: {
-        width: windowHeight - 40,
+    bannerLoader: {
+        width: windowWidth - 40,
         height: windowHeight / 2.5,
-        backgroundColor: '#ccc',
+        backgroundColor: '#333',
         borderRadius: 40
     }
 })

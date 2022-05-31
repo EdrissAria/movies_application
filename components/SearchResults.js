@@ -3,23 +3,23 @@ import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 're
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
-// import ExpoFastImage from 'expo-fast-image'
+import ExpoFastImage from 'expo-fast-image'
 
 export default memo(({ data, navigation }) => {
-    const [genres, setGenres] = useState([]);
+    // const [genres, setGenres] = useState([]);
     
     const getGenres = useQuery('genres', api.getGenres);
     
-    const navigateTo = () => navigation.navigate('movieDetails', { id: data?.id })
-
-    useEffect(() => {
-        let isUnmounted = false; 
-        !isUnmounted && setGenres(getGenres?.data ? getGenres?.data?.genres : [])
-        return ()=>{isUnmounted = true}
-    }, [getGenres.data])
+    const navigateTo = useNavigate('movieDetails', { id: data?.id }); 
+    
+    // useEffect(() => {
+    //     let isUnmounted = false; 
+    //     !isUnmounted && setGenres(getGenres?.data ? getGenres?.data?.genres : [])
+    //     return ()=>{isUnmounted = true}
+    // }, [getGenres.data])
 
     const Gen = [];
-    genres.map(g => {
+    getGenres?.data?.genres.map(g => {
         data?.genre_ids.filter(n => { g.id == n ? Gen.push(g.name) : null })
     })
 
@@ -29,8 +29,8 @@ export default memo(({ data, navigation }) => {
                 <View
                     style={styles.results}
                 >
-                    <Image source={{ uri:`https://image.tmdb.org/t/p/w154${data.poster_path}` }} resizeMethod="scale" style={styles.image}/>
-                    {/* <ExpoFastImage uri={`https://image.tmdb.org/t/p/w154${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} /> */}
+                    {/* <Image source={{ uri:`https://image.tmdb.org/t/p/w154${data.poster_path}` }} resizeMethod="scale" style={styles.image}/> */}
+                    <ExpoFastImage uri={`https://image.tmdb.org/t/p/w154${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} />
                     <View
                         style={styles.search}
                     >

@@ -1,14 +1,17 @@
 import React, {memo} from 'react'
 import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { ListFooter } from '../components/Layout';
+import { ListFooter } from '../components/Layouts/ListFooter';
 import { Entypo } from '@expo/vector-icons';
+import { useNavigate } from '../hooks/useNavigate'
 
 export default memo(({ movies, cat, title, navigation}) => {
     const renderMovies = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
-    const navigateTo = () => navigation.navigate('catagoryMovies', { catagory: cat, data: movies })
+    
+    const navigateTo = useNavigate('catagoryMovies', { catagory: cat, data: movies }); 
+
     return (
         <SafeAreaView>
             <View style={styles.titleContainer}>

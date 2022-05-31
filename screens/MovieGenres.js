@@ -1,34 +1,34 @@
 import {useState, useEffect} from 'react'
 import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
-import Constants  from 'expo-constants';
 import RenderGenres from '../components/RenderGenres';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
+import { globalStyle } from '../globals/GlobalStyle';
  
 const MovieGenres = ({ navigation }) => { 
     console.log('Catagories.js renderssssssssssssss')
-    const [moviesGenre, setMoviesGenre] = useState([]); 
+
     const getMoviesGenre = useQuery('moviesgenre', api.getGenres);
  
-    useEffect(()=>{
-        let isUnmounted = false; 
-        !isUnmounted && setMoviesGenre(getMoviesGenre?.data?[...getMoviesGenre?.data?.genres]:null); 
-        return ()=>{isUnmounted = true}
-    },[getMoviesGenre.data])
+    // useEffect(()=>{
+    //     let isUnmounted = false; 
+    //     !isUnmounted && setMoviesGenre(getMoviesGenre?.data?[...getMoviesGenre?.data?.genres]:null); 
+    //     return ()=>{isUnmounted = true}
+    // },[getMoviesGenre.data])
 
     const renderCatagories = ({ item }) => {
         return <RenderGenres data={item} navigation={navigation}/>
     }
     
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={globalStyle.container}>
             <View style={styles.title}>
                 <Text style={styles.genre}>Genres</Text>
             </View>
             <FlatList 
                 numColumns={2}
-                data={moviesGenre}
-                extraData={moviesGenre}
+                data={getMoviesGenre?.data?.genres}
+                extraData={getMoviesGenre?.data?.genres}
                 renderItem={renderCatagories}
                 contentContainerStyle={{ paddingBottom: 64}}
             />
@@ -37,12 +37,6 @@ const MovieGenres = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: '#000', 
-        paddingHorizontal: 20, 
-        marginTop: Constants.statusBarHeight
-    }, 
     title: {
         paddingVertical: 10, 
         marginTop: 10, 
@@ -53,7 +47,6 @@ const styles = StyleSheet.create({
         fontSize: 21, 
         fontFamily: 'roboto', 
         color: 'rgb(234, 88, 12)', 
-        textAlign: 'center'
     }
 })
 

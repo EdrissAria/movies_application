@@ -1,6 +1,5 @@
-import React from 'react'
+import {useState, useCallback} from 'react'
 import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading'
 
 export default function CustomFonts({ children }) {
     let [fontsLoaded, error] = useFonts({
@@ -8,7 +7,7 @@ export default function CustomFonts({ children }) {
         'gothic': require('../assets/fonts/BankGothicRegular.ttf')
     }); 
     if (!fontsLoaded) {
-        return <AppLoading />
+        return null
     }else{
         return children
     }

@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView} from 'react-native'
-import {RenderCastAbout} from '../components/RenderCastAbout'
-import {RenderHeader} from '../components/MovieSections'
+import { ScrollView } from 'react-native'
+import {RenderCastAbout} from '../components/MovieSections/RenderCastAbout'
+import {RenderHeader} from '../components/MovieSections/RenderHeader'
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'
  
+ 
 const ActorsDetails = ({ navigation, route }) => {
     console.log('ActorsDetails.js renderssssssssssssss')
-    const { data } = route.params;
-    const [selectedActor, setSelectedActor] = useState({});
-     
-    const getActor = useQuery(['actor', data.id],()=> api.getActor(data.id), {enabled: !!data.id});
+    const { id } = route.params;
+    // const [selectedActor, setSelectedActor] = useState({});
+   
+    const getActor = useQuery(['actor', id],()=> api.getActor(id), {enabled: !!id});
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        let isUnmounted = false; 
+    //     let isUnmounted = false; 
 
-        !isUnmounted && setSelectedActor(getActor?.data ? getActor?.data:{})
+    //     !isUnmounted && setSelectedActor(getActor?.data ? getActor?.data:{})
     
-        return () => { isUnmounted = true }
+    //     return () => { isUnmounted = true }
 
-    }, [getActor.data])
+    // }, [getActor.data])
 
     return (
         <ScrollView  style={{ flex: 1, backgroundColor: '#000', paddingBottom: 20 }}>
             {/* Header */}
-            <RenderHeader data={selectedActor} type="actor" navigation={navigation} />
+            <RenderHeader data={getActor?.data} type="actor" navigation={navigation} />
             {/* about actors */}
             <RenderCastAbout actor={selectedActor} />
         </ScrollView>

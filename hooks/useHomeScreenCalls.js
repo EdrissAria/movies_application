@@ -2,9 +2,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 
-
-
-
 export const useHomeScreenCalls = () =>{
     const wait = (timeout) => {
         return new Promise(resolve => {

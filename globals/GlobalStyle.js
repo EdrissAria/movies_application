@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
-import Constants from 'expo-constants'
-
-export const globalStyle = StyleSheet.create({
+import Constants  from 'expo-constants';
+export const globalStyle = {
     container: {
         flex: 1, 
-        marginTop: Constants.statusBarHeight, 
+        backgroundColor: '#000', 
+        paddingHorizontal: 20, 
+        marginTop: Constants.statusBarHeight
     }
-})
+}

@@ -1,16 +1,18 @@
 import React, { memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native'
 import { windowWidth } from '../globals/Dimension'
+import { useNavigate } from '../hooks/useNavigate'
 
-export default memo(({ data, navigation }) => {
-    const navigateTo = () => navigation.navigate('movieGenre', { id: data?.id, genre: data?.name })
+export default memo(({ data }) => {
+    const navigateTo = useNavigate('movieGenre', { id: data?.id, genre: data?.name }); 
     return (
         <TouchableOpacity onPress={navigateTo}>
             <View style={styles.catagory}>
-                <Image source={require('../assets/images/genre.webp')} resizeMethod="resize" style={styles.bgimage} />
+                <ImageBackground source={require('../assets/images/genre.webp')} resizeMode="cover" style={styles.bgimage} >
                 <View style={styles.genre}>
                     <Text style={styles.gen}>{data?.name}</Text>
                 </View>
+                </ImageBackground>
             </View>
         </TouchableOpacity>
     )
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: 60,
-        backgroundColor: 'rgba(255, 60, 24, 0.8)'
+        backgroundColor: 'rgba(0, 0, 0, 0.7)'
     },
     gen: {
         fontFamily: 'roboto',
@@ -40,20 +42,16 @@ const styles = StyleSheet.create({
         color: '#eee',
     },
     catagory: {
-        width: (windowWidth - 64) / 2,
+        width: (windowWidth - 74) / 2,
         height: 140,
         borderRadius: 26,
-        marginHorizontal: 6,
+        marginHorizontal: 9,
         zIndex: 1000,
         overflow: 'hidden',
         marginTop: 20
     },
     bgimage: {
-        position: 'relative',
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
-        borderColor: 'rgb(234, 88, 24)',
-        borderWidth: 1
     }
 })

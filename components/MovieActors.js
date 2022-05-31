@@ -1,30 +1,22 @@
 import React, {memo} from 'react'
 import { StyleSheet, TouchableOpacity, Image } from 'react-native'
-// import ExpoFastImage from 'expo-fast-image'
+import ExpoFastImage from 'expo-fast-image'
+import { useNavigate } from '../hooks/useNavigate'
 
-export default memo(({ data, navigation }) => {
-    const navigateTo = () => navigation.navigate('actorsDetails', {data})
+export default memo(({ data }) => {
+    const navigateTo = useNavigate('actorsDetails', {id: data.id}); 
     return(
         <TouchableOpacity onPress={navigateTo}>
             {
             data?.profile_path == null ?
             <Image source={require('../assets/images/user.png')} resizeMethod="resize" style={styles.cast}/>:
-            <Image source={{uri:`https://image.tmdb.org/t/p/w185${data?.profile_path}`}} resizeMode="cover" style={styles.cast}/>
-            // <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data?.profile_path}`} resizeMode="cover" cacheKey={data.credit_id} style={styles.cast}/>
+            // <Image source={{uri:`https://image.tmdb.org/t/p/w185${data?.profile_path}`}} resizeMode="cover" style={styles.cast}/>
+            <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data?.profile_path}`} resizeMode="cover" cacheKey={data.credit_id} style={styles.cast}/>
             }
         </TouchableOpacity>
     )
 })
 const styles = StyleSheet.create({
-    title: {
-        color: '#eee',
-        fontSize: 12,
-    },
-    genre: {
-        color: '#fff',
-        fontSize: 12,
-        opacity: 0.6
-    },
     cast: {
         width: 60,
         height: 80,

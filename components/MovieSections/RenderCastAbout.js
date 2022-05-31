@@ -1,4 +1,4 @@
-import {useState, memo} from 'react'
+import { memo, useState } from 'react'
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
  

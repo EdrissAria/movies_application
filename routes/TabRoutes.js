@@ -2,8 +2,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Search  from '../screens/Search'
 import About from '../screens/About'
 import MovieGenres from '../screens/MovieGenres'
-import { MainHeader, TabIcon } from '../components/Layout'
+import { MainHeader } from '../components/Layouts/MainHeader'
+import { TabIcon } from '../components/Layouts/TabIcon'
 import HomeScreen from '../screens/HomeScreen'
+import { icons } from '../globals/icons'
 
 const Tab = createBottomTabNavigator();
 console.log('Route.js renderssssssssssssss')
@@ -18,13 +20,14 @@ const options = {
         backgroundColor: '#111',
         borderRadius: 30,
         height: 60,
-        borderTopColor: 'transparent'
+        borderTopColor: 'transparent',
+        marginHorizontal: 4, 
+        zIndex: 0
     },
     header: () => <MainHeader />, 
-    tabBarHideOnKeyboard: true
 }
 
-export default function Home() {
+export default function TabRoutes() {
     return (
         <Tab.Navigator
             screenOptions={options}
@@ -34,7 +37,7 @@ export default function Home() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="home"
+                            icon={icons.home}
                         />
                     ),
                 }}
@@ -44,7 +47,7 @@ export default function Home() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="search"
+                            icon={icons.search}
                         />
                     ),
                     headerShown: false
@@ -67,7 +70,7 @@ export default function Home() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="user"
+                            icon={icons.about}
                         />
                     ),
                 }}
