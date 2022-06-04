@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, Keyboard } from 'react-native'
+import { useRef, useState } from 'react';
+import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, Keyboard, ActivityIndicator } from 'react-native'
 import SearchResults from '../components/SearchResults';
 import { AntDesign } from '@expo/vector-icons';
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 import { globalStyle } from '../globals/GlobalStyle';
+import { colors, fonts } from '../globals/ConstantStyles'
+
 
 const Search = ({ navigation }) => {
     console.log('out of the search')
@@ -29,14 +31,8 @@ const Search = ({ navigation }) => {
     const clearSearch = () => {
         desmiss.current.clear();
         setDismiss(false)
-        setSearchResult([])
+        setSearch('')
     }
-
-    // useEffect(() => {
-    //     let isUnmounted = false;
-    //     !isUnmounted && setSearchResult(searching?.data ? [...searching?.data?.results] : []);
-    //     return () => { isUnmounted = true }
-    // }, [searching.data])
 
     const searchResults = ({ item }) => {
         return <SearchResults navigation={navigation} data={item} />
@@ -49,20 +45,21 @@ const Search = ({ navigation }) => {
                     <View style={styles.search}>
                         {dismiss ?
                             <TouchableWithoutFeedback onPress={clearSearch}>
-                                <AntDesign name="close" size={22} color="rgb(234, 88, 12)" />
+                                <AntDesign name="close" size={22} color={colors.orange} />
                             </TouchableWithoutFeedback> : null
                         }
                         <TextInput
                             ref={desmiss}
                             onChangeText={searchHander}
                             placeholder="search here.."
-                            placeholderTextColor="#bbb"
+                            placeholderTextColor={colors.darkGray}
                             keyboardType="web-search"
                             style={styles.searchInput}
                         />
-                        <AntDesign name="search1" size={24} color="rgb(234, 88, 12)" />
+                        <AntDesign name="search1" size={24} color={colors.orange} />
                     </View>
                     <View style={styles.view}>
+                    {search == undefined ? null : (searching?.isLoading ? <ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }} /> :
                         <FlatList
                             data={searching?.data?.results}
                             extraData={searching?.data?.results}
@@ -72,6 +69,7 @@ const Search = ({ navigation }) => {
                             decelerationRate="fast"
                             contentContainerStyle={{ paddingBottom: 20, }}
                         />
+                    )}
                     </View>
                 </SafeAreaView>
             </TouchableWithoutFeedback>
@@ -86,18 +84,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 16,
         paddingVertical: 10,
-        fontSize: 18,
+        fontSize: fonts.large,
         color: 'rgba(255, 255, 255, 0.9)',
         borderRadius: 30,
-        borderColor: 'rgb(234, 88, 12)',
+        borderColor: colors.orange,
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         borderWidth: 1,
         marginVertical: 20,
     },
     searchInput: {
-        color: '#ddd',
+        color: colors.lightGray,
         marginHorizontal: 3,
-        fontSize: 18,
+        fontSize: fonts.large,
         width: 230,
         paddingVertical: 2,
         paddingHorizontal: 4

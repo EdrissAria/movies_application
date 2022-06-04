@@ -4,7 +4,9 @@ import ExpoFastImage from 'expo-fast-image'
 import { useNavigate } from '../hooks/useNavigate'
 
 export default memo(({ data }) => {
-    const navigateTo = useNavigate('actorsDetails', {id: data.id}); 
+    
+    const [navigateTo] = useNavigate('actorsDetails', {id: data.id}); 
+
     return(
         <TouchableOpacity onPress={navigateTo}>
             {

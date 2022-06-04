@@ -1,6 +1,7 @@
 import { memo, useState } from 'react'
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
+import { colors, fonts } from '../../globals/ConstantStyles';
  
 // render cast information such biography, popularity ....
 
@@ -67,12 +68,12 @@ const styles = StyleSheet.create({
     info: {
         marginTop: 10,
         paddingTop: 10,
-        borderTopColor: '#333',
+        borderTopColor: colors.darkGray,
         borderTopWidth: 1
     },
     title: {
-        color: '#ddd',
-        fontSize: 20,
+        color: colors.lightGray,
+        fontSize: fonts.large,
         letterSpacing: 1,
         fontWeight: 'bold'
     },
@@ -82,14 +83,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: fonts.medium,
         fontWeight: 'bold',
-        color: '#fff',
+        color: colors.white,
         letterSpacing: 1
     },
     text: {
-        fontSize: 14,
-        color: '#ddd',
+        fontSize: fonts.small,
+        color: colors.lightGray,
         letterSpacing: 1,
         marginTop: 3
     },
@@ -97,25 +98,25 @@ const styles = StyleSheet.create({
         marginTop: 12,
         paddingTop: 10,
         paddingBottom: 20,
-        borderTopColor: '#333',
+        borderTopColor: colors.darkGray,
         borderTopWidth: 1
     },
     bio: {
-        color: '#ddd',
-        fontSize: 20,
+        color: colors.lightGray,
+        fontSize: fonts.large,
         letterSpacing: 1,
         fontWeight: 'bold'
     },
     about: {
-        color: '#eee',
-        fontSize: 14,
+        color: colors.lightGray,
+        fontSize: fonts.small,
         letterSpacing: 1,
         marginTop: 6, 
         marginLeft: 4, 
         fontFamily: 'roboto'
     }, 
     more: {
-        fontSize: 16, 
+        fontSize: fonts.medium, 
         color: 'red'
     }
 })

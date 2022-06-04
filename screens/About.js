@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Linking, SafeAreaView, Image,TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+import { colors, fonts } from '../globals/ConstantStyles'
  
 const About = () => {
     return (
@@ -60,7 +61,7 @@ const About = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: colors.black,
         alignItems: 'center'
     },
     content: {
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     about: {
-        color: '#ddd',
-        fontSize: 16, 
+        color: colors.lightGray,
+        fontSize: fonts.medium, 
         letterSpacing: 2, 
         lineHeight: 24, 
         marginTop: 16, 
@@ -87,8 +88,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }, 
     text: {
-        color: '#ccc', 
-        fontSize: 20, 
+        color: colors.lightGray, 
+        fontSize: fonts.large, 
         letterSpacing: 1, 
         fontWeight: 'bold', 
         textAlign: 'center'
@@ -99,11 +100,11 @@ const styles = StyleSheet.create({
         borderRadius: 25, 
         alignSelf: 'center', 
         marginTop: 20, 
-        backgroundColor: '#222' 
+        backgroundColor: colors.darkGray 
     }, 
     name: {
-        color: '#ccc', 
-        fontSize: 16, 
+        color: colors.lightGray, 
+        fontSize: fonts.medium, 
         letterSpacing: 1, 
         marginTop: 10
     }, 
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
         borderColor: '#666', 
         borderWidth: 1, 
         marginTop: 20, 
-        backgroundColor: '#ccc', 
+        backgroundColor: colors.lightGray, 
         width: '100%', 
         height: 50, 
         borderRadius: 6, 
@@ -124,11 +125,11 @@ const styles = StyleSheet.create({
         right: 16
     }, 
     link: {
-        fontSize: 18, 
+        fontSize: fonts.large, 
         fontFamily: 'roboto', 
         fontWeight: 'bold', 
         letterSpacing: 2, 
-        color: '#222' 
+        color: colors.darkGray 
     }
 })
 

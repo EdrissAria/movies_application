@@ -1,6 +1,6 @@
-import { View , Image } from 'react-native'
+import { StyleSheet, View , Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import {styles } from './index'
+import { colors } from '../../globals/ConstantStyles'
 
 export const TabIcon = ({ focused, icon }) => {
     return (
@@ -9,9 +9,16 @@ export const TabIcon = ({ focused, icon }) => {
                 icon == 'grid-outline' ? (<Ionicons
                     name={icon}
                     size={24}
-                    color={focused ? 'rgb(234, 88, 12)' : '#fff'}
-                />) :  <Image source={icon} style={{ width: 24, height: 24 }} tintColor={focused ? 'rgb(234, 88, 12)' : '#fff'} />
+                    color={focused ? colors.orange : colors.white}
+                />) :  <Image source={icon} style={{ width: 24, height: 24 }} tintColor={focused ? colors.orange : colors.white} />
             }
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center', 
+        alignItems: 'center'
+    }
+})

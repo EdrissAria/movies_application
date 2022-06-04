@@ -1,48 +1,50 @@
-import {useEffect, useState} from 'react'
+import { useState } from 'react';
 import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { globalStyle } from '../globals/GlobalStyle';
 import * as api from '../api/Api'
-import { useQuery } from 'react-query'
+import { useInfiniteQuery } from 'react-query'
+import { colors, fonts } from '../globals/ConstantStyles'
+
  
 const MovieGenre = ({ navigation, route }) => {
+    const [totalPages, setTotalPages] = useState(0)
     console.log('MovieGenre.js renderssssssssssssss')
     const {id, genre} = route.params;
     
-    const getMoviesByGenre = useQuery(['bygenre', id],()=> api.getByGenre(id));  
-    
-    // useEffect(()=>{
+    const {data, hasNextPage, isFetching, fetchNextPage, isLoading } = useInfiniteQuery(['bygenre', id],({pageParam = 1})=> api.getByGenre(id, pageParam, setTotalPages), {
+        getNextPageParam: (_lastpage, pages) => {
+            if(pages.length < 10){
+                return pages.length + 1
+            }else{
+                return undefined
+            }
+        }
+    });  
 
-    //     let isUnmounted = false; 
-
-    //     !isUnmounted && setGenreMovie(getMoviesByGenre?.data?[...getMoviesByGenre?.data?.data?.results]:[]);
-        
-    //     return () => {isUnmounted = true}
-        
-    // }, [getMoviesByGenre.data])
-   
     const renderGenre = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }
-    
-    const navigateTo = ()=> navigation.goBack()
 
     return (
         <SafeAreaView style={globalStyle.container}>
             <View style={styles.header}>
-                <TouchableOpacity style={styles.back} onPress={navigateTo}>
-                    <AntDesign name="left" size={20} color='rgb(234, 88, 12)' />
+                <TouchableOpacity style={styles.back} onPress={()=> navigation.goBack()}>
+                    <Entypo name="chevron-thin-left" size={22} color={colors.orange} />
                 </TouchableOpacity>
                 <Text style={styles.title}>{genre}</Text>
             </View>
-            {getMoviesByGenre.isLoading?<ActivityIndicator size="large" color="rgb(234, 88, 12)" style={{marginTop: 20}}/>:
+            {isLoading?<ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }}/>:
             <FlatList 
                 numColumns={3}
-                data={getMoviesByGenre?.data?.data?.results}
-                extraData={getMoviesByGenre?.data?.data?.results}
+                data={data?.pages?.flat()}
+                extraData={data?.pages?.flat()}
                 renderItem={renderGenre}
                 contentContainerStyle={{ paddingBottom: 20 }}
+                onEndReachedThreshold={0.2}
+                onEndReached={fetchNextPage}
+                ListFooterComponent={isFetching ? <ActivityIndicator color="red" size="large" />: !hasNextPage && <Text style={{ color: 'red', textAlign: 'center', fontSize: fonts.medium }}>no more movies!</Text>}
             />}
         </SafeAreaView>
     )
@@ -54,19 +56,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 60, 
         paddingVertical: 10, 
-        backgroundColor: 'rgba(0,0,0, 0.5)', 
+        backgroundColor: colors.transparent, 
     }, 
     title: {
-        fontSize: 21,
+        fontSize: fonts.large,
         marginLeft: 16, 
         fontFamily: 'roboto', 
-        color: 'rgb(234, 88, 12)', 
+        color: colors.orange, 
         textAlign: 'center', 
         textTransform: 'capitalize'
     }, 
     back: { 
         padding: 6, 
-        backgroundColor: 'rgba(250,250,250, 0.18)', 
         borderRadius: 20 
     }
 })

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import NetInfo from '@react-native-community/netinfo'
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
+import { colors, fonts } from '../globals/ConstantStyles';
 
 export const NetAlert = () => {
     const [connect, setConnect] = useState();
@@ -26,14 +27,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between', 
         width: '100%', 
         height: 80,
-        backgroundColor: '#333', 
+        backgroundColor: colors.darkGray, 
         position: 'absolute', 
         top: 10, 
         borderRadius: 10, 
     },
     textAlert: { 
-        color: '#ccc', 
-        fontSize: 16, 
+        color: colors.lightGray, 
+        fontSize: fonts.medium, 
         padding: 10,
         fontFamily: 'roboto' 
     }

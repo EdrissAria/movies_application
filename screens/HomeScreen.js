@@ -5,6 +5,8 @@ import Carousel from 'react-native-snap-carousel';
 import { windowHeight, windowWidth } from '../globals/Dimension';
 import { useHomeScreenCalls } from '../hooks/useHomeScreenCalls';
 import { NetAlert } from '../components/NetAlert';
+import { colors, fonts } from '../globals/ConstantStyles'
+
 
 const wait = (timeout) => {
     return new Promise(resolve => {
@@ -15,7 +17,8 @@ const wait = (timeout) => {
 const HomeScreen = ({ navigation }) => {
 
     console.log('HomeScreen.js renderssssssssssssss')
-    const [refrishing, upcoming, popular, toprated, nowPlaying, onRefrish, getNow_playing] = useHomeScreenCalls(); 
+    const [refrishing, getUpcoming, getPopular, getTop_rated, onRefrish, getNow_playing] = useHomeScreenCalls(); 
+
     const renderBanner = ({ item }) => {
         return <BannerSlider data={item} />
     }
@@ -28,14 +31,14 @@ const HomeScreen = ({ navigation }) => {
                     <RefreshControl
                         refreshing={refrishing}
                         onRefresh={onRefrish}
-                        colors={['rgb(234, 88, 12)']}
-                        progressBackgroundColor="#333"
+                        colors={[colors.orange]}
+                        progressBackgroundColor={colors.darkGray}
                     />
                 }
             >
                 {getNow_playing.isSuccess ?
                      <Carousel
-                     data={nowPlaying}
+                     data={getNow_playing?.data?.results}
                      renderItem={renderBanner}
                      sliderWidth={windowWidth - 40}
                      itemWidth={windowWidth - 140}
@@ -44,15 +47,15 @@ const HomeScreen = ({ navigation }) => {
                     />  :
                     <View style={styles.bannerLoader} />
                 }
-                <View>
-                    <MoviesList movies={popular} cat="popular" title="Popular" navigation={navigation} />
-                </View>
-                <View>
-                    <MoviesList movies={toprated} cat="top_rated" title="Top Rated" navigation={navigation} />
-                </View>
-                <View>
-                    <MoviesList movies={upcoming} cat="upcoming" title="Upcoming" navigation={navigation} />
-                </View>
+                
+                <MoviesList movies={getPopular} cat="popular" title="Popular" navigation={navigation} />
+                
+                
+                <MoviesList movies={getTop_rated} cat="top_rated" title="Top Rated" navigation={navigation} />
+                
+                
+                <MoviesList movies={getUpcoming} cat="upcoming" title="Upcoming" navigation={navigation} />
+                
             </ScrollView>
            <NetAlert />
         </SafeAreaView>
@@ -62,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     parent: { 
         flex: 1, 
-        backgroundColor: '#000' 
+        backgroundColor: colors.black 
     },
     container: {
         paddingHorizontal: 20,
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
     bannerLoader: {
         width: windowWidth - 40,
         height: windowHeight / 2.5,
-        backgroundColor: '#333',
+        backgroundColor: colors.darkGray,
         borderRadius: 40
     }
 })

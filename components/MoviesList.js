@@ -1,16 +1,18 @@
-import React, {memo} from 'react'
-import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity} from 'react-native'
+import {memo} from 'react'
+import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity } from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { ListFooter } from '../components/Layouts/ListFooter';
+import { ListFooter } from '../components/Layouts';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigate } from '../hooks/useNavigate'
+import {colors, fonts} from '../globals/ConstantStyles'
 
 export default memo(({ movies, cat, title, navigation}) => {
+
     const renderMovies = ({ item }) => {
-        return <RenderMovies data={item} navigation={navigation} />
+        return <RenderMovies data={item} qdata={movies} navigation={navigation} />
     }
     
-    const navigateTo = useNavigate('catagoryMovies', { catagory: cat, data: movies }); 
+    const [navigateTo] = useNavigate('catagoryMovies', { catagory: cat, data: movies?.data?.results}); 
 
     return (
         <SafeAreaView>
@@ -22,14 +24,14 @@ export default memo(({ movies, cat, title, navigation}) => {
                 >
                     <Entypo
                         name="chevron-small-right"
-                        size={28}
-                        color='rgb(234, 88, 12)'
+                        size={36}
+                        color={colors.orange}
                     />
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={movies}
-                extraData={movies}
+                data={movies?.data?.results}
+                extraData={movies?.data?.results}
                 decelerationRate="fast"
                 scrollEnabled
                 renderItem={renderMovies}
@@ -43,8 +45,8 @@ export default memo(({ movies, cat, title, navigation}) => {
 
 const styles = StyleSheet.create({
     title: {
-        color: '#eee',
-        fontSize: 18,
+        color: colors.lightGray,
+        fontSize: fonts.large,
         fontFamily: 'roboto',
         letterSpacing: 1,
         position: 'absolute',
@@ -56,8 +58,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 30,
         height: 30,
-        borderRadius: 20,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
         position: 'absolute',
         right: 0,
     },

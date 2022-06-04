@@ -1,10 +1,9 @@
 import { memo } from 'react'
-import { View, Text, TouchableOpacity,ImageBackground } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity,ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons'
-import {styles} from './index'
- 
-
+import { windowHeight } from '../../globals/Dimension'; 
+import { colors, fonts } from '../../globals/ConstantStyles';
 
 export const RenderHeader = memo(({ navigation, data, type }) => {
     return (
@@ -51,4 +50,46 @@ export const RenderHeader = memo(({ navigation, data, type }) => {
             </View>
         </ImageBackground>
     )
+})
+
+const styles = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        width: '100%',
+        height: windowHeight / 2,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: Platform.OS ? 40 : 20,
+        paddingHorizontal: 20
+    },
+    backbtn: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 20,
+        backgroundColor: colors.transparent
+    },
+    headerBar: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    gradient: {
+        width: '100%',
+        height: 150,
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    title: {
+        marginTop: 10,
+        color: colors.lightGray,
+        fontSize: fonts.exLarge,
+        textTransform: 'capitalize',
+        letterSpacing: 4,
+        textAlign: 'center',
+        paddingHorizontal: 10,
+    }
 })

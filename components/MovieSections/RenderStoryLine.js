@@ -1,10 +1,10 @@
 import { memo, useState } from 'react'
-import { View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback } from 'react-native'
 import * as api from '../../api/Api'
 import { useQuery } from 'react-query'
 import  MovieActors  from '../MovieActors';
 import { MoreActors } from '../Layouts/MoreActors'
-import {styles} from './index'
+import { colors, fonts } from '../../globals/ConstantStyles';
 
 
 export const RenderStoryLine = memo(({ navigation, movie }) => {
@@ -58,4 +58,38 @@ export const RenderStoryLine = memo(({ navigation, movie }) => {
             </View>
         </View>
     )
+})
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        marginTop: 10, 
+        paddingHorizontal: 20, 
+        flexDirection: 'column'
+    }, 
+    title: {
+        color: colors.lightGray,
+        fontSize: fonts.large,
+        letterSpacing: 1
+    }, 
+    overview: {
+        color: colors.lightGray, 
+        fontSize: fonts.small, 
+        marginTop: 10, 
+        fontFamily: 'roboto'
+    }, 
+    more: {
+        color: 'red', 
+        fontSize: fonts.small
+    }, 
+    casts: {
+        marginTop: 10, 
+        paddingBottom: 20 
+    }, 
+    castTitle: {
+        color: colors.lightGray, 
+        fontSize: fonts.medium, 
+        marginBottom: 10, 
+        letterSpacing: 1 
+    }
 })

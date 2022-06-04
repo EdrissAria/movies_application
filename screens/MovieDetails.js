@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react'
 import { ScrollView } from 'react-native';
-// import { RenderHeader, RenderCatagoryAndRating, RenderStoryLine } from '../components/MovieSections'; 
-import { RenderHeader } from '../components/MovieSections/RenderHeader';
-import { RenderCatagoryAndRating } from '../components/MovieSections/RenderCatagoryAndRating'
-import { RenderStoryLine } from '../components/MovieSections/RenderStoryLine'
+import { RenderHeader, RenderCatagoryAndRating, RenderStoryLine } from '../components/MovieSections'; 
 import { useQuery } from 'react-query'
 import * as api from '../api/Api';
 

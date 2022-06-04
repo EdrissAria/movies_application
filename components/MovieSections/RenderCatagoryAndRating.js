@@ -1,9 +1,9 @@
 import { memo } from 'react'
-import { View, Text, Linking, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, Linking, TouchableWithoutFeedback } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import * as api from '../../api/Api'
 import { useQuery } from 'react-query'
-import {styles} from './index'
+import { colors, fonts} from '../../globals/ConstantStyles'
 
 
 export const RenderCatagoryAndRating = memo(({ movie }) => {
@@ -38,7 +38,7 @@ export const RenderCatagoryAndRating = memo(({ movie }) => {
                     <Text style={styles.trailer}>
                         <Entypo name="controller-play" size={20} color="#f00" />
                         &nbsp;
-                        <Text style={styles.play}>
+                        <Text style={styles.score}>
                             Play Trailer
                         </Text>
                     </Text>
@@ -51,4 +51,54 @@ export const RenderCatagoryAndRating = memo(({ movie }) => {
             </View>
         </View>
     )
+})
+
+const styles = StyleSheet.create({
+    catagoryContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 10,
+        paddingHorizontal: 6,
+        paddingVertical: 3,
+        borderRadius: 10,
+        backgroundColor: '#777'
+    },
+    content: {
+        flexDirection: 'row',
+        marginTop: 16,
+        alignItems: 'center',
+        paddingHorizontal: 20
+    }, 
+    rating: { 
+        borderRightColor: '#999',
+        borderRightWidth: 1,
+        paddingRight: 10 
+    }, 
+    score: { 
+        color: colors.white,
+        fontSize: fonts.medium,
+        letterSpacing: 2 
+    }, 
+    trailer: {
+        textAlign: 'left',
+        marginLeft: 10
+    },
+    vote: { 
+        color: colors.white, 
+        fontSize: 14 
+    },
+    details: { 
+        alignItems: 'center',
+        flexDirection: 'column', 
+        marginTop: 10, 
+        paddingHorizontal: 20, 
+        paddingVertical: 4, 
+        borderTopColor: colors.darkGray, 
+        borderTopWidth: 1 
+    }, 
+    info: { 
+        fontSize: fonts.medium, 
+        color: colors.lightGray
+    }
 })

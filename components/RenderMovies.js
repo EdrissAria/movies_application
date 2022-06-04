@@ -1,12 +1,15 @@
-import React, {memo} from 'react'
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native'
+import {memo} from 'react'
+import {StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
 import ExpoFastImage from 'expo-fast-image'
 import { useNavigate } from '../hooks/useNavigate' 
+import { colors, fonts } from '../globals/ConstantStyles'
 
-export default memo(({data }) =>{
-    const navigateTo = useNavigate('movieDetails', {id: data?.id}); 
+export default memo(({data, qdata}) =>{
+    const [navigateTo] = useNavigate('movieDetails', {id: data?.id}); 
     return(
+        <>
+        {qdata?.isLoading && <ActivityIndicator color="red" size="large" />}
         <TouchableOpacity onPress={navigateTo}>
             <View style={styles.movie}>
                 {data.poster_path == null ?
@@ -20,18 +23,19 @@ export default memo(({data }) =>{
                 </View>
             </View>
         </TouchableOpacity>        
+        </>
     )
 })
 
 const styles = StyleSheet.create({   
     title: {
-        color: '#eee', 
-        fontSize: 12,
+        color: colors.lightGray, 
+        fontSize: fonts.exSmall,
         textTransform: 'capitalize'
     },
     genre:{
-        color: '#fff',
-        fontSize: 12, 
+        color: colors.white,
+        fontSize: fonts.exSmall, 
         opacity: 0.6
     }, 
     movie: {

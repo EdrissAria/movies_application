@@ -1,16 +1,18 @@
-import React, { useState, useEffect, memo } from 'react'
+import { memo } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
 import ExpoFastImage from 'expo-fast-image'
+import { useNavigate } from '../hooks/useNavigate'
+import { colors, fonts } from '../globals/ConstantStyles'
 
-export default memo(({ data, navigation }) => {
+export default memo(({ data }) => {
     // const [genres, setGenres] = useState([]);
     
     const getGenres = useQuery('genres', api.getGenres);
     
-    const navigateTo = useNavigate('movieDetails', { id: data?.id }); 
+    const [navigateTo] = useNavigate('movieDetails', { id: data?.id }); 
     
     // useEffect(() => {
     //     let isUnmounted = false; 
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         height: 120,
-        borderColor: 'rgb(234, 88, 12)',
+        borderColor: colors.orange,
         borderWidth: 1,
         borderRadius: 16,
         padding: 10,
@@ -65,8 +67,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     title: {
-        color: '#eee',
-        fontSize: 18,
+        color: colors.lightGray,
+        fontSize: fonts.large,
         textTransform: 'capitalize'
     },
     movie: {
@@ -75,15 +77,15 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     vote: {
-        color: '#fff',
-        fontSize: 14,
+        color: colors.white,
+        fontSize: fonts.medium,
         marginLeft: 4,
         color: 'yellow'
     },
     genre: {
-        fontSize: 12,
+        fontSize: fonts.exSmall,
         marginTop: 10,
-        color: '#ccc',
+        color: colors.lightGray,
         marginLeft: 4,
         width: 190
     },
