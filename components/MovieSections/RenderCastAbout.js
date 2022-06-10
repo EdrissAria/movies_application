@@ -2,8 +2,6 @@ import { memo, useState } from 'react'
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { colors, fonts } from '../../globals/ConstantStyles';
- 
-// render cast information such biography, popularity ....
 
 export const RenderCastAbout = memo(({ actor }) => {
 

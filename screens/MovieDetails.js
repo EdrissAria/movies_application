@@ -8,14 +8,6 @@ export default function MovieDetails({ navigation, route }) {
     const { id } = route.params;
     const getMovie = useQuery(['movie', id], () => api.getMovie(id));
 
-    // useEffect(() => {
-    //     let isUnmounted = false; 
-
-    //     !isUnmounted && setSelectedMovie(getMovie?.data ? getMovie?.data : {});
-    
-    //     return () => {isUnmounted = true}
-        
-    // }, [getMovie.data])
     
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>

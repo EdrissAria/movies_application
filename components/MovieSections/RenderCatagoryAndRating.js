@@ -8,12 +8,12 @@ import { colors, fonts} from '../../globals/ConstantStyles'
 
 export const RenderCatagoryAndRating = memo(({ movie }) => {
 
-    const getTrailer = useQuery(['gettrailer', movie?.id], () => api.getTrailer(movie?.id), {
+    const { data } = useQuery(['gettrailer', movie?.id], () => api.getTrailer(movie?.id), {
         enabled: !!movie?.id
     });
 
     const open = () => {
-        Linking.openURL(`https://www.youtube.com/watch?v=${getTrailer?.data ? getTrailer?.data?.results[0]?.key : null}`)
+        Linking.openURL(`https://www.youtube.com/watch?v=${data ? data?.results[0]?.key : null}`)
     }
 
     return (

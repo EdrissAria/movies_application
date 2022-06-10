@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import { StyleSheet, View, Image} from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { windowHeight, windowWidth } from '../globals/Dimension'
 import ExpoFastImage from 'expo-fast-image'
 
@@ -8,7 +8,6 @@ import ExpoFastImage from 'expo-fast-image'
 export default memo(({ data }) => {
     return (
         <View style={styles.banner}>
-            {/* <Image source={{ uri: `https://image.tmdb.org/t/p/original${data.poster_path}` }} resizeMode="cover" resizeMethod="resize" style={styles.image} /> */}
             <ExpoFastImage uri={`https://image.tmdb.org/t/p/original${data.poster_path}`} cacheKey={data.id} resizeMode="cover" resizeMethod="resize" style={styles.image} />
         </View>
     )

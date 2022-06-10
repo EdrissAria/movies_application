@@ -21,12 +21,13 @@ const Search = ({ navigation }) => {
             timer = setTimeout(()=> fn(args), timeout); 
         }
     }
+
+    const { data, isLoading } = useQuery(['searching', search], () => api.search(search), { enabled: !!search });
+
     const searchHander = debounce((query)=>{
         setSearch(query)
         setDismiss(true)
     })
-
-    const searching = useQuery(['searching', search], () => api.search(search), { enabled: !!search });
 
     const clearSearch = () => {
         desmiss.current.clear();
@@ -59,10 +60,10 @@ const Search = ({ navigation }) => {
                         <AntDesign name="search1" size={24} color={colors.orange} />
                     </View>
                     <View style={styles.view}>
-                    {search == undefined ? null : (searching?.isLoading ? <ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }} /> :
+                    {!search ? null : (isLoading ? <ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }} /> :
                         <FlatList
-                            data={searching?.data?.results}
-                            extraData={searching?.data?.results}
+                            data={data?.results}
+                            extraData={data?.results}
                             renderItem={searchResults}
                             scrollEnabled
                             scrollEventThrottle={16}

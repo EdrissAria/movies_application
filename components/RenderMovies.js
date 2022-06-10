@@ -9,12 +9,11 @@ export default memo(({data, qdata}) =>{
     const [navigateTo] = useNavigate('movieDetails', {id: data?.id}); 
     return(
         <>
-        {qdata?.isLoading && <ActivityIndicator color="red" size="large" />}
+        {qdata?.isLoading && <ActivityIndicator color={colors.orange} size="large" />}
         <TouchableOpacity onPress={navigateTo}>
             <View style={styles.movie}>
                 {data.poster_path == null ?
                 <Image source={require('../assets/images/genre.webp')} resizeMethod="resize" style={styles.image}/>:
-                // <Image source={{ uri:`https://image.tmdb.org/t/p/w185${data.poster_path}` }} resizeMethod="resize" style={styles.image}/>
                 <ExpoFastImage uri={`https://image.tmdb.org/t/p/w185${data.poster_path}`} resizeMethod="scale" cacheKey={data.id} style={styles.image}/>
                 }
                 <View style={styles.info}>

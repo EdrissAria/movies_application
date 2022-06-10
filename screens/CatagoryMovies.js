@@ -42,7 +42,7 @@ const CatagoryMovies = ({ navigation, route }) => {
                 contentContainerStyle={{ paddingBottom: 20 }}
                 onEndReachedThreshold={0.2}
                 onEndReached={fetchNextPage}
-                ListFooterComponent={isFetching ? <ActivityIndicator color="red" size="large" />: (!hasNextPage ? <Text style={{ color: 'red', textAlign: 'center', fontSize: fonts.medium }}>no more movies!</Text>:null)}
+                ListFooterComponent={isFetching ? <ActivityIndicator color={colors.orange} size="large" />: (!hasNextPage && null)}
             />
         </SafeAreaView>
     )

@@ -13,13 +13,7 @@ export const RenderStoryLine = memo(({ navigation, movie }) => {
     const [moreActor, setMoreActor] = useState(false)
     const [showListFooter, setShowListFooter] = useState(true)
 
-    const getCasts = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id), {enabled: !!movie?.id}); 
-
-    // useEffect(() => {
-    //     let isUnmounted = false; 
-    //     !isUnmounted && setCasts(getCasts?.data?[...getCasts?.data?.cast]:[])
-    //     return ()=>{isUnmounted = true}
-    // }, [getCasts?.data])
+    const { data } = useQuery(['casts', movie?.id],()=> api.getCasts(movie?.id), {enabled: !!movie?.id}); 
     
     const renderActors = ({ item }) => {
         return <MovieActors data={item} navigation={navigation} />
@@ -44,16 +38,16 @@ export const RenderStoryLine = memo(({ navigation, movie }) => {
                 <Text style={styles.castTitle}>Top Billed Cast</Text>
                 <FlatList
                     data={
-                        moreActor ? getCasts?.data?.cast : (
-                            getCasts?.data?.cast?.length > 6 ? getCasts?.data?.cast?.slice(0, 6):
-                            getCasts?.data?.cast
+                        moreActor ? data?.cast : (
+                            data?.cast?.length > 6 ? data?.cast?.slice(0, 6):
+                            data?.cast
                         )
                     }
-                    extraData={getCasts?.data?.cast}
+                    extraData={data?.cast}
                     renderItem={renderActors}
                     keyExtractor={(item) => item.id}
                     horizontal={true}
-                    ListFooterComponent={getCasts?.data?.cast?.length < 6 ? null :(showListFooter ? <MoreActors setMoreActor={setMoreActor} setShowListFooter={setShowListFooter}/>:null)}
+                    ListFooterComponent={data?.cast?.length < 6 ? null :(showListFooter ? <MoreActors setMoreActor={setMoreActor} setShowListFooter={setShowListFooter}/>:null)}
                 />
             </View>
         </View>

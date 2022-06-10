@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useQuery } from 'react-query'
 import * as api from '../api/Api'
@@ -8,17 +8,10 @@ import { useNavigate } from '../hooks/useNavigate'
 import { colors, fonts } from '../globals/ConstantStyles'
 
 export default memo(({ data }) => {
-    // const [genres, setGenres] = useState([]);
     
     const getGenres = useQuery('genres', api.getGenres);
     
     const [navigateTo] = useNavigate('movieDetails', { id: data?.id }); 
-    
-    // useEffect(() => {
-    //     let isUnmounted = false; 
-    //     !isUnmounted && setGenres(getGenres?.data ? getGenres?.data?.genres : [])
-    //     return ()=>{isUnmounted = true}
-    // }, [getGenres.data])
 
     const Gen = [];
     getGenres?.data?.genres.map(g => {
@@ -31,7 +24,6 @@ export default memo(({ data }) => {
                 <View
                     style={styles.results}
                 >
-                    {/* <Image source={{ uri:`https://image.tmdb.org/t/p/w154${data.poster_path}` }} resizeMethod="scale" style={styles.image}/> */}
                     <ExpoFastImage uri={`https://image.tmdb.org/t/p/w154${data.poster_path}`} cacheKey={data.id} resizeMethod="scale" style={styles.image} />
                     <View
                         style={styles.search}

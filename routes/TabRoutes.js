@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen'
 import { icons } from '../globals/icons'
 
 const Tab = createBottomTabNavigator();
+
 console.log('Route.js renderssssssssssssss')
 const options = {
     tabBarShowLabel: false,
@@ -59,7 +60,7 @@ export default function TabRoutes() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon="grid-outline"
+                            icon={icons.grid}
                         />
                     ),
                     headerShown: false

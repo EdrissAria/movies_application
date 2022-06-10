@@ -15,7 +15,7 @@ const MovieGenre = ({ navigation, route }) => {
     
     const {data, hasNextPage, isFetching, fetchNextPage, isLoading } = useInfiniteQuery(['bygenre', id],({pageParam = 1})=> api.getByGenre(id, pageParam, setTotalPages), {
         getNextPageParam: (_lastpage, pages) => {
-            if(pages.length < 10){
+            if(pages.length < totalPages){
                 return pages.length + 1
             }else{
                 return undefined
@@ -44,7 +44,7 @@ const MovieGenre = ({ navigation, route }) => {
                 contentContainerStyle={{ paddingBottom: 20 }}
                 onEndReachedThreshold={0.2}
                 onEndReached={fetchNextPage}
-                ListFooterComponent={isFetching ? <ActivityIndicator color="red" size="large" />: !hasNextPage && <Text style={{ color: 'red', textAlign: 'center', fontSize: fonts.medium }}>no more movies!</Text>}
+                ListFooterComponent={isFetching ? <ActivityIndicator color={colors.orange} size="large" />: !hasNextPage && null}
             />}
         </SafeAreaView>
     )
