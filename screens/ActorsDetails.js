@@ -6,7 +6,6 @@ import { colors } from '../globals/ConstantStyles'
  
  
 const ActorsDetails = ({ navigation, route }) => {
-    console.log('ActorsDetails.js renderssssssssssssss')
     const { id } = route.params;
    
     const getActor = useQuery(['actor', id],()=> api.getActor(id), {enabled: !!id});

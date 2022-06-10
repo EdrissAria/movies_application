@@ -28,7 +28,7 @@ export default memo(({ data }) => {
                     <View
                         style={styles.search}
                     >
-                        <Text style={styles.title}>{data?.title?.length > 20 ? data?.title?.slice(0, 20) + '..' : data?.title}</Text>
+                        <Text style={styles.title}>{data?.title?.length > 18 ? data?.title?.slice(0, 18) + '..' : data?.title}</Text>
                         <View style={styles.movie}>
                             <AntDesign name="star" size={16} color="yellow" />
                             <Text style={styles.vote}>

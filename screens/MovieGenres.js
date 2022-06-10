@@ -6,7 +6,6 @@ import { globalStyle } from '../globals/GlobalStyle';
 import { colors, fonts } from '../globals/ConstantStyles'
  
 const MovieGenres = ({ navigation }) => { 
-    console.log('Catagories.js renderssssssssssssss')
 
     const getMoviesGenre = useQuery('moviesgenre', api.getGenres);
 

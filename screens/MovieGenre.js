@@ -10,7 +10,6 @@ import { colors, fonts } from '../globals/ConstantStyles'
  
 const MovieGenre = ({ navigation, route }) => {
     const [totalPages, setTotalPages] = useState(0)
-    console.log('MovieGenre.js renderssssssssssssss')
     const {id, genre} = route.params;
     
     const {data, hasNextPage, isFetching, fetchNextPage, isLoading } = useInfiniteQuery(['bygenre', id],({pageParam = 1})=> api.getByGenre(id, pageParam, setTotalPages), {
@@ -44,7 +43,7 @@ const MovieGenre = ({ navigation, route }) => {
                 contentContainerStyle={{ paddingBottom: 20 }}
                 onEndReachedThreshold={0.2}
                 onEndReached={fetchNextPage}
-                ListFooterComponent={isFetching ? <ActivityIndicator color={colors.orange} size="large" />: !hasNextPage && null}
+                ListFooterComponent={isFetching ? <ActivityIndicator color={colors.orange} size="large" />: (!hasNextPage && null)}
             />}
         </SafeAreaView>
     )

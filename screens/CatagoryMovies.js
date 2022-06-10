@@ -11,7 +11,6 @@ const CatagoryMovies = ({ navigation, route }) => {
     const [totalPages, setTotalPages] = useState(0)
     const { catagory } = route.params;
 
-    console.log('CatagoryMovies.js renderssssssssssssss')
 
     const {data, hasNextPage, isFetching, fetchNextPage } = useInfiniteQuery(['movies', catagory], ({pageParam = 1}) => api.getMovies(pageParam, catagory, setTotalPages),{
         getNextPageParam: (_lastpage, pages) => {

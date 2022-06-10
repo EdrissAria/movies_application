@@ -6,10 +6,7 @@ import ActorsDetails from '../screens/ActorsDetails';
 import CatagoryMovies from '../screens/CatagoryMovies'
 import CustomFonts from '../globals/CustomFonts';
 import MovieGenre from '../screens/MovieGenre';
-import { I18nManager,LogBox } from 'react-native';
 
-I18nManager.allowRTL(false); 
-LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'."]);
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +15,6 @@ const header_shown = {
 }
 
 const StackRoutes = () => {
-  console.log('StackRoutes is renderinggggggggggggggggggggg')
    
   return (
       <CustomFonts>

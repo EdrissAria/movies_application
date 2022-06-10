@@ -9,7 +9,6 @@ import { icons } from '../globals/icons'
 
 const Tab = createBottomTabNavigator();
 
-console.log('Route.js renderssssssssssssss')
 const options = {
     tabBarShowLabel: false,
     tabBarStyle: {

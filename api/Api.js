@@ -23,4 +23,4 @@ export const getMovies = (page, catagory, setTotalPages) => api.get(`movie/${cat
     setTotalPages(res?.data?.total_pages)
     return res?.data?.results
 })
-export const search = async (query) => await api.get(`search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`).then(res => res.data)
+export const search = (query) => api.get(`search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`).then(res => res.data)

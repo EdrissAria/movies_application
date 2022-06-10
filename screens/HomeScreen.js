@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import { windowHeight, windowWidth } from '../globals/Dimension';
 import { useHomeScreenCalls } from '../hooks/useHomeScreenCalls';
 import { NetAlert } from '../components/NetAlert';
-import { colors, fonts } from '../globals/ConstantStyles'
+import { colors } from '../globals/ConstantStyles'
 
 
 const wait = (timeout) => {
@@ -16,7 +16,6 @@ const wait = (timeout) => {
 
 const HomeScreen = ({ navigation }) => {
 
-    console.log('HomeScreen.js renderssssssssssssss')
     const [refrishing, getUpcoming, getPopular, getTop_rated, onRefrish, getNow_playing] = useHomeScreenCalls(); 
 
     const renderBanner = ({ item }) => {

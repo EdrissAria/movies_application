@@ -9,8 +9,7 @@ import { colors, fonts } from '../globals/ConstantStyles'
 
 
 const Search = ({ navigation }) => {
-    console.log('out of the search')
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState(null);
     const [dismiss, setDismiss] = useState(false);
     const desmiss = useRef(null);
 
@@ -27,12 +26,11 @@ const Search = ({ navigation }) => {
     const searchHander = debounce((query)=>{
         setSearch(query)
         setDismiss(true)
-    })
+    }, 500)
 
     const clearSearch = () => {
         desmiss.current.clear();
         setDismiss(false)
-        setSearch('')
     }
 
     const searchResults = ({ item }) => {
@@ -60,7 +58,7 @@ const Search = ({ navigation }) => {
                         <AntDesign name="search1" size={24} color={colors.orange} />
                     </View>
                     <View style={styles.view}>
-                    {!search ? null : (isLoading ? <ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }} /> :
+                    {search == '' ? null : (isLoading ? <ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }} /> :
                         <FlatList
                             data={data?.results}
                             extraData={data?.results}
