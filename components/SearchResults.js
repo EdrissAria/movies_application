@@ -35,7 +35,7 @@ export default memo(({ data }) => {
                                 {data?.vote_count}
                             </Text>
                         </View>
-                        <Text style={styles.genre}>{Gen.map(g => g + ', ')}</Text>
+                        <Text style={styles.genre}>{Gen.join(', ')}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

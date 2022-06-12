@@ -13,7 +13,6 @@ const About = () => {
                 </Text>
                 <View style={styles.developer}>
                     {/* about developer */}
-                    <Text style={styles.text}>About Developer</Text>
                     <Image source={require('../assets/images/bishak.png')} resizeMethod="resize"
                         style={styles.photo}
                     />
@@ -86,14 +85,7 @@ const styles = StyleSheet.create({
         marginTop: 20, 
         flexDirection: 'column', 
         alignItems: 'center'
-    }, 
-    text: {
-        color: colors.lightGray, 
-        fontSize: fonts.large, 
-        letterSpacing: 1, 
-        fontWeight: 'bold', 
-        textAlign: 'center'
-    }, 
+    },  
     photo: {
         width: 50, 
         height: 50, 

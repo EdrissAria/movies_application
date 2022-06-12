@@ -47,7 +47,7 @@ export const RenderCatagoryAndRating = memo(({ movie }) => {
             {/* realize date and genre */}
             <View style={styles.details}>
                 <Text style={styles.info}>{movie?.release_date}</Text>
-                <Text style={styles.info}>{movie?.genres?.map(g => g.name + ' ,')}</Text>
+                <Text style={styles.info}>{movie?.genres?.map(g => g.name).join(', ')}</Text>
             </View>
         </View>
     )
