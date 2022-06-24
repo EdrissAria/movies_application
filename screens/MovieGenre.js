@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { Entypo } from '@expo/vector-icons';
 import { globalStyle } from '../globals/GlobalStyle';
 import * as api from '../api/Api'
 import { useInfiniteQuery } from 'react-query'
-import { colors, fonts } from '../globals/ConstantStyles'
-
+import { colors } from '../globals/ConstantStyles'
+import { Header } from '../components/Layout'
  
 const MovieGenre = ({ navigation, route }) => {
     const [totalPages, setTotalPages] = useState(0)
@@ -28,12 +27,7 @@ const MovieGenre = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={globalStyle.container}>
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.back} onPress={()=> navigation.goBack()}>
-                    <Entypo name="chevron-thin-left" size={22} color={colors.orange} />
-                </TouchableOpacity>
-                <Text style={styles.title}>{genre}</Text>
-            </View>
+            <Header title={genre} />
             {isLoading?<ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }}/>:
             <FlatList 
                 numColumns={3}
@@ -48,27 +42,5 @@ const MovieGenre = ({ navigation, route }) => {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 60, 
-        paddingVertical: 10, 
-        backgroundColor: colors.transparent, 
-    }, 
-    title: {
-        fontSize: fonts.large,
-        marginLeft: 16, 
-        fontFamily: 'roboto', 
-        color: colors.orange, 
-        textAlign: 'center', 
-        textTransform: 'capitalize'
-    }, 
-    back: { 
-        padding: 6, 
-        borderRadius: 20 
-    }
-})
 
 export default MovieGenre; 

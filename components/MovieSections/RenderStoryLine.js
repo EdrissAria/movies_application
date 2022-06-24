@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback } from 'reac
 import * as api from '../../api/Api'
 import { useQuery } from 'react-query'
 import  MovieActors  from '../MovieActors';
-import { MoreActors } from '../Layouts/MoreActors'
+import { MoreActors } from '../Layout'
 import { colors, fonts } from '../../globals/ConstantStyles';
 
 

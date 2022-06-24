@@ -1,7 +1,6 @@
 import {memo} from 'react'
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native'
+import {StyleSheet, View,TouchableOpacity, Image} from 'react-native'
 import { windowWidth } from '../globals/Dimension'
-import ExpoFastImage from 'expo-fast-image'
 import { useNavigate } from '../hooks/useNavigate' 
 import { colors, fonts } from '../globals/ConstantStyles'
 
@@ -10,15 +9,8 @@ export default memo(({data}) =>{
     return(
         <>
         <TouchableOpacity onPress={navigateTo}>
-            <View style={styles.movie}>
-                {data.poster_path == null ?
-                <Image source={require('../assets/images/genre.webp')} resizeMode="contain" style={[styles.image, {backgroundColor: colors.darkGray}]}/>:
-                <ExpoFastImage uri={`https://image.tmdb.org/t/p/w185${data.poster_path}`} resizeMethod="scale" cacheKey={data.id} style={styles.image}/>
-                }
-                <View style={styles.info}>
-                    <Text style={styles.title}>{data?.title?.length > 11? data?.title?.slice(0, 10)+'..':data?.title}</Text>
-                    <Text style={styles.genre}>vote: {data?.vote_count}</Text>
-                </View>
+            <View style={styles.movie}>              
+                <Image source={data.image} resizeMode="contain" style={[styles.image, {backgroundColor: colors.darkGray}]}/>
             </View>
         </TouchableOpacity>        
         </>

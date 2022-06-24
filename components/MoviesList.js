@@ -1,7 +1,7 @@
 import {memo} from 'react'
 import { StyleSheet, FlatList, SafeAreaView, View, Text, TouchableOpacity } from 'react-native'
 import RenderMovies from '../components/RenderMovies';
-import { ListFooter } from '../components/Layouts';
+import { ListFooter } from '../components/Layout';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigate } from '../hooks/useNavigate'
 import {colors, fonts} from '../globals/ConstantStyles'

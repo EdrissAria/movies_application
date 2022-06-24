@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
-import { Entypo } from '@expo/vector-icons'
+import { StyleSheet, SafeAreaView, FlatList, ActivityIndicator } from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import Constants from 'expo-constants';
 import * as api from '../api/Api'
 import { useInfiniteQuery } from 'react-query'
 import { colors, fonts } from '../globals/ConstantStyles'
+import { Header } from '../components/Layout'
 
 const CatagoryMovies = ({ navigation, route }) => {
     const [totalPages, setTotalPages] = useState(0)
@@ -27,12 +27,7 @@ const CatagoryMovies = ({ navigation, route }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-                    <Entypo name="chevron-thin-left" size={22} color={colors.orange} />
-                </TouchableOpacity>
-                <Text style={styles.title}>{catagory == 'top_rated' ? 'Top rated' : catagory} Movies</Text>
-            </View>
+            <Header title={catagory == 'top_rated' ? 'Top rated' : catagory} />
             <FlatList
                 numColumns={3}
                 data={data?.pages?.flat()}

@@ -10,7 +10,6 @@ LogBox.ignoreLogs(["Can't perform a React state update on an unmounted component
 const queryClient = new QueryClient();
 
 const App = () => {
-  console.log('app.js rendersssssssssssss')   
   return (
     <QueryClientProvider client={queryClient}>
       <StackRoutes />      

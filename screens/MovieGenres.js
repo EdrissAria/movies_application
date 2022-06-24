@@ -14,9 +14,9 @@ const MovieGenres = ({ navigation }) => {
     }
     
     return (
-        <SafeAreaView style={globalStyle.container}>
+        <View style={globalStyle.container}>
             <View style={styles.title}>
-                <Text style={styles.genre}>Movies Genre</Text>
+                <Text style={styles.genre}>Movies Genres</Text>
             </View>
             <FlatList 
                 numColumns={2}
@@ -25,7 +25,7 @@ const MovieGenres = ({ navigation }) => {
                 renderItem={renderCatagories}
                 contentContainerStyle={{ paddingBottom: 74}}
             />
-        </SafeAreaView>
+        </View>
     )
 }
 

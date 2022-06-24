@@ -8,7 +8,6 @@ export default function MovieDetails({ navigation, route }) {
     const { id } = route.params;
     const getMovie = useQuery(['movie', id], () => api.getMovie(id));
 
-    
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#000' }}>
             {/* Header */}
