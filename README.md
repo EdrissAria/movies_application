@@ -2,6 +2,8 @@
 # Movies mobile app
 # see in expo store
 https://expo.dev/@eedriss/movies
+# Showcase 
+https://edrissaria.github.io/Movies-show-case/
 # Description 
 <h2>Let's jump into movies world!</h2>
 movies details, casts details ,searching movies, movies by genres and trailers all in one app.
