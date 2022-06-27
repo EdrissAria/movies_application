@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, SafeAreaView, RefreshControl } from 'react-native'
+import { StyleSheet, View, ScrollView , RefreshControl } from 'react-native'
 import MoviesList from '../components/MoviesList';
 import BannerSlider from '../components/BannerSlider';
 import Carousel from 'react-native-snap-carousel';
@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={styles.parent}>
+        <View style={styles.parent}>
             <ScrollView
                 contentContainerStyle={styles.container}
                 refreshControl={
@@ -57,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
                 
             </ScrollView>
            <NetAlert />
-        </SafeAreaView>
+        </View>
     )
 }
 

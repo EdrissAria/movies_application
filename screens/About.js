@@ -1,10 +1,10 @@
-import { StyleSheet, View, Text, Linking, SafeAreaView, Image,TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, Linking, Image,TouchableWithoutFeedback } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { colors, fonts } from '../globals/ConstantStyles'
  
 const About = () => {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.content}>
                 <Image source={require('../assets/icon.png')} resizeMode="contain" style={styles.logo} />
                 <Text style={styles.about}>
@@ -53,7 +53,7 @@ const About = () => {
                     </TouchableWithoutFeedback>
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 

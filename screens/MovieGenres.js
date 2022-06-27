@@ -1,4 +1,4 @@
-import {View, SafeAreaView, Text,FlatList, StyleSheet} from 'react-native'
+import {View, Text,FlatList, StyleSheet} from 'react-native'
 import RenderGenres from '../components/RenderGenres';
 import * as api from '../api/Api'
 import { useQuery } from 'react-query'

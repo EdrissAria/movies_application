@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {StyleSheet, View, SafeAreaView, Text,TouchableOpacity, FlatList, ActivityIndicator} from 'react-native'
+import {View, FlatList, ActivityIndicator} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import { globalStyle } from '../globals/GlobalStyle';
 import * as api from '../api/Api'
@@ -26,7 +26,7 @@ const MovieGenre = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={globalStyle.container}>
+        <View style={globalStyle.container}>
             <Header title={genre} />
             {isLoading?<ActivityIndicator size="large" color={colors.orange} style={{ marginTop: 20 }}/>:
             <FlatList 
@@ -39,7 +39,7 @@ const MovieGenre = ({ navigation, route }) => {
                 onEndReached={fetchNextPage}
                 ListFooterComponent={isFetching ? <ActivityIndicator color={colors.orange} size="large" />: (!hasNextPage && null)}
             />}
-        </SafeAreaView>
+        </View>
     )
 }
 

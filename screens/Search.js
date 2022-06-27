@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, TextInput, TouchableWithoutFeedback, FlatList, Keyboard, ActivityIndicator, Text } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback, FlatList, Keyboard, ActivityIndicator, Text } from 'react-native'
 import SearchResults from '../components/SearchResults';
 import { AntDesign } from '@expo/vector-icons';
 import { useQuery } from 'react-query'
@@ -33,6 +33,7 @@ const Search = ({ navigation }) => {
     const clearSearch = () => {
         desmiss.current.clear();
         setDismiss(false)
+        setSearch('')
     }
 
     const searchResults = ({ item }) => {
@@ -44,7 +45,7 @@ const Search = ({ navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <SafeAreaView style={globalStyle.container}>
+            <View style={globalStyle.container}>
                 {/* Search Bar */}
                 <View style={styles.search}>
                     {dismiss ?
@@ -89,7 +90,7 @@ const Search = ({ navigation }) => {
                             />
                         )}
                 </View>
-            </SafeAreaView>
+            </View>
         </TouchableWithoutFeedback>
     )
 }
