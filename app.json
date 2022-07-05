@@ -22,9 +22,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#000000"
       },
-      "package": "com.eedriss.movies"
+      "package": "com.eedriss.Movies"
     },
     "web": {
       "favicon": "./assets/favicon.png"

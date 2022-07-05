@@ -15,7 +15,7 @@ export default memo(({ movies, cat, title, navigation}) => {
     const [navigateTo] = useNavigate('catagoryMovies', { catagory: cat, data: movies?.data?.results}); 
 
     return (
-        <SafeAreaView>
+        <View>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>{title}</Text>
                 <TouchableOpacity
@@ -39,7 +39,7 @@ export default memo(({ movies, cat, title, navigation}) => {
                 keyExtractor={(item) => item.id}
                 ListFooterComponent={<ListFooter navigateTo={navigateTo} />}
             />
-        </SafeAreaView>
+        </View>
     )
 })
 

@@ -19,7 +19,7 @@ export default memo(({ data }) => {
     })
 
     return (
-        <SafeAreaView>
+        <View>
             <TouchableOpacity onPress={navigateTo}>
                 <View
                     style={styles.results}
@@ -39,7 +39,7 @@ export default memo(({ data }) => {
                     </View>
                 </View>
             </TouchableOpacity>
-        </SafeAreaView>
+        </View>
     )
 })
 
