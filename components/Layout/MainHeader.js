@@ -1,5 +1,5 @@
 import { StyleSheet, View , Text , Image } from 'react-native'
-// import Constants from 'expo-constants'
+import Constants from 'expo-constants'
 import { colors } from '../../globals/ConstantStyles'
 
 export const MainHeader = () => {

@@ -9,7 +9,6 @@ import { colors, fonts } from '../globals/ConstantStyles'
 import { recentSearches } from '../data'
 import RecentSearches from '../components/RecentSearches';
 
-
 const Search = ({ navigation }) => {
     const [search, setSearch] = useState('');
     const [dismiss, setDismiss] = useState(false);
@@ -27,7 +26,7 @@ const Search = ({ navigation }) => {
 
     const searchHander = debounce((query) => {
         setSearch(query)
-        setDismiss(true)
+        query != ""? setDismiss(true) : setDismiss(false) 
     }, 500)
 
     const clearSearch = () => {

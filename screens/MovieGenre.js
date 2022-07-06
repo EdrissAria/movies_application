@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import { globalStyle } from '../globals/GlobalStyle';
@@ -8,19 +7,18 @@ import { colors } from '../globals/ConstantStyles'
 import { Header } from '../components/Layout'
  
 const MovieGenre = ({ navigation, route }) => {
-    const [totalPages, setTotalPages] = useState(0)
     const {id, genre} = route.params;
     
-    const {data, hasNextPage, isFetching, fetchNextPage, isLoading } = useInfiniteQuery(['bygenre', id],({pageParam = 1})=> api.getByGenre(id, pageParam, setTotalPages), {
+    const {data,hasNextPage, isFetching, fetchNextPage, isLoading} = useInfiniteQuery(['bygenre', id],({pageParam = 1})=> api.getByGenre(id, pageParam), {
         getNextPageParam: (_lastpage, pages) => {
-            if(pages.length < totalPages){
+            if(hasNextPage){
                 return pages.length + 1
             }else{
                 return undefined
             }
         }
-    });  
-
+    });
+    
     const renderGenre = ({ item }) => {
         return <RenderMovies data={item} navigation={navigation} />
     }

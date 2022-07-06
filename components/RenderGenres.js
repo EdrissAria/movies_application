@@ -6,7 +6,6 @@ import Images from '../globals/Images'
 
 export default memo(({ data }) => {
     const [navigateTo] = useNavigate('movieGenre', { id: data?.id, genre: data?.name }); 
-    console.log('images: ', Images['Action'])
     return (
         <TouchableOpacity onPress={navigateTo}>
             <View style={styles.catagory}>

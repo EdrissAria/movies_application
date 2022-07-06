@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { StyleSheet, SafeAreaView, FlatList, ActivityIndicator } from 'react-native'
 import RenderMovies from '../components/RenderMovies';
 import Constants from 'expo-constants';
@@ -8,13 +7,11 @@ import { colors, fonts } from '../globals/ConstantStyles'
 import { Header } from '../components/Layout'
 
 const CatagoryMovies = ({ navigation, route }) => {
-    const [totalPages, setTotalPages] = useState(0)
     const { catagory } = route.params;
 
-
-    const {data, hasNextPage, isFetching, fetchNextPage } = useInfiniteQuery(['movies', catagory], ({pageParam = 1}) => api.getMovies(pageParam, catagory, setTotalPages),{
+    const {data, hasNextPage, isFetching, fetchNextPage } = useInfiniteQuery(['movies', catagory], ({pageParam = 1}) => api.getMovies(pageParam, catagory),{
         getNextPageParam: (_lastpage, pages) => {
-            if(pages.length < totalPages){
+            if(hasNextPage){
                 return pages.length + 1
             }else{
                 return undefined
